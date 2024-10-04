@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>熊家新闻</title>
+        <style>
+            #container{
+                background: aliceblue;
+                position: relative;
+                max-width: 90%;
+                margin: 10px auto;
+                /* background-color: rgba(255, 255, 255, 0.9); */
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                padding: 10px;
+            }
+            #header{
+                text-align: center;
+            }
+            #h1{
+                text-shadow: 2px 2px 8px aliceblue;
+            }
+            #h1:hover, #img:hover{
+                transform: scale(1.02); 
+                transition: transform 0.3s ease;
+            }
+            h3{
+                font-size: 19px;
+            }
+            p{
+                font-size: 17px;
+            }
+            #img{
+                border-radius: 30px;
+            }
+            #p1, #nav, #section{
+                text-align: left;
+                margin-left: 10%;
+                margin-right: 10%;
+                line-height: 1.8;
+            }
+            p:hover{
+                background-color: rgb(210, 236, 252);
+            }
+            #mousePicture{
+                position: absolute;
+                z-index: 1000;
+            }
+            @keyframes move{
+                from{transform: translateX(0%);}
+                to{transform: translateX(100%);}
+            }
+            #panda{
+                animation-name: move;
+                animation-duration: 20s;
+                animation-iteration-count: infinite;
+            }
+            #back{
+                background: rgb(208, 239, 250);
+                color: rgb(12, 12, 12);
+                font-size: 20px;
+                font-weight: 600;
+                border: none;
+                padding: 20px 20px;
+                border-radius: 60px;
+                margin-left: 3%;
+                margin-top: 2%;
+            }
+            #back:hover{
+                background: rgb(123, 210, 250);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="panda">
+            <img src="home_pic/101.jpg" style="width: 30px; height: 30px;" alt="">
+        </div>
+        <div id="container">
+            <div>
+                <button id="back" onclick="history.back()">Back</button>
+            </div>
+            <header id="header">
+                <br>
+                <h1 id="h1">熊家迎来新成员“小小熊”，但小君熊经历了人生第一次手术</h1>
+                <br>
+                <p id="p1"> </p>
+                <br>
+                <figure>
+                    <img id="img" src="home_pic/103.jpg" width="400" height="300">
+                </figure>
+            </header>
+            <br>
+            <br>
+            
+            <!-- <nav id="nav">
+                <h3></h3>
+                <ul>
+                    <li><a href="#life"></a></li>
+                    <li><a href="#character"></a></li>
+                </ul>
+                <br><br>
+            </nav> -->
+            <section id="section">
+                <article id="life">
+                    <h3></h3><br>
+                    <p>
+                        首尔时间2023年12月30日10点08分，熊家的新成员“小小熊”在京畿道光明市出生。这一天，首尔迎来了三十多年不遇的大雪，整个城市被白雪覆盖，显得格外美丽和宁静。<br><br>
+
+然而，在这喜庆的日子里，小君熊却经历了人生中的第一次手术。手术的消息让熊家感到非常悲伤和担忧。为了安抚小君熊的情绪，熊家决定以后每年在小小熊的生日这天，小小熊都要为小君熊准备一份特别的礼物，以表达对小君熊的关爱和支持。<br><br>
+
+熊家发言人表示：“虽然今天是一个充满喜悦和期待的日子，但我们也不能忽视小君熊的感受。希望通过这种方式，能够让小君熊感受到家人的关爱和温暖。”<br><br>
+
+这一决定得到了广泛的支持和赞赏，许多人认为这是一个充满爱心和温情的举动，能够帮助小君熊更好地度过这段艰难的时光。<br><br></p>
+                </article>
+                <br>
+                <article id="character">
+                    <h3></h3>
+                    <p></p>
+                        <br>
+                </article>
+            </section>
+        </div>
+    </body>
+</html>
