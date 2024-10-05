@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小熊一家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <style>
         #con {
@@ -265,6 +265,59 @@
         #page-numbers span:hover {
             background-color: #e0e0e0;
         }
+
+         /* Media Queries for Mobile Devices */
+         @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            header img {
+                width: 140px;
+                height: 180px;
+            }
+
+            h3 {
+                font-size: 28px;
+            }
+
+            #navbar {
+                flex-direction: column;
+            }
+
+            #navbar a {
+                padding: 10px;
+                font-size: 18px;
+            }
+
+            #container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            #picture img {
+                width: 100%;
+                height: auto;
+            }
+
+            #pictures {
+                width: calc(100vw - 40px); /* Adjust picture width for mobile */
+            }
+
+            .arrow {
+                font-size: 24px;
+            }
+
+            .arrow-small {
+                font-size: 16px;
+            }
+
+            #news,
+            #related {
+                margin-bottom: 20px;
+            }
+        }
     </style>
 </head>
 
@@ -279,11 +332,12 @@
         
         
         <div id="navbar">
-            <a href="homepage.html">主页</a>
-            <a href="intro.html">两只小熊</a>
-            <a href="intro.html">光小熊</a>
-            <a href="intro.html">君小熊</a>
-            <a href="intro.html">小小熊</a>
+            <a href="homepage.html">主页</a><br>
+            <a href="intro.html">两只小熊</a><br>
+            <a href="intro.html">光小熊</a><br>
+            <a href="intro.html">君小熊</a><br>
+            <a href="intro.html">合体熊</a><br>
+            <a href="intro.html">小小熊</a><br>
         </div>
         <br>
         
