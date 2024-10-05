@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>熊家新闻</title>
+        <style>
+            #container{
+                background: aliceblue;
+                position: relative;
+                max-width: 90%;
+                margin: 10px auto;
+                /* background-color: rgba(255, 255, 255, 0.9); */
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                padding: 10px;
+            }
+            #header{
+                text-align: center;
+            }
+            #h1{
+                text-shadow: 2px 2px 8px aliceblue;
+            }
+            #h1:hover, #img:hover{
+                transform: scale(1.02); 
+                transition: transform 0.3s ease;
+            }
+            h3{
+                font-size: 19px;
+            }
+            p{
+                font-size: 17px;
+            }
+            #img{
+                border-radius: 30px;
+            }
+            #p1, #nav, #section{
+                text-align: left;
+                margin-left: 10%;
+                margin-right: 10%;
+                line-height: 1.8;
+            }
+            p:hover{
+                background-color: rgb(210, 236, 252);
+            }
+            #mousePicture{
+                position: absolute;
+                z-index: 1000;
+            }
+            @keyframes move{
+                from{transform: translateX(0%);}
+                to{transform: translateX(100%);}
+            }
+            #panda{
+                animation-name: move;
+                animation-duration: 20s;
+                animation-iteration-count: infinite;
+            }
+            #back{
+                background: rgb(208, 239, 250);
+                color: rgb(12, 12, 12);
+                font-size: 20px;
+                font-weight: 600;
+                border: none;
+                padding: 20px 20px;
+                border-radius: 60px;
+                margin-left: 3%;
+                margin-top: 2%;
+            }
+            #back:hover{
+                background: rgb(123, 210, 250);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="panda">
+            <img src="home_pic/101.jpg" style="width: 30px; height: 30px;" alt="">
+        </div>
+        <div id="container">
+            <div>
+                <button id="back" onclick="history.back()">Back</button>
+            </div>
+            <header id="header">
+                <br>
+                <h1 id="h1">熊熊釜山行</h1>
+                <br>
+                <p id="p1"> </p>
+                <br>
+                <figure>
+                    <img id="img" src="home_pic/106.jpg" width="400" height="500">
+                </figure>
+            </header>
+            <br>
+            <br>
+            
+            <!-- <nav id="nav">
+                <h3></h3>
+                <ul>
+                    <li><a href="#life"></a></li>
+                    <li><a href="#character"></a></li>
+                </ul>
+                <br><br>
+            </nav> -->
+            <section id="section">
+                <article id="life">
+                    <h3></h3><br>
+                    <p>
+                        小光和小君第一次踏上了釜山的土地。小光是陪小君来参加雅思考试的。由于考试的紧张气氛，小君在第一天并没有游玩。直到第二天，小光和小君才在西面一起放松游玩。<br><br>
+
+                        在西面，小光做了一件让小君印象深刻的事情——他剪了超级帅气的发型。小光带着一头长长的头发走进理发店，当理发师问他想剪什么发型时，小光毫不犹豫地回答：“随便。”理发师虽然有些困惑，但还是开始了剪发。当小光剪完头发走出来时，小君惊讶地确认了好几遍：“这是小光吗？真的是小光吗？”<br><br>
+                        
+                        两只“小熊”随后幸福地享用了一顿美味的猪蹄。<br><br>
+                        
+                        回到学校后，小君的同学们纷纷旁敲侧击地问她是否换了男朋友。实际上，小君并没有换男朋友，只是小光的发型变化让大家产生了误会。不过，这也是后话了。
+                        
+                        <br><br></p>
+                </article>
+                <br>
+                <article id="character">
+                    <h3></h3>
+                    <p></p>
+                        <br>
+                </article>
+            </section>
+        </div>
+    </body>
+</html>
