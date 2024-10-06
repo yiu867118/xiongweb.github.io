@@ -4,17 +4,30 @@
         <meta charset="utf-8">
         <title>熊家新闻</title>
         <style>
-            #container{
-                background: aliceblue;
+            #con {
                 position: relative;
                 max-width: 90%;
                 margin: 10px auto;
-                /* background-color: rgba(255, 255, 255, 0.9); */
+                background-color: rgba(255, 255, 255, 0.5);
                 border-radius: 10px;
                 box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
                 overflow: hidden;
                 padding: 10px;
             }
+
+            #con::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url(love_pic/t.png);
+                background-size: 100%;
+                opacity: 0.9;
+                z-index: -1;
+            }
+
             #header{
                 text-align: center;
             }
@@ -59,7 +72,7 @@
             #back{
                 background: rgb(208, 239, 250);
                 color: rgb(12, 12, 12);
-                font-size: 20px;
+                font-size: 18px;
                 font-weight: 600;
                 border: none;
                 padding: 20px 20px;
@@ -68,7 +81,7 @@
                 margin-top: 2%;
             }
             #back:hover{
-                background: rgb(123, 210, 250);
+                background: rgb(154, 218, 248);
             }
         </style>
     </head>
@@ -76,7 +89,7 @@
         <div id="panda">
             <img src="home_pic/101.jpg" style="width: 30px; height: 30px;" alt="">
         </div>
-        <div id="container">
+        <div id="con">
             <div>
                 <button id="back" onclick="history.back()">Back</button>
             </div>
