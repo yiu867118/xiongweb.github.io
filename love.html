@@ -6,6 +6,14 @@
     <title>熊熊两只</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         #con {
             position: relative;
             max-width: 90%;
@@ -33,7 +41,7 @@
 
         body {
             background: #f0f4f8;
-            font-family: 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -60,6 +68,10 @@
             color: #333;
             font-weight: 700; /* 字体加粗 */
             font-family: 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+        }
+        h3:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
         }
 
         header img {
@@ -125,12 +137,17 @@
             position: relative;
         }
 
+        #news:hover, #related:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
+        }
+
         #news {
             background-image: url(home_pic/b.png);
         }
 
         #related {
-            background-image: url(love_pic/t.png);
+            background-image: url(home_pic/c.png);
         }
 
         #news-container {
@@ -287,7 +304,7 @@
             height: 20px;
             background: rgb(249, 202, 238);
             transform: rotate(-45deg);
-            animation: float 5s infinite;
+            animation: float 500s infinite;
         }
         .heart::before,
         .heart::after {
@@ -312,7 +329,7 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-100vh) rotate(-45deg);
+                transform: translateY(-120vh) rotate(-45deg);
                 opacity: 0;
             }
         }
@@ -607,7 +624,7 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.animationDuration = Math.random() * 10 + 3 + 's';
             document.body.appendChild(heart);
             setTimeout(() => {
                 heart.remove();

@@ -69,6 +69,11 @@
             text-shadow: 2px 2px #fcfdfd;
         }
 
+        h1:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
+        }
+
         /* 图库样式 */
         .gallery {
             display: flex;
@@ -139,13 +144,13 @@
 
         .bubble {
             position: absolute;
-            width: 20px; /* 调整泡泡大小 */
-            height: 20px; /* 调整泡泡大小 */
+            width: 40px; /* 调整泡泡大小 */
+            height: 40px; /* 调整泡泡大小 */
             background: linear-gradient(135deg, rgba(19, 150, 244, 0.7), rgba(255, 255, 255, 0.5)); /* 渐变色 */
             border-radius: 50%; /* 圆形泡泡 */
             filter: blur(1px); /* 模糊滤镜 */
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
-            animation: float 60s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
+            animation: float 1000s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
         }
 
         .bubble::before,
@@ -373,7 +378,7 @@
             const bubble = document.createElement('div');
             bubble.classList.add('bubble');
             bubble.style.left = Math.random() * 100 + 'vw';
-            bubble.style.animationDuration = (Math.random() * 5 + 5) + 's'; /* 随机的动画时间 */
+            bubble.style.animationDuration = (Math.random() * 20 + 5) + 's'; /* 随机的动画时间 */
             document.body.appendChild(bubble);
 
             // 创建星光效果
