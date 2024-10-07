@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宝宝收红包</title>
+  <style>
+    @font-face {
+        font-family: 'KaiTi';
+        src: url('STKAITI.TTF') format('truetype'),
+             url('STXINWEI.TTF') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    #con {
+        position: relative;
+        max-width: 90%;
+        height: 90vw;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    #con::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(baby_pic/691.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    body {
+        font-family: 'KaiTi', 'Pacifico', 'Dancing Script', cursive, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(baby_pic/z.jpg);
+        text-align: center;
+        padding: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        gap: 20px;
+        min-height: 200px;
+    }
+
+    #qr-code {
+        width: 350px;
+        height: 350px;
+        border-radius: 10px;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: #000000;
+        text-shadow: 3px 3px #ffffff;
+    }
+
+    h1:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+
+    .red-envelope-section {
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .red-envelope-btn,
+    .custom-amount-input {
+        padding: 15px 20px;
+        background-color: #fe8b74;
+        color: #fff;
+        border: none;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin: 10px 0;
+        border-radius: 8px;
+        width: 80%;
+        transition: all 0.3s ease;
+    }
+
+    .custom-amount-input {
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #fe8b74;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .red-envelope-btn:hover {
+        background-color: #e64a19;
+        transform: scale(1.05);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        text-align: center;
+        border-radius: 15px;
+        width: 80%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .modal-content h2 {
+        margin-bottom: 20px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    #nickname,
+    #alipay {
+        padding: 12px;
+        font-size: 1em;
+        margin: 10px 0;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .confirm-btn {
+        background-color: #7af8ae;
+        color: white;
+        padding: 15px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 8px;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn:hover {
+        background-color: #27ae60;
+    }
+
+    .success-message {
+        display: none;
+        color: #2ecc71;
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+
+    #records {
+        background-color: rgba(243, 255, 216, 0.1);
+        width: 99.5%;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .leaderboard {
+        margin-top: 40px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+
+    .leaderboard h2 {
+        color: #ff5252;
+        margin-bottom: 20px;
+    }
+
+    .leaderboard ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .leaderboard li {
+        background-color: #fff;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+    }
+
+    .leaderboard li:hover {
+        transform: translateY(-5px);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="con">
+    <header>
+      <h1>熊宝宝收红包</h1>
+    </header>
+
+    <div class="red-envelope-section">
+      <input type="number" id="custom-amount" class="custom-amount-input" placeholder="请输入任意金额">
+      <button class="red-envelope-btn" onclick="showPaymentModal()">发红包</button>
+    </div>
+
+    <div id="success-message" class="success-message">🎉 红包发送成功！小小熊祝你万事如意，心想事成!</div>
+
+    <div id="payment-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>扫码发红包</h2>
+        <img id="qr-code" src="baby_pic/money.png" alt="支付宝收款码">
+        <input type="text" id="nickname" placeholder="输入您的名字或昵称">
+        <input type="text" id="alipay" placeholder="输入您的支付宝账号">
+        <button id="confirm-payment" class="confirm-btn">确认发红包</button>
+      </div>
+    </div>
+    
+    <div id="records">
+        <section id="leaderboard" class="leaderboard">
+        <h2>红包记录</h2>
+        <ul id="ranking-list">
+            <li>1. 小君 发了 100 元红包</li>
+            <li>2. 小光 发了 100 元红包</li>
+        </ul>
+        </section>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paymentModal = document.getElementById('payment-modal');
+      const closeModal = document.querySelector('.close');
+      const confirmPaymentBtn = document.getElementById('confirm-payment');
+      const successMessage = document.getElementById('success-message');
+      const rankingList = document.getElementById('ranking-list');
+      const nicknameInput = document.getElementById('nickname');
+      const alipayInput = document.getElementById('alipay');
+      const qrCodeImg = document.getElementById('qr-code');
+      const customAmountInput = document.getElementById('custom-amount');
+
+      let leaderboard = [
+        { name: '小君', amount: 100 },
+        { name: '小光', amount: 100 }
+      ];
+
+      closeModal.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+      });
+
+      confirmPaymentBtn.addEventListener('click', () => {
+        const nickname = nicknameInput.value || '匿名用户';
+        const alipay = alipayInput.value;
+        const amount = customAmountInput.value;
+
+        if (alipay && amount > 0) {
+          leaderboard.push({ name: nickname, amount: amount });
+
+          updateLeaderboard();
+          paymentModal.style.display = 'none';
+          showSuccessMessage();
+          nicknameInput.value = '';
+          alipayInput.value = '';
+        } else {
+          alert('请输入正确的金额和支付宝账号');
+        }
+      });
+
+      function showSuccessMessage() {
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      }
+
+      function updateLeaderboard() {
+        rankingList.innerHTML = '';
+        leaderboard.sort((a, b) => b.amount - a.amount);
+        leaderboard.forEach((entry, index) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${index + 1}. ${entry.name} 发了 ${entry.amount} 元红包`;
+          rankingList.appendChild(listItem);
+        });
+      }
+
+      window.showPaymentModal = function() {
+        const amount = customAmountInput.value;
+
+        if (amount && amount > 0) {
+          qrCodeImg.src = 'baby_pic/money.png';
+          qrCodeImg.dataset.amount = amount;
+          paymentModal.style.display = 'flex';
+        } else {
+          alert('请输入有效的金额');
+        }
+      }
+
+      updateLeaderboard();
+    });
+  </script>
+</body>
+</html>
