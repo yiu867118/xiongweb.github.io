@@ -69,9 +69,14 @@
             font-weight: 700; /* 字体加粗 */
         }
 
-        h3:hover{
+        h4:hover,h3:hover{
             transform: scale(1.02); 
             transition: transform 0.3s ease;
+        }
+
+        h5:hover{
+            background-color: rgba(222, 245, 206, 0.7);
+            border-radius: 5px;
         }
 
         header img {
@@ -130,7 +135,7 @@
         #news, #related {
             flex: 1;
             background-color: white;
-            border-radius: 60%;
+            border-radius: 20px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -145,6 +150,11 @@
             background-image: url(home_pic/login_1.jpg);
         }
 
+        #news-container {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
         h4 {
             font-size: 26px; /* 改大字体 */
             margin-bottom: 15px;
@@ -152,6 +162,7 @@
             text-align: center;
             font-weight: 700;
         }
+        
 
         .news, .re {
             padding: 10px;
@@ -259,7 +270,7 @@
 
         .pagination-btn {
             border: none;
-            background-color: #dbf1fd;
+            background-color: #ebfddb;
             padding: 8px 12px;
             margin: 0 5px;
             border-radius: 30px;
@@ -268,7 +279,7 @@
         }
 
         .pagination-btn:hover {
-            background-color: #9fcaf9;
+            background-color: #d2f99f;
         }
 
         #page-numbers span {
@@ -281,12 +292,12 @@
         }
 
         #page-numbers .active {
-            background-color: #aad2fc;
+            background-color: #cffcaa;
             color: white;
         }
 
         #page-numbers span:hover {
-            background-color: #8acff9;
+            background-color: #bef98a;
         }
 
         /* 向右移动的动画 */
@@ -428,8 +439,8 @@
         <div id="container">
             <div id="news">
                 <h4>小小熊介绍</h4>
-                <div id="news-container" style="text-align: left; font-size: 20px; font-weight: 500; font-family: 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;">
-                    <!-- 新闻内容 -->
+                <div id="news-container">
+                    
                 </div>
                 <br>
                 <div id="pagination" style="text-align: center; margin-top: 10px;">
@@ -448,7 +459,7 @@
                 <br>
                 <br>
                 <br>
-                <div style="text-align: center; font-size: 20px; font-weight: 500; font-family: 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;">
+                <div style="text-align: center; font-size: 20px; font-weight: 500;">
                     <div class="re">两只熊♥</div>
                     <br>
                     <div class="re">2020.1.26</div>
@@ -472,10 +483,10 @@
         <br>
         <footer>
             <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(235, 249, 215, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
-                <p style="font-size: 19px; color: #555; margin: 0; font-family: 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif; font-weight: 500;">
+                <p style="font-size: 19px; color: #555; margin: 0;">
                     网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
                 </p>
-                <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: 'Poppins', sans-serif;">
+                <p style="font-size: 14px; color: #999; margin-top: 10px;">
                     © 2024 熊家 All Rights Reserved.
                 </p>
             </div>
@@ -523,45 +534,39 @@
             startPictureAutoSlide();
 
 
-            // 熊家新闻
-            const newsData = [
-                { title: "熊家烟花节", date: "2024.10.05", desc: "首尔烟花节, 熊家看烟花", link: "news7.html" },
-                { title: "啊, 今天小小熊又挨揍了?", date: "2024.8.10", desc: "小小熊今天非常委屈，因为不喝奶被小光爸爸狠狠的揍了。", link: "news1.html" },
-                { title: "小熊家起草熊家法案", date: "", desc: "熊家宣布起草管理法案，规范小熊宝宝的行为。", link: "news2.html" },
-                { title: "熊家迎来新成员“小小熊”", date: "2023.12.30", desc: "2023年12月30日，小小熊出生，小君熊经历手术。", link: "news3.html" },
-                { title: "两只熊的济州岛奇妙之旅", date: "2023.7.10", desc: "近日，两只可爱的熊前往济州岛，享受了一段幸福的旅行。", link: "news4.html" },
-                { title: "两只熊本科毕业啦", date: "2022.8.17", desc: "2022年8月17日, 两只小熊本科毕业, 准备开启下个副本。", link: "news5.html" },
-                { title: "熊熊釜山行", date: "2022.2.27", desc: "陪小君考雅思，两只熊熊釜山行", link: "news6.html" },
-                // 添加更多新闻
+            // 小小熊介绍板块
+            const introductionData = [
+                {
+                    title: "我是小小熊，2023年12月出生在韩国京畿道光明市。那天，首尔地区下起了三十多年未见的大雪，我就在这白雪皑皑的世界里诞生了。<br><br> 我是我们熊家最小的熊，一只调皮捣蛋的小熊。我每天都喜欢在家里大冒险，看看小熊爸爸妈妈有没有藏什么好东西。不过，我的小熊爸爸妈妈是两只忘崽熊熊，总是自己出门玩，不带着我。<br> <br>其实，我还不想出去呢！我有好多小玩具，自己在家里玩得可开心了。真希望他们两只熊能在外面多玩一会儿，晚点回来。我一出门就害怕，别人一看我，我就得哭哭。只能我悄咪咪地看你们，你们谁都不许看我！"
+                },
+                // 添加更多介绍内容
             ];
 
-            const newsPerPage = 3;
+            const introductionsPerPage = 3;
             let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
 
-            function renderNews() {
-                const newsContainer = document.getElementById('news-container');
-                newsContainer.innerHTML = '';
+            function renderIntroduction() {
+                const introductionContainer = document.getElementById('news-container');
+                introductionContainer.innerHTML = '';
 
-                const start = (currentPage - 1) * newsPerPage;
-                const end = start + newsPerPage;
-                const newsToShow = newsData.slice(start, end);
+                const start = (currentPage - 1) * introductionsPerPage;
+                const end = start + introductionsPerPage;
+                const introductionsToShow = introductionData.slice(start, end);
 
-                newsToShow.forEach(news => {
-                    const newsDiv = document.createElement('div');
-                    newsDiv.className = 'news';
-                    newsDiv.innerHTML = `
-                        <h5 style="font-size: 20px;"><a href="${news.link}" onclick="saveCurrentPage()">${news.title}</a></h5>
-                        <p>${news.date}</p>
-                        <p>${news.desc}</p>
+                introductionsToShow.forEach(intro => {
+                    const introDiv = document.createElement('div');
+                    introDiv.className = 'introduction';
+                    introDiv.innerHTML = `
+                        <h5 style="font-size: 22px; font-weight: 400;"><p onclick="saveCurrentPage()">${intro.title}</p></h5>
                     `;
-                    newsContainer.appendChild(newsDiv);
+                    introductionContainer.appendChild(introDiv);
                 });
 
                 renderPagination();
             }
 
             function renderPagination() {
-                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                const totalPages = Math.ceil(introductionData.length / introductionsPerPage);
                 const pageNumbers = document.getElementById('page-numbers');
                 pageNumbers.innerHTML = '';
 
@@ -571,7 +576,7 @@
                     pageSpan.className = i === currentPage ? 'active' : '';
                     pageSpan.addEventListener('click', function () {
                         currentPage = i;
-                        renderNews();
+                        renderIntroduction();
                     });
                     pageNumbers.appendChild(pageSpan);
                 }
@@ -583,15 +588,15 @@
             document.getElementById('prev-page').addEventListener('click', function () {
                 if (currentPage > 1) {
                     currentPage--;
-                    renderNews();
+                    renderIntroduction();
                 }
             });
 
             document.getElementById('next-page').addEventListener('click', function () {
-                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                const totalPages = Math.ceil(introductionData.length / introductionsPerPage);
                 if (currentPage < totalPages) {
                     currentPage++;
-                    renderNews();
+                    renderIntroduction();
                 }
             });
 
@@ -600,8 +605,9 @@
                 localStorage.setItem('currentPage', currentPage);
             }
 
-            // 初始渲染新闻
-            renderNews();
+            // 初始渲染介绍
+            renderIntroduction();
+
 
 
 
