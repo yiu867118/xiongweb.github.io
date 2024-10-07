@@ -161,8 +161,8 @@
             color: #444;
             text-align: center;
             font-weight: 700;
+            font-family: 'KaiTi';
         }
-        
 
         .news, .re {
             padding: 10px;
@@ -542,7 +542,7 @@
                 // 添加更多介绍内容
             ];
 
-            const introductionsPerPage = 3;
+            const introductionsPerPage = 1;
             let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
 
             function renderIntroduction() {
@@ -557,7 +557,7 @@
                     const introDiv = document.createElement('div');
                     introDiv.className = 'introduction';
                     introDiv.innerHTML = `
-                        <h5 style="font-size: 22px; font-weight: 400;"><p onclick="saveCurrentPage()">${intro.title}</p></h5>
+                        <h5 style="font-size: 22px; font-weight: 400;"><p onclick="saveCurrentPage_baby()">${intro.title}</p></h5>
                     `;
                     introductionContainer.appendChild(introDiv);
                 });
@@ -601,7 +601,7 @@
             });
 
             // 保存当前页面的函数
-            function saveCurrentPage() {
+            function saveCurrentPage_baby() {
                 localStorage.setItem('currentPage', currentPage);
             }
 

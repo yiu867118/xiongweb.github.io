@@ -161,6 +161,10 @@
             color: #444;
             text-align: center;
             font-weight: 700;
+            font-family: 'KaiTi', 'Pacifico'
+        }
+        h5{
+            font-family: 'KaiTi', 'Pacifico';
         }
 
         .news, .re {
@@ -404,7 +408,7 @@
                 <br>
                 <br>
                 <br>
-                <div style="text-align: center; font-size: 22px; font-weight: 500;">
+                <div style="text-align: center; font-size: 22px; font-weight: 500; font-family: 'KaiTi', 'Pacifico';">
                     <div class="re">两只熊♥</div>
                     <br>
                     <div class="re">2020.1.26</div>
@@ -488,8 +492,7 @@
                 { title: "小光吃辣的肚肚痛" },
                 { title: "小君不喜欢吃海鲜" },
                 { title: "小君泡面不喜欢打入散蛋" },
-                { title: "" },
-                { title: "" },
+                // 去除空字符串项，或自行跳过空内容
             ];
 
             const newsPerPage = 4;
@@ -503,17 +506,22 @@
                 const end = start + newsPerPage;
                 const newsToShow = newsData.slice(start, end);
 
-                newsToShow.forEach((news, index) => {
-                    const newsDiv = document.createElement('div');
-                    newsDiv.className = 'news';
-                    newsDiv.innerHTML = `
-                        <h5 style="font-size: 21px; font-weight: 500;" contenteditable="true">${news.title}</h5>
-                    `;
-                    newsContainer.appendChild(newsDiv);
+                newsToShow.forEach((news) => {
+                    if (news.title) {  // 检查title是否为空
+                        const newsDiv = document.createElement('div');
+                        newsDiv.className = 'news';
+                        newsDiv.innerHTML = `
+                            <h5 style="font-size: 21px; font-weight: 500;" contenteditable="true">
+                                <p onclick="saveCurrentPage_love()">${news.title}</p>
+                            </h5>
+                        `;
+                        newsContainer.appendChild(newsDiv);
+                    }
                 });
 
                 renderPagination();
             }
+
 
             function renderPagination() {
                 const totalPages = Math.ceil(newsData.length / newsPerPage);
@@ -551,7 +559,7 @@
             });
 
             // 保存当前页面的函数
-            function saveCurrentPage() {
+            function saveCurrentPage_love() {
                 localStorage.setItem('currentPage', currentPage);
             }
 
