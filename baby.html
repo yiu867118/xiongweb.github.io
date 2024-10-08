@@ -550,7 +550,7 @@
             ];
 
             const introductionsPerPage = 1;
-            let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
+            let currentPage = sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1;
 
             function renderIntroduction() {
                 const introductionContainer = document.getElementById('news-container');
@@ -609,7 +609,7 @@
 
             // 保存当前页面的函数
             function saveCurrentPage_baby() {
-                localStorage.setItem('currentPage', currentPage);
+                sessionStorage.setItem('currentPage', currentPage);
             }
 
             // 初始渲染介绍

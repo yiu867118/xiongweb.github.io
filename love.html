@@ -498,7 +498,7 @@
             ];
 
             const newsPerPage = 3;
-            let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
+            let currentPage = sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1;
 
             function renderNews() {
                 const newsContainer = document.getElementById('news-container');
@@ -562,7 +562,7 @@
 
             // 保存当前页面的函数
             function saveCurrentPage_love() {
-                localStorage.setItem('currentPage', currentPage);
+                sessionStorage.setItem('currentPage', currentPage);
             }
 
             // 初始渲染新闻
