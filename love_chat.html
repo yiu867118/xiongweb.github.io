@@ -185,16 +185,20 @@
         @keyframes float {
             0% {
                 transform: translate(0, 0);
-                opacity: 0.8; /* 起始位置半透明 */
+                opacity: 0.8;
             }
             50% {
-                transform: translate(-20px, -2000px) rotate(10deg); /* 向左漂浮并旋转 */
-                opacity: 0.6; /* 中间透明度 */
+                transform: translate(-20px, -50%) rotate(10deg);
+                opacity: 0.6;
             }
             100% {
-                transform: translate(20px, -4000px) rotate(-10deg); /* 向右漂浮并旋转 */
-                opacity: 0; /* 结束时逐渐变透明 */
+                transform: translate(20px, -100%) rotate(-10deg);
+                opacity: 0;
             }
+        }
+
+        .float {
+            animation: float 10s linear infinite;
         }
 
         /* 星光点效果 */
@@ -382,6 +386,32 @@
 
         setInterval(createBubble, 600); /* 控制泡泡生成频率 */
 
+        window.onload = function() {
+            const floatingElement = document.querySelector('.float');
+            const pageHeight = document.body.scrollHeight; // 获取页面的总高度
+
+            // 动态插入CSS规则
+            const styleSheet = document.styleSheets[0];
+            styleSheet.insertRule(`
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0);
+                        opacity: 0.8;
+                    }
+                    50% {
+                        transform: translate(-20px, -${pageHeight * 0.5}px) rotate(10deg); /* 50% 页面高度 */
+                        opacity: 0.6;
+                    }
+                    100% {
+                        transform: translate(20px, -${pageHeight}px) rotate(-10deg); /* 100% 页面高度 */
+                        opacity: 0;
+                    }
+                }
+            `, styleSheet.cssRules.length);
+
+            // 将动画应用到浮动元素
+            floatingElement.style.animation = "float 10s linear infinite";
+        };
 
 
         // 更新滚动进度条的 JavaScript
@@ -392,6 +422,9 @@
             const scrollPercentage = (scrollTop / scrollHeight) * 100;
             scrollProgressBar.style.height = scrollPercentage + "%";
         };
+
+
+
 
 
     </script>
