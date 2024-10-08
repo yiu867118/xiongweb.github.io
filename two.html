@@ -19,7 +19,7 @@
             max-width: 90%;
             max-height: 90%;
             margin: 10px auto;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url(home_pic/back.jpg);
+            background-image: url(two_pic/q.jpg);
             background-size: 100%;
             opacity: 0.9;
             z-index: -1;
@@ -50,11 +50,13 @@
             display: flex;
             justify-content: center; /* 居中对齐 */
             align-items: center;
-            background-image: url(home_pic/back.jpg);
+            background-image: url(two_pic/q.jpg);
+            background-color: rgba(255, 255, 255, 0.9);
             text-align: center;
             padding: 15px 0;
             max-width: 100%;
             gap: 20px; /* 调整标题和图片间距 */
+            min-height: 150px;
         }
 
         header div {
@@ -67,6 +69,7 @@
             margin: 0;
             color: #333;
             font-weight: 700; /* 字体加粗 */
+            text-shadow: 2px 2px #fcfdfd;
         }
 
         h3:hover{
@@ -74,9 +77,13 @@
             transition: transform 0.3s ease;
         }
 
+        h5{
+            font-size: 22px;
+        }
+
         header img {
-            width: 200px;
-            height: 240px;
+            width: 130px;
+            height: 180px;
             border-radius: 50%;
         }
 
@@ -98,7 +105,7 @@
         #navbar {
             display: flex;
             justify-content: center;
-            background-color: rgba(228, 244, 252, 0.9);
+            background-color: rgba(239, 228, 252, 0.9);
             padding: 10px;
             border-radius: 5px;
             max-width: 100%;
@@ -115,7 +122,7 @@
         }
 
         #navbar a:hover {
-            background-color: rgba(205, 233, 252, 0.7);
+            background-color: rgba(225, 205, 252, 0.7);
             border-radius: 5px;
         }
 
@@ -138,19 +145,20 @@
         }
 
         #news {
-            background-image: url(home_pic/b.png);
+            background-image: url(two_pic/w.jpg);
         }
 
         #related {
-            background-image: url(home_pic/c.png);
+            background-image: url(two_pic/t.jpg);
         }
 
         h4 {
-            font-size: 26px; /* 改大字体 */
+            font-size: 28px; /* 改大字体 */
             margin-bottom: 15px;
-            color: #444;
+            color: #000000;
             text-align: center;
             font-weight: 700;
+            text-shadow: 2px 1px #fcfdfd;
         }
 
         .news, .re {
@@ -160,9 +168,19 @@
         }
 
         .news:hover, .re:hover {
-            background-color: rgba(206, 231, 245, 0.7);
+            background-color: rgba(222, 206, 245, 0.7);
             border-radius: 5px;
         }
+
+        #related-container, #news-container {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        #related-container p{
+            font-size: 20px;
+        }
+
+
 
         #picture {
             position: relative;
@@ -259,7 +277,7 @@
 
         .pagination-btn {
             border: none;
-            background-color: #dbf1fd;
+            background-color: #efdbfd;
             padding: 8px 12px;
             margin: 0 5px;
             border-radius: 30px;
@@ -268,7 +286,7 @@
         }
 
         .pagination-btn:hover {
-            background-color: #9fcaf9;
+            background-color: #d29ff9;
         }
 
         #page-numbers span {
@@ -281,12 +299,12 @@
         }
 
         #page-numbers .active {
-            background-color: #aad2fc;
+            background-color: #dbaafc;
             color: white;
         }
 
         #page-numbers span:hover {
-            background-color: #8acff9;
+            background-color: #a98af9;
         }
     </style>
 </head>
@@ -294,20 +312,18 @@
 <body>
     <div id="con">
         <header>
+            <div><h3>合体</h3></div>
+            <!-- <div><img src="two_pic/two.jpg" alt="熊家图标"></div> -->
             <div><h3>熊熊</h3></div>
-            <div><img src="home_pic/1.jpg" alt="熊家图标"></div>
-            <div><h3>之家</h3></div>
             <a id="login" href="login.html" style="font-size: 20px;">Login</a>
         </header>
         
         
         <div id="navbar">
-            <a href="homepage.html">主页</a><br>
-            <a href="love.html">两只小熊</a><br>
-            <a href="intro.html">光小熊</a><br>
-            <a href="intro.html">君小熊</a><br>
-            <a href="intro.html">合体熊</a><br>
-            <a href="baby.html">小小熊</a><br>
+            <a href="homepage.html">熊家主页</a><br>
+            <a href="jun.html">小君主页</a><br>
+            <a href="baby.html">熊宝宝主页</a><br>
+            
         </div>
         <br>
         <br>
@@ -317,28 +333,23 @@
             <div id="prev" class="arrow"><</div>
             <div id="pictures">
                 
-                <img height="200" width="200" src="home_pic/3.jpg" alt="">
-                <img height="200" width="200" src="home_pic/4.jpg" alt="">
-                <img height="200" width="200" src="home_pic/5.jpg" alt="">
-                <img height="200" width="200" src="home_pic/6.jpg" alt="">
-                <img height="200" width="200" src="home_pic/7.jpg" alt="">
-                <img height="200" width="200" src="home_pic/8.jpg" alt="">
-                <img height="200" width="200" src="home_pic/9.jpg" alt="">
-                <img height="200" width="200" src="home_pic/10.jpg" alt="">
-                <img height="200" width="200" src="home_pic/11.jpg" alt="">
-                <img height="200" width="200" src="home_pic/12.jpg" alt="">
-                <img height="200" width="200" src="home_pic/14.jpg" alt="">
-                <img height="200" width="200" src="home_pic/15.jpg" alt="">
-                <img height="200" width="200" src="home_pic/16.jpg" alt="">
-                <img height="200" width="200" src="home_pic/18.jpg" alt="">
+                <img height="200" width="200" src="two_pic/401.jpg" alt="">
+                <img height="200" width="200" src="two_pic/402.jpg" alt="">
+                <img height="200" width="200" src="two_pic/404.jpg" alt="">
+                <img height="200" width="200" src="two_pic/451.jpg" alt="">
+                <img height="200" width="200" src="two_pic/452.jpg" alt="">
+                <img height="200" width="200" src="two_pic/453.jpg" alt="">
+                <img height="200" width="200" src="two_pic/454.jpg" alt="">
+                <img height="200" width="200" src="two_pic/455.jpg" alt="">
+                <img height="200" width="200" src="two_pic/456.jpg" alt="">
             </div>
             <div id="next" class="arrow">></div>
         </div>
 
         <div id="container">
             <div id="news">
-                <h4>熊家新闻</h4>
-                <p style="text-align: center;" style="font-size: 20px;">(点击可查看新闻详情)</p>
+                <h4>宝宝历程</h4>
+                <p style="text-align: center;" style="font-size: 20px;"></p>
                 <div id="news-container" style="text-align: left; font-size: 20px; font-weight: 500;">
                     <!-- 新闻内容 -->
                 </div>
@@ -351,35 +362,23 @@
             </div>
 
             <div id="related">
-                <h4>熊家纪念日</h4>
-                <br>
-                <br>
-                <br>
-                <p style="text-align: center;"> o(*￣▽￣*)o   *^▽^*   ヽ(ﾟ▽ﾟ)ノ</p>
-                <br>
-                <br>
-                <br>
-                <div style="text-align: center; font-size: 22px; font-weight: 500; ">
-                    <div class="re">两只熊♥</div>
-                    <br>
-                    <div class="re">2020.1.26</div>
-                    <br>
-                    <div class="re">距今...天</div>
-                
+                <h4>君君历程</h4>
+                <p style="text-align: center; font-size: 20px;"></p>
+                <div id="related-container" style="text-align: left; font-size: 20px; font-weight: 500;">
+                    <!-- 新闻内容 -->
                 </div>
-                <div class="arrow-small" id="prev-re"><</div>
-                <div class="arrow-small" id="next-re">></div>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div id="dots"></div>
+                <div id="pagination-related" style="text-align: center; margin-top: 10px;">
+                    <button id="prev-page-related" class="pagination-btn">上一页</button>
+                    <span id="page-numbers-related"></span>
+                    <button id="next-page-related" class="pagination-btn">下一页</button>
+                </div>
             </div>
         </div>
+
+
+
+
         <br>
         <footer>
             <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
@@ -433,37 +432,35 @@
 
             startPictureAutoSlide();
 
+            
 
-            // 熊家新闻
+            //超声波展示
             const newsData = [
-                { title: "熊家烟花节", date: "2024.10.05", desc: "首尔烟花节, 熊家看烟花", link: "news7.html" },
-                { title: "啊, 今天小小熊又挨揍了?", date: "2024.8.10", desc: "小小熊今天非常委屈，因为不喝奶被小光爸爸狠狠的揍了。", link: "news1.html" },
-                { title: "小熊家起草熊家法案", date: "", desc: "熊家宣布起草管理法案，规范小熊宝宝的行为。", link: "news2.html" },
-                { title: "熊家迎来新成员“小小熊”", date: "2023.12.30", desc: "2023年12月30日，小小熊出生，小君熊经历手术。", link: "news3.html" },
-                { title: "两只熊的济州岛奇妙之旅", date: "2023.7.10", desc: "近日，两只可爱的熊前往济州岛，享受了一段幸福的旅行。", link: "news4.html" },
-                { title: "两只熊本科毕业啦", date: "2022.8.17", desc: "2022年8月17日, 两只小熊本科毕业, 准备开启下个副本。", link: "news5.html" },
-                { title: "熊熊釜山行", date: "2022.2.27", desc: "陪小君考雅思，两只熊熊釜山行", link: "news6.html" },
-                // 添加更多新闻
+                { title: "Week 4", date: "", desc: "第一次见到你 你还是一个小扁蛋", img: "two_pic/451.jpg", link: "news7.html" },
+                { title: "Week 6", date: "", desc: "一个更扁的蛋 有心跳了", img: "two_pic/452.jpg", link: "news7.html" },
+                { title: "Week 8", date: "", desc: "初具人形", img: "two_pic/453.jpg", link: "news7.html" },
+                { title: "Week 12", date: "", desc: "更像小人了", img: "two_pic/454.jpg", link: "news7.html" },
+                { title: "Week 16", date: "", desc: "医生给你拍了屁屁照 得知你是只男宝宝", img: "two_pic/455.jpg", link: "news7.html" },
+                { title: "Week 28", date: "", desc: "你的第一张彩照", img: "two_pic/456.jpg", link: "news7.html" },
             ];
 
-            const newsPerPage = 2;
-            let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
+            const newsPerPage = 1;
+            let currentPage = sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1;
 
             function renderNews() {
                 const newsContainer = document.getElementById('news-container');
                 newsContainer.innerHTML = '';
 
                 const start = (currentPage - 1) * newsPerPage;
-                const end = start + newsPerPage;
-                const newsToShow = newsData.slice(start, end);
+                const newsToShow = newsData.slice(start, start + newsPerPage);
 
                 newsToShow.forEach(news => {
                     const newsDiv = document.createElement('div');
                     newsDiv.className = 'news';
                     newsDiv.innerHTML = `
-                        <h5 style="font-size: 22px;"><a href="${news.link}" onclick="saveCurrentPage()">${news.title}</a></h5>
-                        <p>${news.date}</p>
-                        <p>${news.desc}</p>
+                        <h5 style="font-size: 26px; text-align:center;">${news.title}</h5>
+                        <h5 style="font-size: 20px; text-align:center;">${news.desc}</h5>
+                        <img src="${news.img}" alt="${news.title}" style="width:90%; height:auto; margin-left:auto; margin-right:auto; display:block;">
                     `;
                     newsContainer.appendChild(newsDiv);
                 });
@@ -506,73 +503,92 @@
                 }
             });
 
-            // 保存当前页面的函数
             function saveCurrentPage() {
-                localStorage.setItem('currentPage', currentPage);
+                sessionStorage.setItem('currentPage', currentPage);
             }
 
-            // 初始渲染新闻
             renderNews();
 
 
-
             
- 
-
-
-            // 熊家纪念日
-            const anniversaries = [
-                { date: new Date('2020-01-26'), name: '两只熊♥' },
-                { date: new Date('1998-09-29'), name: '光生日' },
-                { date: new Date('1998-12-13'), name: '君生日' },
-                { date: new Date('2023-08-09'), name: '结婚纪念日' },
-                { date: new Date('2023-12-30'), name: '小小熊生日' }
+            const relatedContents = [
+                { title: "2023年上学期  期中考试周", text: "傍晚，我和小光看着从医院拿回来的那张扁蛋图像，陷入了沉思——这真的是个人吗？怎么看起来更像个蛋呢？小光总是问我有什么感觉，而我总是回答：“没有。”虽然据说这是怀孕的意思，但总是没什么实感。\n\n" },
+                { title: "2023年上学期  期中-期末", text: "渐渐地，我的身体一天比一天不适，三步一吐，闷，喘不过气，像饿死鬼一样吃饭。而在学校，却要依然若无其事地上课和发表。每次英文发表要持续两三个小时，全凭毅力强忍一次次不适。身体越是不舒服，似乎我越是想把事情做得更好。\n\n" },
+                { title: "2023年上学期  学期收获", text: "学期平均绩点:98.3/100, 奖学金:折合约4w人民币"},
+                { title: "2023年暑假", text: "研究助教没有暑假，每天都在做声学分析。不过小光每天都陪着我。", img: "two_pic/493.jpg" },
+                { title: "", text: "", img: "" },
+                { title: "", text: "", img: "" },
+                { title: "2023年下学期  期中前", text: "不断加重的不适，白天闷、晕、吐、喘不过气, 晚上彻夜难眠。小光开始每天陪我上学放学。\n\n" },
+                { title: "2023年下学期  期中后", text: "超级不适，晚上稍微一动就被撕扯痛得清醒过来，日日无眠。学业上, 去成均馆大学交换学习了人工智能，因没有基础，熬夜到清晨是常事。在家里走路都困难的我，到了学校却总是风轻云淡、步态轻盈。\n\n" },
+                { title: "2023年下学期  学期收获", text: "人工智能课:满分，学期平均绩点:98.3/100，奖学金:折合约4w人民币" },
+                { title: "2023年寒假初", text: "结束合体时光",  img: "two_pic/405.jpg" },
             ];
 
-            let reIndex = 0;
-            let reInterval;
+            let currentPageRelated = 0;
 
-            function updateAnniversary(index) {
-                const reElements = document.querySelectorAll('.re');
-                const current = anniversaries[index];
-                const now = new Date();
-                const diff = Math.ceil((now - current.date) / (1000 * 60 * 60 * 24));
-                reElements[0].textContent = current.name;
-                reElements[1].textContent = current.date.toLocaleDateString();
-                reElements[2].textContent = `距今已经${diff}天`;
-                updateDots(index);
+            function displayRelatedContent() {
+                const relatedContainer = document.getElementById("related-container");
+                relatedContainer.innerHTML = "";
+
+                // 显示两个内容
+                for (let i = 0; i < 3; i++) {
+                    const contentIndex = currentPageRelated * 3 + i; // 计算当前显示的内容索引
+                    if (contentIndex < relatedContents.length) {
+                        const content = relatedContents[contentIndex];
+                        const contentDiv = document.createElement("div");
+                        contentDiv.className = "related-content"; // 为每个内容添加类以便样式
+
+                        const title = document.createElement("h5");
+                        title.innerText = content.title;
+                        const text = document.createElement("p");
+                        text.innerText = content.text;
+
+                        contentDiv.appendChild(title);
+                        contentDiv.appendChild(text);
+
+                        if (content.img) {
+                            const img = document.createElement("img");
+                            img.src = content.img;
+                            img.alt = "图片";
+                            img.style.width = "70%";
+                            img.style.height = "auto"
+                            contentDiv.appendChild(img);
+                        }
+
+                        relatedContainer.appendChild(contentDiv);
+                    }
+                }
+
+                updateRelatedPageNumbers();
             }
 
-            function updateDots(index) {
-                const dots = document.getElementById('dots');
-                dots.innerHTML = '';
-                anniversaries.forEach((_, i) => {
-                    const dot = document.createElement('span');
-                    dot.className = 'dot' + (i === index ? ' active' : '');
-                    dots.appendChild(dot);
-                });
+            function updateRelatedPageNumbers() {
+                const totalPages = Math.ceil(relatedContents.length / 3); // 计算总页数
+                document.getElementById("page-numbers-related").innerText = `${currentPageRelated + 1} / ${totalPages}`;
             }
 
-            function startAnniversaryAutoSlide() {
-                reInterval = setInterval(function () {
-                    reIndex = (reIndex + 1) % anniversaries.length;
-                    updateAnniversary(reIndex);
-                }, 5000);
+            function prevPageRelated() {
+                if (currentPageRelated > 0) {
+                    currentPageRelated--;
+                    displayRelatedContent();
+                }
             }
 
+            function nextPageRelated() {
+                const totalPages = Math.ceil(relatedContents.length / 3); // 计算总页数
+                if (currentPageRelated < totalPages - 1) {
+                    currentPageRelated++;
+                    displayRelatedContent();
+                }
+            }
 
-            document.getElementById('prev-re').addEventListener('click', function () {
-                reIndex = (reIndex - 1 + anniversaries.length) % anniversaries.length;
-                updateAnniversary(reIndex);
-            });
+            document.getElementById("prev-page-related").addEventListener("click", prevPageRelated);
+            document.getElementById("next-page-related").addEventListener("click", nextPageRelated);
 
-            document.getElementById('next-re').addEventListener('click', function () {
-                reIndex = (reIndex + 1) % anniversaries.length;
-                updateAnniversary(reIndex);
-            });
+            displayRelatedContent();
 
-            updateAnniversary(reIndex);
-            startAnniversaryAutoSlide();
+
+           
         </script>
     </div>
 </body>
