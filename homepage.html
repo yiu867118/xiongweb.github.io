@@ -14,7 +14,49 @@
             font-style: normal;
         }
 
+        /* 全屏欢迎页面 */
+        
+        /* 初始样式，定义全屏的欢迎屏幕 */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('two_pic/a.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            color: white;
+            font-size: 48px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 1s ease, opacity 1s ease; /* 添加平滑动画 */
+        }
+
+        /* 当欢迎屏幕消失时，它将上移并渐隐 */
+        .welcome-hide {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        #welcome-screen span {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', sans-serif;
+        }
+
         #con {
+            display: none;
             position: relative;
             max-width: 90%;
             max-height: 90%;
@@ -33,7 +75,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url(home_pic/back.jpg);
+            background-image: url(you_pic/a.jpg);
             background-size: 100%;
             opacity: 0.9;
             z-index: -1;
@@ -292,6 +334,13 @@
 </head>
 
 <body>
+    <div id="welcome-screen">
+        <div>欢迎来到熊熊之家</div>
+        <span>点击任意位置进入熊家主页</span>
+    </div>
+
+
+
     <div id="con">
         <header>
             <div><h3>熊熊</h3></div>
@@ -573,6 +622,24 @@
 
             updateAnniversary(reIndex);
             startAnniversaryAutoSlide();
+
+
+            // 当用户点击欢迎页面时，隐藏它并显示主页面
+        // 添加点击事件监听器，当用户点击欢迎屏幕时触发动画
+        document.getElementById('welcome-screen').addEventListener('click', function() {
+            var welcomeScreen = document.getElementById('welcome-screen');
+            var mainContent = document.getElementById('con');
+
+            // 给欢迎屏幕添加滑动效果的类
+            welcomeScreen.classList.add('welcome-hide');
+
+            // 动画完成后隐藏欢迎屏幕，并显示主页面内容
+            setTimeout(function() {
+                welcomeScreen.style.display = 'none'; // 完全隐藏欢迎屏幕
+                con.style.display = 'block'; // 显示主页内容
+            }, 1000); // 时间与 transition 的持续时间一致
+        });
+
         </script>
     </div>
 </body>

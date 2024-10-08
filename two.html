@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>小小熊</title>
+    <title>双熊熊</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <style>
         @font-face {
@@ -19,7 +19,7 @@
             max-width: 90%;
             max-height: 90%;
             margin: 10px auto;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.7);
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -33,7 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url(baby_pic/z.jpg);
+            background-image: url(home_pic/back.jpg);
             background-size: 100%;
             opacity: 0.9;
             z-index: -1;
@@ -50,7 +50,7 @@
             display: flex;
             justify-content: center; /* 居中对齐 */
             align-items: center;
-            background-image: url(baby_pic/z.jpg);
+            background-image: url(home_pic/back.jpg);
             text-align: center;
             padding: 15px 0;
             max-width: 100%;
@@ -69,24 +69,20 @@
             font-weight: 700; /* 字体加粗 */
         }
 
-        h4:hover,h3:hover{
+        h3:hover{
             transform: scale(1.02); 
             transition: transform 0.3s ease;
         }
 
-        h5:hover{
-            background-color: rgba(222, 245, 206, 0.7);
-            border-radius: 5px;
-        }
-
         header img {
-            width: 240px;
+            width: 200px;
             height: 240px;
             border-radius: 50%;
         }
 
         header img:hover{
             transform: scale(1.05);
+            opacity: 0.8; /* 透明度 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
@@ -102,7 +98,7 @@
         #navbar {
             display: flex;
             justify-content: center;
-            background-color: rgba(232, 250, 220, 0.5);
+            background-color: rgba(228, 244, 252, 0.9);
             padding: 10px;
             border-radius: 5px;
             max-width: 100%;
@@ -119,7 +115,7 @@
         }
 
         #navbar a:hover {
-            background-color: rgba(198, 250, 167, 0.7);
+            background-color: rgba(205, 233, 252, 0.7);
             border-radius: 5px;
         }
 
@@ -135,28 +131,18 @@
         #news, #related {
             flex: 1;
             background-color: white;
-            border-radius: 20px;
+            border-radius: 10px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
         }
 
         #news {
-            background-image: url(home_pic/login.jpg);
-            background-color: rgba(198, 250, 167, 0.8);
+            background-image: url(home_pic/b.png);
         }
 
         #related {
-            background-image: url(home_pic/login_1.jpg);
-        }
-        #news:hover, #related:hover{
-            transform: scale(1.02); 
-            transition: transform 0.3s ease;
-        }
-
-        #news-container {
-            margin-left: 10%;
-            margin-right: 10%;
+            background-image: url(home_pic/c.png);
         }
 
         h4 {
@@ -165,7 +151,6 @@
             color: #444;
             text-align: center;
             font-weight: 700;
-            font-family: 'KaiTi';
         }
 
         .news, .re {
@@ -175,7 +160,7 @@
         }
 
         .news:hover, .re:hover {
-            background-color: rgba(224, 245, 206, 0.7);
+            background-color: rgba(206, 231, 245, 0.7);
             border-radius: 5px;
         }
 
@@ -274,7 +259,7 @@
 
         .pagination-btn {
             border: none;
-            background-color: #ebfddb;
+            background-color: #dbf1fd;
             padding: 8px 12px;
             margin: 0 5px;
             border-radius: 30px;
@@ -283,7 +268,7 @@
         }
 
         .pagination-btn:hover {
-            background-color: #d2f99f;
+            background-color: #9fcaf9;
         }
 
         #page-numbers span {
@@ -296,92 +281,12 @@
         }
 
         #page-numbers .active {
-            background-color: #cffcaa;
+            background-color: #aad2fc;
             color: white;
         }
 
         #page-numbers span:hover {
-            background-color: #bef98a;
-        }
-
-        /* 向右移动的动画 */
-        @keyframes move-right {
-            0% {
-                transform: translateX(0%);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateX(50%);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100%);
-                opacity: 0.5;
-            }
-        }
-
-        /* 向左移动的动画 */
-        @keyframes move-left {
-            0% {
-                transform: translateX(0%);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateX(-50%); /* 向左 */
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(-100%);
-                opacity: 0.5;
-            }
-        }
-
-        /* 向右移动的特效 */
-        #panda-right {
-            animation-name: move-right;
-            animation-duration: 10s;
-            animation-iteration-count: infinite;
-            background-color: rgba(241, 250, 220, 0.9);
-            border-radius: 100%;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            position: relative;
-            width: 210px;
-            height: 250px;
-        }
-
-        /* 向左移动的特效 */
-        #panda-left {
-            animation-name: move-left;
-            animation-duration: 10s;
-            animation-iteration-count: infinite;
-            background-color: rgba(241, 250, 220, 0.9);
-            border-radius: 100%;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            position: relative;
-            width: 200px;
-            height: 240px;
-        }
-
-        /* 图片样式 */
-        #panda-left img, #panda-right img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-
-        /* 模糊边缘效果 */
-        #panda-left::before, #panda-right::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            box-shadow: 0 0 20px 10px rgba(241, 250, 220, 0.1);
-            pointer-events: none;
+            background-color: #8acff9;
         }
     </style>
 </head>
@@ -389,26 +294,20 @@
 <body>
     <div id="con">
         <header>
-            <!-- 移动特效图片 -->
-            <div id="panda-left">
-                <img src="baby_pic/693.png" alt="">
-            </div>
-
-            <div><h3>小小</h3></div>
-            <div><img src="baby_pic/691.jpg" alt="熊家图标"></div>
             <div><h3>熊熊</h3></div>
-
-            <!-- 移动特效图片 -->
-            <div id="panda-right">
-                <img src="baby_pic/692.jpg" alt="">
-            </div>
+            <div><img src="home_pic/1.jpg" alt="熊家图标"></div>
+            <div><h3>之家</h3></div>
             <a id="login" href="login.html" style="font-size: 20px;">Login</a>
         </header>
-
+        
+        
         <div id="navbar">
             <a href="homepage.html">主页</a><br>
-            <a href=".html">熊宝宝相册</a><br>
-            <a href="baby_money.html">熊宝宝收红包</a><br>
+            <a href="love.html">两只小熊</a><br>
+            <a href="intro.html">光小熊</a><br>
+            <a href="intro.html">君小熊</a><br>
+            <a href="intro.html">合体熊</a><br>
+            <a href="baby.html">小小熊</a><br>
         </div>
         <br>
         <br>
@@ -418,33 +317,30 @@
             <div id="prev" class="arrow"><</div>
             <div id="pictures">
                 
-                <img height="200" width="200" src="baby_pic/601.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/602.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/603.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/609.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/612.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/613.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/615.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/617.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/619.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/620.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/621.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/625.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/627.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/628.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/629.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/630.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/632.jpg" alt="">
-                <img height="200" width="200" src="baby_pic/633.jpg" alt="">
+                <img height="200" width="200" src="home_pic/3.jpg" alt="">
+                <img height="200" width="200" src="home_pic/4.jpg" alt="">
+                <img height="200" width="200" src="home_pic/5.jpg" alt="">
+                <img height="200" width="200" src="home_pic/6.jpg" alt="">
+                <img height="200" width="200" src="home_pic/7.jpg" alt="">
+                <img height="200" width="200" src="home_pic/8.jpg" alt="">
+                <img height="200" width="200" src="home_pic/9.jpg" alt="">
+                <img height="200" width="200" src="home_pic/10.jpg" alt="">
+                <img height="200" width="200" src="home_pic/11.jpg" alt="">
+                <img height="200" width="200" src="home_pic/12.jpg" alt="">
+                <img height="200" width="200" src="home_pic/14.jpg" alt="">
+                <img height="200" width="200" src="home_pic/15.jpg" alt="">
+                <img height="200" width="200" src="home_pic/16.jpg" alt="">
+                <img height="200" width="200" src="home_pic/18.jpg" alt="">
             </div>
             <div id="next" class="arrow">></div>
         </div>
 
         <div id="container">
             <div id="news">
-                <h4>小小熊介绍</h4>
-                <div id="news-container">
-                    
+                <h4>熊家新闻</h4>
+                <p style="text-align: center;" style="font-size: 20px;">(点击可查看新闻详情)</p>
+                <div id="news-container" style="text-align: left; font-size: 20px; font-weight: 500;">
+                    <!-- 新闻内容 -->
                 </div>
                 <br>
                 <div id="pagination" style="text-align: center; margin-top: 10px;">
@@ -463,7 +359,7 @@
                 <br>
                 <br>
                 <br>
-                <div style="text-align: center; font-size: 24px; font-weight: 550;">
+                <div style="text-align: center; font-size: 22px; font-weight: 500; ">
                     <div class="re">两只熊♥</div>
                     <br>
                     <div class="re">2020.1.26</div>
@@ -486,7 +382,7 @@
         </div>
         <br>
         <footer>
-            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(235, 249, 215, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
+            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
                 <p style="font-size: 19px; color: #555; margin: 0;">
                     网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
                 </p>
@@ -538,42 +434,45 @@
             startPictureAutoSlide();
 
 
-            // 小小熊介绍板块
-            const introductionData = [
-                {
-                    title: "我是小小熊，2023年12月出生在韩国京畿道光明市。那天，首尔地区下起了三十多年未见的大雪，我就在这白雪皑皑的世界里诞生了。<br><br> 我是我们熊家最小的熊，一只调皮捣蛋的小熊。我每天都喜欢在家里大冒险，看看小熊爸爸妈妈有没有藏什么好东西。<br><br> 我的小熊爸爸妈妈是两只忘崽熊熊，总是自己出门玩，不带着我。不过, 其实我还不想出去呢！我有好多小玩具，自己在家里玩得可开心了。真希望他们两只熊能在外面多玩一会儿，晚点回来。我一出门就害怕，别人一看我，我就得哭哭。只能我悄咪咪地看别人，别人谁都不许看我, 哼~"
-                },
-                {
-                    title: ""
-                },
-                // 添加更多介绍内容
+            // 熊家新闻
+            const newsData = [
+                { title: "熊家烟花节", date: "2024.10.05", desc: "首尔烟花节, 熊家看烟花", link: "news7.html" },
+                { title: "啊, 今天小小熊又挨揍了?", date: "2024.8.10", desc: "小小熊今天非常委屈，因为不喝奶被小光爸爸狠狠的揍了。", link: "news1.html" },
+                { title: "小熊家起草熊家法案", date: "", desc: "熊家宣布起草管理法案，规范小熊宝宝的行为。", link: "news2.html" },
+                { title: "熊家迎来新成员“小小熊”", date: "2023.12.30", desc: "2023年12月30日，小小熊出生，小君熊经历手术。", link: "news3.html" },
+                { title: "两只熊的济州岛奇妙之旅", date: "2023.7.10", desc: "近日，两只可爱的熊前往济州岛，享受了一段幸福的旅行。", link: "news4.html" },
+                { title: "两只熊本科毕业啦", date: "2022.8.17", desc: "2022年8月17日, 两只小熊本科毕业, 准备开启下个副本。", link: "news5.html" },
+                { title: "熊熊釜山行", date: "2022.2.27", desc: "陪小君考雅思，两只熊熊釜山行", link: "news6.html" },
+                // 添加更多新闻
             ];
 
-            const introductionsPerPage = 1;
+            const newsPerPage = 2;
             let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 1;
 
-            function renderIntroduction() {
-                const introductionContainer = document.getElementById('news-container');
-                introductionContainer.innerHTML = '';
+            function renderNews() {
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '';
 
-                const start = (currentPage - 1) * introductionsPerPage;
-                const end = start + introductionsPerPage;
-                const introductionsToShow = introductionData.slice(start, end);
+                const start = (currentPage - 1) * newsPerPage;
+                const end = start + newsPerPage;
+                const newsToShow = newsData.slice(start, end);
 
-                introductionsToShow.forEach(intro => {
-                    const introDiv = document.createElement('div');
-                    introDiv.className = 'introduction';
-                    introDiv.innerHTML = `
-                        <h5 style="font-size: 24px; line-height: 1.5;font-weight: 400;"><p onclick="saveCurrentPage_baby()">${intro.title}</p></h5>
+                newsToShow.forEach(news => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news';
+                    newsDiv.innerHTML = `
+                        <h5 style="font-size: 22px;"><a href="${news.link}" onclick="saveCurrentPage()">${news.title}</a></h5>
+                        <p>${news.date}</p>
+                        <p>${news.desc}</p>
                     `;
-                    introductionContainer.appendChild(introDiv);
+                    newsContainer.appendChild(newsDiv);
                 });
 
                 renderPagination();
             }
 
             function renderPagination() {
-                const totalPages = Math.ceil(introductionData.length / introductionsPerPage);
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
                 const pageNumbers = document.getElementById('page-numbers');
                 pageNumbers.innerHTML = '';
 
@@ -583,7 +482,7 @@
                     pageSpan.className = i === currentPage ? 'active' : '';
                     pageSpan.addEventListener('click', function () {
                         currentPage = i;
-                        renderIntroduction();
+                        renderNews();
                     });
                     pageNumbers.appendChild(pageSpan);
                 }
@@ -595,26 +494,25 @@
             document.getElementById('prev-page').addEventListener('click', function () {
                 if (currentPage > 1) {
                     currentPage--;
-                    renderIntroduction();
+                    renderNews();
                 }
             });
 
             document.getElementById('next-page').addEventListener('click', function () {
-                const totalPages = Math.ceil(introductionData.length / introductionsPerPage);
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
                 if (currentPage < totalPages) {
                     currentPage++;
-                    renderIntroduction();
+                    renderNews();
                 }
             });
 
             // 保存当前页面的函数
-            function saveCurrentPage_baby() {
+            function saveCurrentPage() {
                 localStorage.setItem('currentPage', currentPage);
             }
 
-            // 初始渲染介绍
-            renderIntroduction();
-
+            // 初始渲染新闻
+            renderNews();
 
 
 
