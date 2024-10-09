@@ -159,6 +159,7 @@
             filter: blur(1px); /* 模糊滤镜 */
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
             animation: float 1000s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
+            will-change: transform, opacity; /* 性能优化 */
         }
 
         .bubble::before,
@@ -317,6 +318,13 @@
 
             <div class="image-container">
                 <img src="love_pic/272.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/273.jpg" alt="聊天记录3">
                 <div class="overlay">
                     <div class="text">🐻♥🐻</div>
                 </div>

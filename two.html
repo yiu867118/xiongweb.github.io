@@ -263,23 +263,7 @@
             transition: transform 0.3s ease;
         }
 
-        #dots {
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .dot {
-            height: 10px;
-            width: 10px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .dot.active {
-            background-color: #717171;
-        }
+       
 
         .pagination-btn {
             border: none;
@@ -387,7 +371,7 @@
 
         <br>
         <footer>
-            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
+            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(237, 230, 249, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
                 <p style="font-size: 19px; color: #555; margin: 0;">
                     网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
                 </p>
@@ -465,7 +449,7 @@
                     newsDiv.className = 'news';
                     newsDiv.innerHTML = `
                         <h5 style="font-size: 26px; text-align:center;">${news.title}</h5>
-                        <h5 style="font-size: 20px; text-align:center;">${news.desc}</h5>
+                        <h5 style="font-size: 22px; text-align:center;">${news.desc}</h5>
                         <img src="${news.img}" alt="${news.title}" style="width:90%; height:auto; margin-left:auto; margin-right:auto; display:block;">
                     `;
                     newsContainer.appendChild(newsDiv);
@@ -518,8 +502,8 @@
 
             
             const relatedContents = [
-                { title: "2023年上学期  期中考试周", text: "傍晚，我和小光看着从医院拿回来的那张扁蛋图像，陷入了沉思——这真的是个人吗？怎么看起来更像个蛋呢？小光总是问我有什么感觉，而我总是回答：“没有。”虽然据说这是怀孕的意思，但总是没什么实感。\n\n" },
-                { title: "2023年上学期  期中-期末", text: "渐渐地，身体开始一天比一天不适，吐，闷，饿。在学校，却要依然若无其事地上课和发表。每次英文发表要持续两三个小时，全凭毅力强忍一次次不适。身体越是不舒服，似乎我越是想把事情做得更好。\n\n" },
+                { title: "2023年上学期  期中考试周", text: "傍晚，我和小光看着从医院拿回来的那张扁蛋图像，陷入了沉思——这真的是个人吗？怎么看起来更像个蛋呢？小光总是问我有什么感觉，而我总是回答：“没有。”\n\n" },
+                { title: "2023年上学期  期中-期末", text: "渐渐地，身体开始一天比一天不适，吐，闷，饿。在学校，忙碌于上课和发表。每次英文发表要持续两三个小时，全凭毅力强忍一次次不适。身体越是不舒服，似乎我越是想把事情做得更好。\n\n" },
                 { title: "2023年上学期  学期收获", text: "学期平均绩点:98.3/100, 奖学金:折合约4w人民币"},
                 { title: "2023年暑假", text: "研究助教没有暑假，每天都在做声学分析。不过小光每天都陪着我。", img: "two_pic/493.jpg" },
                 { title: "", text: "", img: "" },

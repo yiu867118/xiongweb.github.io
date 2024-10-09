@@ -11,7 +11,7 @@
         }
         .container {
             background: url(home_pic/login.jpg);
-            background-size: 500px 350px ;
+            background-size: 100%;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -64,7 +64,7 @@
 <body>
     <div class="container">
         <h2>加入熊家会员</h2>
-        <form action="/register" onsubmit="return registerSuccess()">
+        <form onsubmit="return registerSuccess()">
             <input type="email" class="input" name="email" placeholder="邮箱" required><br>
             <input type="password" class="input" name="password" placeholder="密码" required><br>
             <input type="password" class="input" name="passwordSure" placeholder="再次输入密码" required><br><br>
@@ -72,11 +72,32 @@
         </form>
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
     <script>
-        function registerSuccess() {
-            alert('成功创建熊家会员账号!');
-            window.location.href = 'homepage.html';
-            return false; 
+        // Configure AWS Amplify
+        Amplify.configure({
+            Auth: {
+                // Your Cognito details
+                region: 'your-region',
+                userPoolId: 'your-user-pool-id',
+                userPoolWebClientId: 'your-app-client-id',
+            }
+        });
+
+        async function registerSuccess() {
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            try {
+                await Amplify.Auth.signUp({
+                    username: email,
+                    password: password,
+                });
+                alert('成功创建熊家会员账号!');
+                window.location.href = 'homepage.html';
+            } catch (error) {
+                alert('注册失败: ' + error.message);
+            }
+            return false;
         }
     </script>
 </body>

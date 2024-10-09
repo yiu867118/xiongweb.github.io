@@ -311,7 +311,9 @@
             background: rgb(249, 202, 238);
             transform: rotate(-45deg);
             animation: float 500s infinite;
+            will-change: transform, opacity; /* 添加性能优化 */
         }
+        
         .heart::before,
         .heart::after {
             content: "";
@@ -354,7 +356,7 @@
         
         <div id="navbar">
             <a href="homepage.html">熊家主页</a><br>
-            <a href="intro.html">熊熊相册</a><br>
+            <a href="love_pic.html">熊熊相册</a><br>
             <a href="love_chat.html">日常记录</a><br>
         </div>
         <br>

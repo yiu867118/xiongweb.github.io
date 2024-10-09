@@ -12,7 +12,7 @@
         }
         .container {
             background: url(home_pic/login.jpg);
-            background-size: 500px 350px ;
+            background-size: 100% ;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -66,7 +66,7 @@
 
     <div class="container">
         <h2>熊家会员登陆</h2>
-        <form action="/login"  onsubmit="return loginSuccess()">
+        <form action="/login" onsubmit="return loginSuccess()">
             <input type="email" class="input" name="email" placeholder="Email" required><br>
             <input type="password" class="input" name="password" placeholder="Password" required><br>
             <button type="submit" class="sub">Login</button>
@@ -74,11 +74,34 @@
         <p id="create-account">没有账号? <a href="login_registration.html">点击创建账号</a>.</p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
     <script>
-        function loginSuccess() {
-            alert('登录成功!');
-            window.location.href = 'homepage.html';
-            return false; 
+        // Configure AWS Amplify
+        Amplify.configure({
+            Auth: {
+                // Your Cognito details
+                region: 'ap-northeast-2',
+                userPoolId: 'ap-northeast-2_eDA8pl2f6',
+                userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
+            }
+        });
+
+        async function loginSuccess() {
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+            try {
+                await Amplify.Auth.signIn(email, password);
+                alert('登录成功!');
+                await logUserAccess(email);
+                window.location.href = 'homepage.html';
+            } catch (error) {
+                alert('登录失败: ' + error.message);
+            }
+            return false;
+        }
+
+        async function logUserAccess(email) {
+            // Logic to log user access (increase visit count) using Amplify DataStore
         }
     </script>
 </body>
