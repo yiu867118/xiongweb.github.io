@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <title>join xiong's family</title>
     <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'KaiTi', sans-serif;
             background-color: rgb(234, 253, 241);
             position: relative;
         }
@@ -16,7 +23,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 500px;
-            height: 300px;
+            height: auto;
             text-align: center;
             position: absolute;
             margin-top: 25%;
@@ -50,14 +57,8 @@
             font-weight: 600;
             color: #070707;
         }
-        @media (max-width: 600px) {
-            .container {
-                width: 90%;
-                margin-top: 50%;
-            }
-            .sub {
-                width: 100%;
-            }
+        p{
+            font-size: 22px;
         }
     </style>
 </head>
@@ -65,14 +66,26 @@
     <div class="container">
         <h2>加入熊家会员</h2>
         <form onsubmit="return registerSuccess()">
-            <input type="email" class="input" name="email" placeholder="邮箱" required><br>
-            <input type="password" class="input" name="password" placeholder="密码" required><br>
-            <input type="password" class="input" name="passwordSure" placeholder="再次输入密码" required><br><br>
+            
+            <input type="text" class="input" name="username" id="username" placeholder="用户名" required autocomplete="username"><br>
+            
+            
+            <input type="email" class="input" name="email" id="email" placeholder="邮箱" required autocomplete="email"><br>
+            
+            
+            <input type="tel" class="input" name="phonenumber" id="phonenumber" placeholder="手机号" required autocomplete="tel"><br>
+            
+            
+            <input type="password" class="input" name="password" id="password" placeholder="密码" required autocomplete="new-password"><br>
+            
+            
+            <input type="password" class="input" name="passwordSure" id="passwordSure" placeholder="再次输入密码" required autocomplete="new-password"><br><br>
+            
             <button type="submit" class="sub">加入会员</button>
         </form>
+        <br>
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
     <script>
         // Configure AWS Amplify
         Amplify.configure({
@@ -87,7 +100,13 @@
         async function registerSuccess() {
             const email = document.querySelector('input[name="email"]').value;
             const password = document.querySelector('input[name="password"]').value;
+            const loadingText = document.getElementById('loading');
+            const submitButton = document.querySelector('.sub');
+
             try {
+                loadingText.style.display = 'block';
+                submitButton.disabled = true;
+
                 await Amplify.Auth.signUp({
                     username: email,
                     password: password,
@@ -96,8 +115,11 @@
                 window.location.href = 'homepage.html';
             } catch (error) {
                 alert('注册失败: ' + error.message);
+            } finally {
+                loadingText.style.display = 'none';
+                submitButton.disabled = false;
             }
-            return false;
+            return false; // Prevent form submission
         }
     </script>
 </body>

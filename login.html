@@ -2,22 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>join xiong's family</title>
     <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'KaiTi', sans-serif;
             background-color: rgb(234, 253, 241);
             position: relative;
         }
         .container {
             background: url(home_pic/login.jpg);
-            background-size: 100% ;
+            background-size:100% ;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 500px;
-            height: 300px;
+            height: auto;
             text-align: center;
             position: absolute;
             margin-top: 25%;
@@ -51,14 +57,8 @@
             font-weight: 600;
             color: #070707;
         }
-        @media (max-width: 600px) {
-            .container {
-                width: 90%;
-                margin-top: 50%;
-            }
-            .sub {
-                width: 100%;
-            }
+        p{
+            font-size: 22px;
         }
     </style>
 </head>
@@ -67,13 +67,15 @@
     <div class="container">
         <h2>熊家会员登陆</h2>
         <form action="/login" onsubmit="return loginSuccess()">
-            <input type="email" class="input" name="email" placeholder="Email" required><br>
-            <input type="password" class="input" name="password" placeholder="Password" required><br>
+            <input type="text" class="input" name="identifier" placeholder="用户名 / 邮箱 / 手机号" required><br>
+            <input type="password" class="input" name="password" placeholder="密码" required><br>
             <button type="submit" class="sub">Login</button>
         </form>
+        <br>
         <p id="create-account">没有账号? <a href="login_registration.html">点击创建账号</a>.</p>
     </div>
 
+    
     <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
     <script>
         // Configure AWS Amplify
@@ -87,20 +89,22 @@
         });
 
         async function loginSuccess() {
-            const email = document.querySelector('input[name="email"]').value;
+            const identifier = document.querySelector('input[name="identifier"]').value;
             const password = document.querySelector('input[name="password"]').value;
+
             try {
-                await Amplify.Auth.signIn(email, password);
+                // Attempt to sign in using the identifier (username, email, or phone number)
+                await Amplify.Auth.signIn(identifier, password);
                 alert('登录成功!');
-                await logUserAccess(email);
+                await logUserAccess(identifier);
                 window.location.href = 'homepage.html';
             } catch (error) {
                 alert('登录失败: ' + error.message);
             }
-            return false;
+            return false; // Prevent default form submission
         }
 
-        async function logUserAccess(email) {
+        async function logUserAccess(identifier) {
             // Logic to log user access (increase visit count) using Amplify DataStore
         }
     </script>
