@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>join xiong's family</title>
+    <title>Join Xiong's Family</title>
     <style>
         @font-face {
             font-family: 'KaiTi';
@@ -18,7 +18,7 @@
         }
         .container {
             background: url(home_pic/login.jpg);
-            background-size:100% ;
+            background-size: 100%;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -57,13 +57,12 @@
             font-weight: 600;
             color: #070707;
         }
-        p{
+        p {
             font-size: 22px;
         }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h2>熊家会员登陆</h2>
         <form action="/login" onsubmit="return loginSuccess()">
@@ -74,14 +73,12 @@
         <br>
         <p id="create-account">没有账号? <a href="login_registration.html">点击创建账号</a>.</p>
     </div>
-
     
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@4.3.16/dist/aws-amplify.min.js"></script>
     <script>
         // Configure AWS Amplify
         Amplify.configure({
             Auth: {
-                // Your Cognito details
                 region: 'ap-northeast-2',
                 userPoolId: 'ap-northeast-2_eDA8pl2f6',
                 userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
@@ -93,19 +90,27 @@
             const password = document.querySelector('input[name="password"]').value;
 
             try {
-                // Attempt to sign in using the identifier (username, email, or phone number)
+                // Attempt to sign in using the identifier
                 await Amplify.Auth.signIn(identifier, password);
                 alert('登录成功!');
-                await logUserAccess(identifier);
                 window.location.href = 'homepage.html';
             } catch (error) {
-                alert('登录失败: ' + error.message);
+                // Display specific error messages
+                switch (error.code) {
+                    case 'UserNotFoundException':
+                        alert('用户不存在，请检查用户名或邮箱。');
+                        break;
+                    case 'NotAuthorizedException':
+                        alert('用户名或密码错误。');
+                        break;
+                    case 'UserNotConfirmedException':
+                        alert('用户尚未确认，请检查邮箱。');
+                        break;
+                    default:
+                        alert('登录失败: ' + error.message);
+                }
             }
             return false; // Prevent default form submission
-        }
-
-        async function logUserAccess(identifier) {
-            // Logic to log user access (increase visit count) using Amplify DataStore
         }
     </script>
 </body>

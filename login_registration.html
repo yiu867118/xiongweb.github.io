@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>join xiong's family</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-amplify/4.3.16/aws-amplify.min.js"></script>
     <style>
         @font-face {
             font-family: 'KaiTi';
@@ -57,8 +58,14 @@
             font-weight: 600;
             color: #070707;
         }
-        p{
+        p {
             font-size: 22px;
+        }
+        #loading {
+            display: none;
+            font-size: 16px;
+            color: #2da75c;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -66,23 +73,14 @@
     <div class="container">
         <h2>加入熊家会员</h2>
         <form onsubmit="return registerSuccess()">
-            
             <input type="text" class="input" name="username" id="username" placeholder="用户名" required autocomplete="username"><br>
-            
-            
             <input type="email" class="input" name="email" id="email" placeholder="邮箱" required autocomplete="email"><br>
-            
-            
             <input type="tel" class="input" name="phonenumber" id="phonenumber" placeholder="手机号" required autocomplete="tel"><br>
-            
-            
             <input type="password" class="input" name="password" id="password" placeholder="密码" required autocomplete="new-password"><br>
-            
-            
             <input type="password" class="input" name="passwordSure" id="passwordSure" placeholder="再次输入密码" required autocomplete="new-password"><br><br>
-            
             <button type="submit" class="sub">加入会员</button>
         </form>
+        <div id="loading">加载中...</div>
         <br>
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
@@ -91,9 +89,9 @@
         Amplify.configure({
             Auth: {
                 // Your Cognito details
-                region: 'your-region',
-                userPoolId: 'your-user-pool-id',
-                userPoolWebClientId: 'your-app-client-id',
+                region: 'ap-northeast-2',
+                userPoolId: 'ap-northeast-2_eDA8pl2f6',
+                userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
             }
         });
 
