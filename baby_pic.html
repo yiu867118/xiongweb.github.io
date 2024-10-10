@@ -151,6 +151,20 @@
             transform: scale(1.05);
         }
 
+
+         /* 为视频设置固定的宽高比，并确保自适应大小 */
+        video {
+            display: grid;
+            max-width: 600px;
+            height: auto;
+            aspect-ratio: 16 / 9; /* 设置视频的宽高比例 */
+            border-radius: 20px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        video:hover{
+            transform: scale(1.05);
+        }
+
         .footer {
             background-color: #2c97d5;
             color: #fff;
@@ -215,7 +229,7 @@
             position: absolute;
             width: 40px; /* 调整泡泡大小 */
             height: 40px; /* 调整泡泡大小 */
-            background: linear-gradient(135deg, rgba(19, 150, 244, 0.7), rgba(255, 255, 255, 0.5)); /* 渐变色 */
+            background: linear-gradient(135deg, rgba(208, 247, 186, 0.7), rgba(201, 243, 111, 0.5)); /* 渐变色 */
             border-radius: 50%; /* 圆形泡泡 */
             filter: blur(1px); /* 模糊滤镜 */
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
@@ -265,139 +279,161 @@
 
 <div class="container">
     <header>
-        <div class="title">两只小熊的照片集</div>
+        <div class="title">小小熊宝宝的影像集</div>
     </header>
 
     <div class="timeline">
         <!-- Year 2020 -->
         <div class="year">
-            <div class="year-label">2020年</div>
+            <div class="year-label">在医院</div>
             <div class="content">
-                <div class="caption-card">第一次一起拍照....</div>
+                <div class="caption-card">手术确认单和宝宝探望证明</div>
                 <div class="year-images">
-                    <img src="love_pic/2020_03_1.jpg" alt="鲁邦风情街的小熊">
-                    <img src="love_pic/2020_03_3.jpg" alt="鲁邦风情街的小熊">
-                    
+                    <img src="baby_pic/1001.jpg" alt="小小熊">
+                    <img src="baby_pic/1002.jpg" alt="小小熊">
                 </div>
 
                 <br>
-                <div class="caption-card">古装</div>
+                <div class="caption-card">手术前</div>
                 <div class="year-images">
-                    <img src="love_pic/2020_10_1.jpg" alt="古装">
-                    <img src="love_pic/2020_10_2.jpg" alt="古装">
-                </div>
-            </div>
-        </div>
-
-        <!-- Year 2021 -->
-        <div class="year">
-            <div class="year-label">2021年</div>
-            <div class="content">
-                <div class="caption-card">一起赏月...</div>
-                <div class="year-images">
-                    <img src="love_pic/2021_09_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2021_09_2.jpg" alt="两只小熊">
-                </div>
-                <br>
-                <div class="caption-card">在釜山</div>
-                <div class="year-images">
-                    <img src="love_pic/2021_12_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2021_12_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2021_12_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2021_12_4.jpg" alt="两只小熊">
-                </div>
-            </div>
-        </div>
-
-        <div class="year">
-            <div class="year-label">2022年</div>
-            <div class="content">
-                <div class="caption-card">本科毕业了!</div>
-                <div class="year-images">
-                    <img src="love_pic/2022_08_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_08_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_08_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_08_4.jpg" alt="两只小熊">
+                    <video src="baby_pic/1003.mp4" controls alt="手术前">
                 </div>
 
                 <br>
-                <div class="caption-card">来到首尔的第一次理发</div>
+                <div class="caption-card">小熊熊来啦! 小光爸爸剪脐带</div>
                 <div class="year-images">
-                    <img id="one" src="love_pic/2022_09_1.jpg"  alt="两只小熊">
+                    <video src="baby_pic/1006.mp4" controls alt="小小熊">
                 </div>
 
                 <br>
-                <div class="caption-card">在景福宫</div>
+                <div class="caption-card">刚出生一天,医院拍的视频</div>
                 <div class="year-images">
-                    <img src="love_pic/2022_10_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_10_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_10_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2022_10_4.jpg" alt="两只小熊">
+                    <video src="baby_pic/1011.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">住院七天</div>
+                <div class="year-images">
+                    <img src="baby_pic/1008.jpg" alt="小小熊">
+                    <img src="baby_pic/1009.jpg" alt="小小熊">
                 </div>
             </div>
         </div>
 
         <div class="year">
-            <div class="year-label">2023年</div>
+            <div class="year-label">调理院时光</div>
             <div class="content">
-                <div class="caption-card">在南山塔上，锁上了一把写有我们名字的锁</div>
+                <div class="caption-card">第一次帮熊宝宝换臭臭</div>
                 <div class="year-images">
-                    <img src="love_pic/2023_02_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_02_2.jpg" alt="两只小熊">
+                    <video src="baby_pic/1007.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">小光爸爸拍拍</div>
+                <div class="year-images">
+                    <video src="baby_pic/1010.mp4" controls alt="小小熊">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">六个月前</div>
+            <div class="content">
+
+                <div class="caption-card">在吗</div>
+                <div class="year-images">
+                    <img src="baby_pic/1018.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">屁屁是青青的</div>
+                <div class="year-images">
+                    <img src="baby_pic/1020.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">小熊宝宝第一次过年</div>
+                <div class="year-images">
+                    <img src="baby_pic/1021.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">小光爸爸洗宝宝, 宝宝臭臭汤洗澡</div>
+                <div class="year-images">
+                    <img src="baby_pic/1022.jpg" alt="小小熊">
+                    <video src="baby_pic/1022.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">打针去</div>
+                <div class="year-images">
+                    <img src="baby_pic/1023.jpg" alt="小小熊">
+                    <video src="baby_pic/1024.mp4" controls alt="小小熊"></video>
+                    <br>
+                    <video src="baby_pic/1025.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">家门口樱花开了</div>
+                <div class="year-images">
+                    <img src="baby_pic/1031.jpg" alt="小小熊">
+                    <img src="baby_pic/1032.jpg" alt="小小熊">
+                    <img src="baby_pic/1030.jpg" alt="小小熊">
+                    <img src="baby_pic/1034.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">熊爸爸买的熊帽帽和兔兔衣</div>
+                <div class="year-images">
+                    <img src="baby_pic/1036.jpg" alt="小小熊">
+                    <img src="baby_pic/1038.jpg" alt="小小熊">
+                    <img src="baby_pic/1039.jpg" alt="小小熊">
+                    <video src="baby_pic/1037.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">花样睡姿</div>
+                <div class="year-images">
+                    <img src="baby_pic/1040.jpg" alt="小小熊">
+                    <img src="baby_pic/1041.jpg" alt="小小熊">
+                    <img src="baby_pic/1042.jpg" alt="小小熊">
+                    <img src="baby_pic/1043.jpg" alt="小小熊">
                 </div>
                 
                 <br>
-                <div class="caption-card">在济州岛</div>
+                <div class="caption-card">公园溜宝宝</div>
                 <div class="year-images">
-                    <img src="love_pic/2023_07_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_07_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_07_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_07_4.jpg" alt="两只小熊">
+                    <img src="baby_pic/1051.jpg" alt="小小熊">
+                    <img src="baby_pic/1052.jpg" alt="小小熊">
+                    <img src="baby_pic/1053.jpg" alt="小小熊">
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="year">
+            <div class="year-label">一岁前</div>
+            <div class="content">
+                <div class="caption-card">熊家看烟花</div>
+                <div class="year-images">
+                    <img src="baby_pic/1071.jpg" alt="小小熊">
+                    <img src="baby_pic/1072.jpg" alt="小小熊">
+                    <img src="baby_pic/1073.jpg" alt="小小熊">
+                    <img src="baby_pic/1074.jpg" alt="小小熊">
                 </div>
 
                 <br>
-                <div class="caption-card">一组婚纱照</div>
+                <div class="caption-card">小光爸爸带宝宝探望学习的小惨君</div>
                 <div class="year-images">
-                    <img src="love_pic/2023_08_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_6.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_7.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_8.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_9.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_10.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_11.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_12.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_13.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_14.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_17.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_18.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_19.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_20.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_21.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_22.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_25.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_4.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_15.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_16.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_23.jpg" alt="两只小熊">
-                    <img src="love_pic/2023_08_24.jpg" alt="两只小熊">
+                    <img src="baby_pic/1081.jpg" alt="小小熊">
                 </div>
+
             </div>
         </div>
 
-        <div class="year">
-            <div class="year-label">2024年</div>
-            <div class="content">
-                <div class="caption-card">樱花开了, 带着小熊宝宝在家门口随手拍</div>
-                <div class="year-images">
-                    <img src="love_pic/2024_04_1.jpg" alt="两只小熊">
-                    <img src="love_pic/2024_04_2.jpg" alt="两只小熊">
-                    <img src="love_pic/2024_04_3.jpg" alt="两只小熊">
-                    <img src="love_pic/2024_04_4.jpg" alt="两只小熊">
-                </div>
-            </div>
-        </div>
+      
 
     </div>
 

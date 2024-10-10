@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>join xiong's family</title>
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js" async></script>
+    <title>Join Xiong's Family</title>
+    
+    <!-- 加载 AWS Amplify -->
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js" defer></script>
+
 
     <style>
         @font-face {
@@ -85,21 +88,31 @@
         <br>
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
+
+    <!-- 显示 Amplify 版本信息 -->
     <script>
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查 Amplify 是否加载成功
             if (typeof Amplify !== 'undefined') {
-                console.log('Amplify 已正确加载');
-                Amplify.configure({
-                    Auth: {
-                        region: 'ap-northeast-2',
-                        userPoolId: 'ap-northeast-2_eDA8pl2f6',
-                        userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
-                    }
-                });
+                console.log('Amplify 加载成功，版本:', Amplify.version);
+                try {
+                    Amplify.configure({
+                        Auth: {
+                            region: 'ap-northeast-2',
+                            userPoolId: 'ap-northeast-2_eDA8pl2f6',
+                            userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
+                        }
+                    });
+                    console.log('Amplify 配置成功');
+                } catch (configError) {
+                    console.error('Amplify 配置错误:', configError);
+                    alert('Amplify 配置错误，请检查配置项。');
+                }
             } else {
-                console.error('Amplify 未定义，请检查脚本加载。');
+                console.error('Amplify 未定义，请检查加载路径。');
+                alert('Amplify 未定义，可能本地文件路径有问题。');
             }
-        };
+        });
 
         async function registerSuccess() {
             const email = document.querySelector('input[name="email"]').value;
@@ -118,6 +131,7 @@
                 alert('成功创建熊家会员账号!');
                 window.location.href = 'homepage.html';
             } catch (error) {
+                console.error('注册错误:', error);
                 alert('注册失败: ' + error.message);
             } finally {
                 loadingText.style.display = 'none';
@@ -125,7 +139,7 @@
             }
             return false;
         }
-
     </script>
+
 </body>
 </html>
