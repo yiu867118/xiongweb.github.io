@@ -466,7 +466,6 @@
 // 获取所有视频元素
 const videos = document.querySelectorAll('video');
 
-// 对每个视频进行处理，生成 poster
 videos.forEach((video) => {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
@@ -477,23 +476,21 @@ videos.forEach((video) => {
     playButton.innerHTML = '▶'; // 简单的播放符号
     playButton.style.position = 'absolute';
     playButton.style.top = '50%';
-    playButton.style.left = '15%';
+    playButton.style.left = '10%';
     playButton.style.transform = 'translate(-50%, -50%)';
     playButton.style.fontSize = '40px';
     playButton.style.color = 'white';
     playButton.style.opacity = '0.8';
     playButton.style.cursor = 'pointer';
     playButton.style.zIndex = '10'; // 确保按钮在其他元素之上
-    
+
     // 视频容器设置成相对定位
     video.parentElement.style.position = 'relative';
     video.parentElement.appendChild(playButton); // 插入播放按钮
-
-    // 将生成的img元素插入到每个视频的父容器中
-    video.parentElement.appendChild(img);
+    video.parentElement.appendChild(img); // 将生成的img元素插入到每个视频的父容器中
 
     // 当视频元数据加载完后
-    video.addEventListener('canplay', () => {
+    video.addEventListener('loadedmetadata', () => {
         // 设置canvas宽高为视频的宽高
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
@@ -518,19 +515,15 @@ videos.forEach((video) => {
     video.addEventListener('timeupdate', onTimeUpdate);
 
     // 当点击图片或播放按钮时，显示并播放视频
-    img.addEventListener('click', () => {
+    const playVideo = () => {
         video.style.display = 'block'; // 显示视频
         img.style.display = 'none'; // 隐藏图片
         playButton.style.display = 'none'; // 隐藏播放按钮
         video.play(); // 播放视频
-    });
+    };
 
-    playButton.addEventListener('click', () => {
-        video.style.display = 'block'; // 显示视频
-        img.style.display = 'none'; // 隐藏图片
-        playButton.style.display = 'none'; // 隐藏播放按钮
-        video.play(); // 播放视频
-    });
+    img.addEventListener('click', playVideo);
+    playButton.addEventListener('click', playVideo);
 
     // 当视频播放结束时，隐藏视频，重新显示图片和播放按钮
     video.addEventListener('ended', () => {
