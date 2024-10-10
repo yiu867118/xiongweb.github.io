@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>join xiong's family</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-amplify/4.3.16/aws-amplify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js" async></script>
+
     <style>
         @font-face {
             font-family: 'KaiTi';
@@ -85,15 +86,20 @@
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
     <script>
-        // Configure AWS Amplify
-        Amplify.configure({
-            Auth: {
-                // Your Cognito details
-                region: 'ap-northeast-2',
-                userPoolId: 'ap-northeast-2_eDA8pl2f6',
-                userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
+        window.onload = function() {
+            if (typeof Amplify !== 'undefined') {
+                console.log('Amplify 已正确加载');
+                Amplify.configure({
+                    Auth: {
+                        region: 'ap-northeast-2',
+                        userPoolId: 'ap-northeast-2_eDA8pl2f6',
+                        userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
+                    }
+                });
+            } else {
+                console.error('Amplify 未定义，请检查脚本加载。');
             }
-        });
+        };
 
         async function registerSuccess() {
             const email = document.querySelector('input[name="email"]').value;
@@ -117,8 +123,9 @@
                 loadingText.style.display = 'none';
                 submitButton.disabled = false;
             }
-            return false; // Prevent form submission
+            return false;
         }
+
     </script>
 </body>
 </html>
