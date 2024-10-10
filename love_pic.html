@@ -142,12 +142,27 @@
             max-height: auto;
         }
 
+
+
         #one{
-            width: 200px;
+            width: 300px;
             height: auto;
         }
 
         .year-images img:hover {
+            transform: scale(1.05);
+        }
+
+
+        video {
+            display: grid;
+            max-width: 600px;
+            height: auto;
+            aspect-ratio: 16 / 9; /* 设置视频的宽高比例 */
+            border-radius: 20px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        video:hover{
             transform: scale(1.05);
         }
 
@@ -293,6 +308,12 @@
         <div class="year">
             <div class="year-label">2021年</div>
             <div class="content">
+
+                <div class="caption-card">小吃光</div>
+                <div class="year-images">
+                    <video src="love_pic/2021_10_01.mp4" controls alt="两只小熊">
+                </div>
+                <br>
                 <div class="caption-card">一起赏月...</div>
                 <div class="year-images">
                     <img src="love_pic/2021_09_1.jpg" alt="两只小熊">
