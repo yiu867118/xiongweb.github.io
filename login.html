@@ -86,7 +86,7 @@
             async function loginSuccess(event) {
                 event.preventDefault(); // 阻止默认提交行为
 
-                 const identifier = document.querySelector('input[name="identifier"]').value;
+                const identifier = document.querySelector('input[name="identifier"]').value;
                 const password = document.querySelector('input[name="password"]').value;
 
                 try {
@@ -124,10 +124,13 @@
                     localStorage.setItem('username', user.username);
                     localStorage.setItem('userData', JSON.stringify(user));
 
-
                     console.log('登录成功:', user);
                     alert('登录成功!');
-                    window.location.href = 'homepage.html';  // 登录成功后跳转到主页
+
+                    // 获取重定向参数并进行重定向
+                    const params = new URLSearchParams(window.location.search);
+                    const redirectUrl = params.get('redirect') || 'homepage.html';
+                    window.location.href = redirectUrl; // 重定向到指定页面
                 } catch (error) {
                     console.error('登录过程中发生错误:', error.message);
                     alert('登录失败: ' + error.message);
