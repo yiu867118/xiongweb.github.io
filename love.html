@@ -336,9 +336,13 @@
                 transform: translateY(0) rotate(-45deg);
                 opacity: 1;
             }
+            50% {
+                transform: translate(-20px, -120vh) rotate(-45deg);
+                opacity: 0.5;
+            }
             100% {
-                transform: translateY(-120vh) rotate(-45deg);
-                opacity: 0;
+                transform: translateY(20px, -240vh) rotate(-45deg);
+                opacity: 0.1;
             }
         }
     </style>
@@ -636,7 +640,7 @@
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 10 + 3 + 's';
+            heart.style.animationDuration = Math.random() * 50 + 10 + 's';
             document.body.appendChild(heart);
             setTimeout(() => {
                 heart.remove();

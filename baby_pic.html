@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>小小熊的照片集</title>
+    <title>小小熊的影像集</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -98,7 +98,7 @@
         .year-label {
             font-size: 20px;
             font-weight: bold;
-            color: #3faeef;
+            color: #517344;
             background-color: #f0f6fc;
             padding: 10px 20px;
             border-radius: 20px;
@@ -167,31 +167,7 @@
 
         
 
-        .footer {
-            background-color: #2c97d5;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            border-radius: 12px;
-            margin-top: 40px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #007bff;
-        }
+    
 
         @media (max-width: 768px) {
             .timeline {
@@ -281,7 +257,7 @@
 
 <div class="container">
     <header>
-        <div class="title">小小熊宝宝的影像集</div>
+        <div class="title">小小熊的影像集</div>
     </header>
 
     <div class="timeline">
@@ -314,8 +290,10 @@
                 </div>
 
                 <br>
-                <div class="caption-card">住院七天</div>
+                <div class="caption-card">住院  肚子上手臂上插了各种针管... 每天清晨都被针扎醒...</div>
                 <div class="year-images">
+                    <img src="baby_pic/1010.jpg" alt="小小熊">
+                    <img src="baby_pic/1011.jpg" alt="小小熊">
                     <img src="baby_pic/1008.jpg" alt="小小熊">
                     <img src="baby_pic/1009.jpg" alt="小小熊">
                 </div>
@@ -334,6 +312,12 @@
                 <div class="caption-card">小光爸爸拍拍</div>
                 <div class="year-images">
                     <video id="myVideo" src="baby_pic/1010.mp4" controls alt="小小熊">
+                </div>
+                
+                <br>
+                <div class="caption-card">小君第一次抱小熊</div>
+                <div class="year-images">
+                    <img src="baby_pic/1013.jpg" alt="小小熊">
                 </div>
 
             </div>
@@ -354,16 +338,11 @@
                     <img src="baby_pic/1020.jpg" alt="小小熊">
                 </div>
 
-                <br>
-                <div class="caption-card">小熊宝宝第一次过年</div>
-                <div class="year-images">
-                    <img src="baby_pic/1021.jpg" alt="小小熊">
-                </div>
+
 
                 <br>
                 <div class="caption-card">小光爸爸洗宝宝, 宝宝臭臭汤洗澡</div>
                 <div class="year-images">
-                    
                     <video id="myVideo" src="baby_pic/1022.mp4" controls alt="小小熊"></video>
                 </div>
 
@@ -428,6 +407,19 @@
         <div class="year">
             <div class="year-label">一岁前</div>
             <div class="content">
+                
+                <div class="caption-card">八个月大, 饭桌上最小的宝宝</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1062.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">第一张证件照, 看起来像个大大宝宝</div>
+                <div class="year-images">
+                    <img src="baby_pic/1060.jpg" alt="小小熊">
+                </div>
+
+                <br>
                 <div class="caption-card">熊家看烟花</div>
                 <div class="year-images">
                     <img src="baby_pic/1071.jpg" alt="小小熊">
@@ -437,7 +429,7 @@
                 </div>
 
                 <br>
-                <div class="caption-card">小光爸爸带宝宝探望学习的小惨君</div>
+                <div class="caption-card">和小光爸爸一起探望学习的小惨君</div>
                 <div class="year-images">
                     <img src="baby_pic/1081.jpg" alt="小小熊">
                 </div>
@@ -451,7 +443,7 @@
 
 
     <footer>
-        <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(197, 221, 245, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
+        <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(221, 245, 197, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
             <p style="font-size: 19px; color: #555; margin: 0; font-family: 'KaiTi', 'Poppins', sans-serif; font-weight: 600;">
                 网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
             </p>
@@ -476,7 +468,7 @@ videos.forEach((video) => {
     playButton.innerHTML = '▶'; // 简单的播放符号
     playButton.style.position = 'absolute';
     playButton.style.top = '50%';
-    playButton.style.left = '10%';
+    playButton.style.left = '15%';
     playButton.style.transform = 'translate(-50%, -50%)';
     playButton.style.fontSize = '40px';
     playButton.style.color = 'white';
@@ -496,7 +488,7 @@ videos.forEach((video) => {
         canvas.height = video.videoHeight;
 
         // 将视频的第一帧捕捉到 canvas 上
-        video.currentTime = 0.1;  // 尝试捕捉非常靠近开头的一帧
+        video.currentTime = 0.2;  // 尝试捕捉非常靠近开头的一帧
     });
 
     // 当当前时间更改时绘制帧

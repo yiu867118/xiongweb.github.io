@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js" async></script>
+    
     <title>登录 Xiong's Family</title>
     <style>
         @font-face {
@@ -67,7 +67,7 @@
     <div class="container">
         <h2>熊家会员登陆</h2>
         <form action="/login" onsubmit="return loginSuccess()">
-            <input type="text" class="input" name="identifier" placeholder="用户名 / 邮箱 / 手机号" required><br>
+            <input type="text" class="input" name="identifier" placeholder="用户名 / 邮箱" required><br>
             <input type="password" class="input" name="password" placeholder="密码" required><br>
             <button type="submit" class="sub">Login</button>
         </form>
@@ -75,43 +75,44 @@
         <p id="create-account">没有账号? <a href="login_registration.html">点击创建账号</a>.</p>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@4.3.16/dist/aws-amplify.min.js"></script>
-    <script>
-        // Configure AWS Amplify
-        Amplify.configure({
-            Auth: {
-                region: 'ap-northeast-2',
-                userPoolId: 'ap-northeast-2_eDA8pl2f6',
-                userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
-            }
-        });
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+        // 初始化 Supabase 客户端
+        const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         async function loginSuccess() {
             const identifier = document.querySelector('input[name="identifier"]').value;
             const password = document.querySelector('input[name="password"]').value;
 
             try {
-                // Attempt to sign in using the identifier
-                await Amplify.Auth.signIn(identifier, password);
+                // 使用 Supabase 进行登录
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: identifier,
+                    password: password,
+                });
+
+                if (error) {
+                    throw error;
+                }
+
                 alert('登录成功!');
-                window.location.href = 'homepage.html';
+                window.location.href = 'homepage.html';  // 登录成功后跳转到主页
             } catch (error) {
-                // Display specific error messages
-                switch (error.code) {
-                    case 'UserNotFoundException':
-                        alert('用户不存在，请检查用户名或邮箱。');
-                        break;
-                    case 'NotAuthorizedException':
+                // 根据错误信息显示提示
+                switch (error.message) {
+                    case 'Invalid login credentials':
                         alert('用户名或密码错误。');
                         break;
-                    case 'UserNotConfirmedException':
+                    case 'Email not confirmed':
                         alert('用户尚未确认，请检查邮箱。');
                         break;
                     default:
                         alert('登录失败: ' + error.message);
                 }
             }
-            return false; // Prevent default form submission
+
+            return false; // 防止表单默认提交
         }
     </script>
 </body>

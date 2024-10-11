@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>Join Xiong's Family</title>
-    
-    <!-- 加载 AWS Amplify -->
-    <script src="https://cdn.jsdelivr.net/npm/aws-amplify@latest/dist/aws-amplify.min.js" defer></script>
 
+ 
 
     <style>
         @font-face {
@@ -79,7 +77,6 @@
         <form onsubmit="return registerSuccess()">
             <input type="text" class="input" name="username" id="username" placeholder="用户名" required autocomplete="username"><br>
             <input type="email" class="input" name="email" id="email" placeholder="邮箱" required autocomplete="email"><br>
-            <input type="tel" class="input" name="phonenumber" id="phonenumber" placeholder="手机号" required autocomplete="tel"><br>
             <input type="password" class="input" name="password" id="password" placeholder="密码" required autocomplete="new-password"><br>
             <input type="password" class="input" name="passwordSure" id="passwordSure" placeholder="再次输入密码" required autocomplete="new-password"><br><br>
             <button type="submit" class="sub">加入会员</button>
@@ -89,56 +86,53 @@
         <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
     </div>
 
-    <!-- 显示 Amplify 版本信息 -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 检查 Amplify 是否加载成功
-            if (typeof Amplify !== 'undefined') {
-                console.log('Amplify 加载成功，版本:', Amplify.version);
-                try {
-                    Amplify.configure({
-                        Auth: {
-                            region: 'ap-northeast-2',
-                            userPoolId: 'ap-northeast-2_eDA8pl2f6',
-                            userPoolWebClientId: '4plj10evn069oo96t48tm4c6h9',
-                        }
-                    });
-                    console.log('Amplify 配置成功');
-                } catch (configError) {
-                    console.error('Amplify 配置错误:', configError);
-                    alert('Amplify 配置错误，请检查配置项。');
-                }
-            } else {
-                console.error('Amplify 未定义，请检查加载路径。');
-                alert('Amplify 未定义，可能本地文件路径有问题。');
-            }
-        });
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+        // 立即初始化 Supabase 客户端
+        const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        async function registerSuccess() {
-            const email = document.querySelector('input[name="email"]').value;
-            const password = document.querySelector('input[name="password"]').value;
-            const loadingText = document.getElementById('loading');
-            const submitButton = document.querySelector('.sub');
+        document.addEventListener('DOMContentLoaded', function () {
+            async function registerSuccess() {
+                const email = document.querySelector('input[name="email"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+                const loadingText = document.getElementById('loading');
+                const submitButton = document.querySelector('.sub');
 
-            try {
+                // 显示加载状态
                 loadingText.style.display = 'block';
                 submitButton.disabled = true;
 
-                await Amplify.Auth.signUp({
-                    username: email,
-                    password: password,
-                });
-                alert('成功创建熊家会员账号!');
-                window.location.href = 'homepage.html';
-            } catch (error) {
-                console.error('注册错误:', error);
-                alert('注册失败: ' + error.message);
-            } finally {
-                loadingText.style.display = 'none';
-                submitButton.disabled = false;
+                try {
+                    // 调用 Supabase API 注册用户并发送邮箱验证
+                    const { error } = await supabase.auth.signUp({
+                        email: email,
+                        password: password,
+                        options: {
+                            emailRedirectTo: 'homepage.html'  // 替换为你需要的重定向页面
+                        }
+                    });
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    alert('请检查邮箱并点击验证链接以完成注册！');
+                } catch (error) {
+                    console.error('注册错误:', error);
+                    alert('注册失败: ' + error.message);
+                } finally {
+                    // 关闭加载状态
+                    loadingText.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+
+                return false;  // 防止表单默认提交
             }
-            return false;
-        }
+
+            // 绑定表单提交事件
+            document.querySelector('form').onsubmit = registerSuccess;
+        });
     </script>
 
 </body>
