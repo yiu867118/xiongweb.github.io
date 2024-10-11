@@ -2,9 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Join Xiong's Family</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <title>加入熊家会员</title>
     <style>
         @font-face {
             font-family: 'KaiTi';
@@ -70,13 +68,15 @@
             margin-top: 10px;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
         <h2>加入熊家会员</h2>
         <form id="register-form">
             <input type="text" class="input" name="username" id="username" placeholder="用户名" required autocomplete="username"><br>
-            <input type="email" class="input" name="email" id="email" placeholder="邮箱" required autocomplete="email"><br>
+            <input type="text" class="input" name="fullname" id="fullname" placeholder="姓名" required autocomplete="name"><br>
+            <input type="date" class="input" name="birthdate" id="birthdate" placeholder="生日" required autocomplete="bday"><br>
             <input type="password" class="input" name="password" id="password" placeholder="密码" required autocomplete="new-password"><br>
             <input type="password" class="input" name="passwordSure" id="passwordSure" placeholder="再次输入密码" required autocomplete="new-password"><br><br>
             <button type="submit" class="sub">加入会员</button>
@@ -100,7 +100,9 @@
             form.addEventListener('submit', async function (event) {
                 event.preventDefault(); // 阻止默认提交行为
 
-                const email = document.querySelector('input[name="email"]').value;
+                const username = document.querySelector('input[name="username"]').value;
+                const fullname = document.querySelector('input[name="fullname"]').value;
+                const birthdate = document.querySelector('input[name="birthdate"]').value;
                 const password = document.querySelector('input[name="password"]').value;
                 const loadingText = document.getElementById('loading');
                 const submitButton = document.querySelector('.sub');
@@ -110,18 +112,17 @@
                 submitButton.disabled = true;
 
                 try {
-                    console.log("注册用户：", email);
-                    const { data, error } = await supabase.auth.signUp({
-                        email: email,
-                        password: password
-                    });
+                    // 插入用户到自定义表
+                    const { data, error } = await supabase.from('users').insert([
+                        { username: username, fullname: fullname, birthdate: birthdate, password: password }
+                    ]);
 
                     if (error) {
                         console.error('注册失败:', error);
                         alert('注册失败: ' + error.message);
                     } else {
                         console.log('注册成功:', data);
-                        alert('请检查邮箱并点击验证链接以完成注册！');
+                        alert('注册成功！请记住你的用户名和密码。');
                     }
                 } catch (error) {
                     console.error('发生错误:', error);

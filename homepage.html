@@ -330,17 +330,20 @@
         #page-numbers span:hover {
             background-color: #8acff9;
         }
-    </style>
+    </style>  
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
+    <!-- 欢迎屏幕 -->
     <div id="welcome-screen">
-        <div>欢迎来到熊熊之家</div>
+        <div id="welcome-message"></div>
         <span>点击任意位置进入熊家主页</span>
     </div>
 
 
 
+   <!-- 主内容 -->
     <div id="con">
         <header>
             <div><h3>熊熊</h3></div>
@@ -443,6 +446,8 @@
 
 
         <script>
+        
+
             // 图片轮播逻辑
             let pictureIndex = 0;
             const pictures = document.getElementById('pictures');
@@ -629,7 +634,7 @@
         // 检查用户是否已经访问过
 
         // 定义显示欢迎页面的时间间隔（以毫秒为单位），例如 24 小时
-        const welcomeTimeout = 2 * 60 * 60 * 1000; // 24小时
+        const welcomeTimeout = 0 * 60 * 60 * 1000; // 24小时
 
         // 获取当前时间
         const now = new Date().getTime();
@@ -661,7 +666,28 @@
         }
 
 
+        
+    document.addEventListener('DOMContentLoaded', function () {
+        const username = localStorage.getItem('username');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const welcomeScreen = document.getElementById('welcome-screen');
 
+        if (username) {
+            // 显示欢迎信息
+            welcomeMessage.innerText = `${username}, 欢迎你来到熊熊之家`;
+            // 如果需要的话，更新登录位置的内容
+            const loginElement = document.getElementById('login');
+            if (loginElement) {
+                loginElement.textContent = username;
+                loginElement.href = 'login_info.html'; // 设置点击跳转到用户信息页面
+            }
+        } else {
+            // 如果没有用户名，保持span内容可见
+            welcomeMessage.innerText = '欢迎来到熊熊之家'; // 清空欢迎信息
+        }
+    })
+
+      
         </script>
     </div>
 </body>
