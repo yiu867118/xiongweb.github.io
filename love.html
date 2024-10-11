@@ -105,8 +105,7 @@
             position: absolute;
             right: 0;
             top: 100%; /* Ensure it drops below the login element */
-            background-color: white;
-            background-image: url(home_pic/back.jpg);
+            background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
             min-width: 300px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 100;
@@ -121,22 +120,24 @@
         }
 
         .dropdown-content p {
-            margin: 0;
             padding: 12px 16px;
-            color: #333;
+            color: #000000;
+            text-shadow: 2px 2px rgb(255, 255, 255);
             font-weight: bold;
+            text-align: center;
         }
 
         .dropdown-content a {
-            color: black;
+            color: rgb(18, 70, 123);
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            
             transition: background-color 0.3s ease;
         }
 
         .dropdown-content a:hover {
-            background-color: #4ab4e5e0;
+            background-color: #4fb7e8a3;
         }
 
 
@@ -710,7 +711,7 @@
             if (username) {
                 loginElement.textContent = username;
                 loginElement.href = '#';
-                vipMessage.innerHTML = `超级厉害的熊家VIP ${username}, 您好! <a href="login_info.html">点击这里可查看我的熊熊会员信息</a>`;
+                vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
 
                 // Show dropdown on hover
                 loginElement.addEventListener('mouseover', function () {
