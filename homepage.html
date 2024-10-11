@@ -401,7 +401,7 @@
             <div><img src="home_pic/1.jpg" alt="熊家图标"></div>
             <div><h3>之家</h3></div>
             <div class="dropdown">
-                <a id="login" href="login.html?redirect=login_info.html" style="font-size: 20px;">Login</a>
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
                 <div class="dropdown-content" id="vip-dropdown">
                     <p id="vip-message"></p>
                 </div>
@@ -688,82 +688,86 @@
             startAnniversaryAutoSlide();
 
 
-        // 当用户点击欢迎页面时，隐藏它并显示主页面
-        // 添加点击事件监听器，当用户点击欢迎屏幕时触发动画
-        // 检查用户是否已经访问过
 
-        // 定义显示欢迎页面的时间间隔（以毫秒为单位），例如 24 小时
-        const welcomeTimeout = 0 * 60 * 60 * 1000; // 24小时
+            document.addEventListener('DOMContentLoaded', function () {
+    // 显示欢迎页面的逻辑
+    function showWelcomeScreen() {
+        document.getElementById('welcome-screen').style.display = 'flex';
+        document.getElementById('con').style.display = 'none';
 
-        // 获取当前时间
-        const now = new Date().getTime();
+        document.getElementById('welcome-screen').addEventListener('click', function () {
+            document.getElementById('welcome-screen').classList.add('welcome-hide');
+            setTimeout(function () {
+                document.getElementById('welcome-screen').style.display = 'none';
+                document.getElementById('con').style.display = 'block';
+            }, 1000);
+        });
+    }
 
-        // 从 localStorage 获取上次访问的时间
-        const lastVisit = localStorage.getItem('lastVisit');
+    // 基于访问时间间隔显示欢迎页面
+    const welcomeTimeout = 3 * 60 * 60 * 1000; // 3小时
+    const now = new Date().getTime();
+    const lastVisit = localStorage.getItem('lastVisit');
+    const justLoggedIn = localStorage.getItem('justLoggedIn');
 
-        // 判断用户是否第一次访问或距离上次访问超过设定的时间间隔
-        if (!lastVisit || now - lastVisit > welcomeTimeout) {
-            // 显示欢迎页面
-            document.getElementById('welcome-screen').style.display = 'flex';
-            document.getElementById('con').style.display = 'none';
+    if (!lastVisit || now - lastVisit > welcomeTimeout) {
+        showWelcomeScreen();
+        localStorage.setItem('lastVisit', now);
+    } else if (justLoggedIn) {
+        showWelcomeScreen(); // 只在刚刚登录时显示欢迎页面
+        localStorage.removeItem('justLoggedIn'); // 移除标记
+    } else {
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('con').style.display = 'block';
+    }
 
-            // 点击欢迎页面后隐藏并存储当前时间
-            document.getElementById('welcome-screen').addEventListener('click', function () {
-                document.getElementById('welcome-screen').classList.add('welcome-hide');
-                setTimeout(function () {
-                    document.getElementById('welcome-screen').style.display = 'none';
-                    document.getElementById('con').style.display = 'block';
-                }, 1000);
+    // 用户登录逻辑
+    const username = localStorage.getItem('username');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const loginElement = document.getElementById('login');
+    const vipDropdown = document.getElementById('vip-dropdown');
+    const vipMessage = document.getElementById('vip-message');
 
-                // 更新 localStorage 中的访问时间
-                localStorage.setItem('lastVisit', now);
-            });
-        } else {
-            // 如果用户在规定时间内访问过，不再显示欢迎页面
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('con').style.display = 'block';
+    if (username) {
+        welcomeMessage.innerText = `${username}, 欢迎你来到熊熊之家`;
+        if (loginElement) {
+            loginElement.textContent = username;
+            loginElement.href = '#';
+            vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
         }
 
-
-        
-        document.addEventListener('DOMContentLoaded', function () {
-            const username = localStorage.getItem('username');
-            const welcomeMessage = document.getElementById('welcome-message');
-            const loginElement = document.getElementById('login');
-            const vipDropdown = document.getElementById('vip-dropdown');
-            const vipMessage = document.getElementById('vip-message');
-
-            if (username) {
-                welcomeMessage.innerText = `${username}, 欢迎你来到熊熊之家`;
-                if (loginElement) {
-                    loginElement.textContent = username;
-                    loginElement.href = '#'; 
-                    vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
-                }
-
-                // Show dropdown on hover
-                loginElement.addEventListener('mouseover', function () {
-                    vipDropdown.style.display = 'block';
-                });
-
-                // Hide dropdown when mouse leaves the dropdown area
-                vipDropdown.addEventListener('mouseleave', function () {
-                    vipDropdown.style.display = 'none';
-                });
-
-                // Hide dropdown when mouse leaves the login element area
-                loginElement.addEventListener('mouseleave', function () {
-                    setTimeout(function () {
-                        if (!vipDropdown.matches(':hover')) {
-                            vipDropdown.style.display = 'none';
-                        }
-                    }, 300);
-                });
-            } else {
-                welcomeMessage.innerText = '欢迎来到熊熊之家';
-                vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
-            }
+        // 悬停时显示下拉菜单
+        loginElement.addEventListener('mouseover', function () {
+            vipDropdown.style.display = 'block';
         });
+
+        // 鼠标离开下拉区域时隐藏下拉菜单
+        vipDropdown.addEventListener('mouseleave', function () {
+            vipDropdown.style.display = 'none';
+        });
+
+        // 鼠标离开登录元素时隐藏下拉菜单
+        loginElement.addEventListener('mouseleave', function () {
+            setTimeout(function () {
+                if (!vipDropdown.matches(':hover')) {
+                    vipDropdown.style.display = 'none';
+                }
+            }, 300);
+        });
+    } else {
+        welcomeMessage.innerText = '欢迎来到熊熊之家';
+        vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+    }
+});
+
+// 在用户成功登录后调用
+function setJustLoggedIn() {
+    localStorage.setItem('justLoggedIn', 'true');
+}
+
+
+
+
 
 
       
