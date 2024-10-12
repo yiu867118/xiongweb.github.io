@@ -83,72 +83,78 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-        console.log("Supabase 初始化完成");
-
-        async function loginSuccess(event) {
-            event.preventDefault(); // 阻止默认提交行为
-
-            const identifier = document.querySelector('input[name="identifier"]').value;
-            const password = document.querySelector('input[name="password"]').value;
-
-            try {
-                console.log("登录尝试用户：", identifier);
-
-                // 直接查询所有用户
-                const { data: users, error } = await supabase
-                    .from('users')
-                    .select('*');
-
-                if (error) {
-                    console.error('查询出错:', error);
-                    alert('查询出错: ' + error.message);
-                    return;
-                }
-
-                console.log('查询到的所有用户:', users);
-
-                const user = users.find(user => user.username === identifier || user.fullname === identifier);
-
-                if (!user) {
-                    console.error('登录失败: 用户名或姓名不存在。');
-                    alert('登录失败: 用户名或姓名不存在。');
-                    return;
-                }
-
-                // 验证密码
-                if (user.password !== password) {
-                    console.error('登录失败: 密码错误。');
-                    alert('登录失败: 密码错误。');
-                    return;
-                }
-
-                // 保存用户名到 localStorage
-                localStorage.setItem('username', user.username);
-                localStorage.setItem('userData', JSON.stringify(user));
-
-                console.log('登录成功:', user);
-                alert('登录成功!');
-
-                // 设置登录标志
-                setJustLoggedIn();
-
-                // 获取重定向参数并进行重定向
-                const params = new URLSearchParams(window.location.search);
-                const redirectUrl = params.get('redirect') || 'homepage.html';
-                window.location.href = redirectUrl; // 重定向到指定页面
-            } catch (error) {
-                console.error('登录过程中发生错误:', error.message);
-                alert('登录失败: ' + error.message);
-            }
+    const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+        headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`
         }
-
-        const form = document.getElementById('login-form');
-        form.addEventListener('submit', loginSuccess);
     });
+
+    console.log("Supabase 初始化完成");
+
+    async function loginSuccess(event) {
+        event.preventDefault(); // 阻止默认提交行为
+
+        const identifier = document.querySelector('input[name="identifier"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        try {
+            console.log("登录尝试用户：", identifier);
+
+            // 直接查询所有用户
+            const { data: users, error } = await supabase
+                .from('users')
+                .select('*');
+
+            if (error) {
+                console.error('查询出错:', error);
+                alert('查询出错: ' + error.message);
+                return;
+            }
+
+            console.log('查询到的所有用户:', users);
+
+            const user = users.find(user => user.username === identifier || user.fullname === identifier);
+
+            if (!user) {
+                console.error('登录失败: 用户名或姓名不存在。');
+                alert('登录失败: 用户名或姓名不存在。');
+                return;
+            }
+
+            // 验证密码
+            if (user.password !== password) {
+                console.error('登录失败: 密码错误。');
+                alert('登录失败: 密码错误。');
+                return;
+            }
+
+         // 保存用户名到 localStorage
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('userData', JSON.stringify(user));
+
+            // 设置登录标志
+            localStorage.setItem('isLoggedIn', 'true'); // 标记用户已经登录
+
+            console.log('登录成功:', user);
+            alert('登录成功!');
+
+            
+            // 获取重定向参数并进行重定向
+            const params = new URLSearchParams(window.location.search);
+            const redirectUrl = params.get('redirect') || 'homepage.html';
+            window.location.href = redirectUrl; // 重定向到指定页面
+        } catch (error) {
+            console.error('登录过程中发生错误:', error.message);
+            alert('登录失败: ' + error.message);
+        }
+    }
+
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', loginSuccess);
+});
 
 
         
