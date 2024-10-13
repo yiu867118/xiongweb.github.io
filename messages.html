@@ -394,9 +394,9 @@
                 }
                 let username = '匿名用户';
                 if (!checkLoginStatus()) {
-                    const confirmAnonymous = confirm("你未登录，是否继续以匿名或落款方式发布？点击取消则转到登录页面。");
+                    const confirmAnonymous = confirm("你未登录，是否继续以未登录状态发布评论？点击取消则转到登录页面。");
                     if (!confirmAnonymous) {
-                        window.location.href = 'login.html';
+                        window.location.href = 'login_messages.html';
                         return;
                     }
                     if (!isAnonymous) {
@@ -424,11 +424,11 @@
             const replyToMessage = async (messageId) => {
                 let username = '匿名用户';
                 if (!checkLoginStatus()) {
-                    const confirmAnonymous = confirm("你未登录，是否继续以匿名或落款方式回复？点击取消则转到登录页面。");
-                    if (!confirmAnonymous) {
-                        window.location.href = 'login.html';
-                        return;
-                    }
+                    // const confirmAnonymous = confirm("你未登录，是否继续以匿名或落款方式回复？点击取消则转到登录页面。");
+                    // if (!confirmAnonymous) {
+                    //     window.location.href = 'login.html';
+                    //     return;
+                    // }
                     const isAnonymous = confirm("是否匿名回复？点击取消则以落款方式回复。");
                     if (!isAnonymous) {
                         username = prompt("请输入您的名字（落款）：");

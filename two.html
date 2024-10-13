@@ -94,13 +94,57 @@
         }
 
         #login {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #444;
-            font-weight: 600;
-            text-decoration: none;
-        }
+          color: #444;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      .dropdown {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+      }
+
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 100%; /* Ensure it drops below the login element */
+          background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+          min-width: 240px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          z-index: 100;
+          border-radius: 8px;
+          overflow: hidden;
+          padding: 10px 0; /* Added padding to handle hover area */
+      }
+
+      .dropdown:hover .dropdown-content,
+      .dropdown-content:hover {
+          display: block;
+      }
+
+      .dropdown-content p {
+          padding: 12px 16px;
+          color: #000000;
+          text-shadow: 2px 2px rgb(255, 255, 255);
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .dropdown-content a {
+          color: rgb(76, 144, 212);
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          
+          transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #4fb7e8a3;
+      }
 
         #navbar {
             display: flex;
@@ -305,7 +349,12 @@
             <div><h3>合体</h3></div>
             <!-- <div><img src="two_pic/two.jpg" alt="熊家图标"></div> -->
             <div><h3>熊熊</h3></div>
-            <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
         </header>
         
         
@@ -576,6 +625,46 @@
             document.getElementById("next-page-related").addEventListener("click", nextPageRelated);
 
             displayRelatedContent();
+
+
+
+
+            //login
+            document.addEventListener('DOMContentLoaded', function () {
+                const username = localStorage.getItem('username');
+                const loginElement = document.getElementById('login');
+                const vipDropdown = document.getElementById('vip-dropdown');
+                const vipMessage = document.getElementById('vip-message');
+
+                if (username) {
+                    loginElement.textContent = username;
+                    loginElement.href = '#';
+                    vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+                    // Show dropdown on hover
+                    loginElement.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+
+                    loginElement.addEventListener('mouseleave', function () {
+                        setTimeout(function () {
+                            if (!vipDropdown.matches(':hover')) {
+                                vipDropdown.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+
+                    vipDropdown.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+
+                    vipDropdown.addEventListener('mouseleave', function () {
+                        vipDropdown.style.display = 'none';
+                    });
+                } else {
+                    vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+                }
+            });
 
 
            

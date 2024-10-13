@@ -211,6 +211,7 @@
                     } else {
                         console.log('注册成功:', data);
                         alert('注册成功！请记住你的用户名和密码。');
+                        window.location.href = 'login.html'; // 重定向到登录页面
                     }
                 } catch (error) {
                     console.error('发生错误:', error);
