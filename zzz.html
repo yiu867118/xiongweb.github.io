@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>访问记录详情</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.26.0/dist/umd/supabase.min.js"></script>
+  <style>
+    @font-face {
+      font-family: 'KaiTi';
+      src: url('STKAITI.TTF') format('truetype'),
+           url('STXINWEI.TTF') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* 全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'KaiTi', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #000000;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background-color: #4ba1df;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #5ca9d5;
+      color: #fff;
+    }
+
+    thead th {
+      padding: 15px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 1.2rem;
+    }
+
+    tbody {
+      background-color: #f8fafc;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #e6eff7;
+    }
+
+    tbody td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #e1e8ed;
+      font-size: 1rem;
+    }
+
+    tbody td:first-child {
+      width: 5%;
+      text-align: center;
+      font-weight: 500;
+      color: #54a9e2;
+    }
+
+    tbody td:nth-child(2) {
+      width: 30%;
+    }
+
+    tbody td:nth-child(3) {
+      width: 35%;
+    }
+
+    tbody td:nth-child(4) {
+      width: 30%;
+      word-break: break-all;
+    }
+
+    tbody tr:hover {
+      background-color: #d9eff6;
+    }
+
+    tfoot {
+      background-color: #56a9e8;
+      color: #fff;
+      padding: 10px;
+      text-align: right;
+      font-size: 0.9rem;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      thead th, tbody td {
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      table {
+        font-size: 0.8rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* 细节优化 */
+    tr {
+      transition: background-color 0.3s ease;
+    }
+
+    tr:hover {
+      background-color: #cce7f0;
+    }
+
+    table {
+      transition: all 0.3s ease;
+    }
+
+    table:hover {
+      transform: scale(1.001);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>访问记录</h1>
+  <table id="visit-log">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>时间</th>
+        <th>页面URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 访问记录会在这里显示 -->
+    </tbody>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+      
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+      
+      supabase
+        .from('visits')
+        .select('*')
+        .order('timestamp', { ascending: false })  // 以时间倒序排列记录
+        .then(({ data, error }) => {
+          if (error) {
+            console.error('获取访问记录时出错:', error);
+            return;
+          }
+          const visitLog = document.getElementById('visit-log').querySelector('tbody');
+          data.forEach(visit => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${visit.id}</td>
+              <td>${visit.username || '未登录用户'}</td>
+              <td>${new Date(visit.timestamp).toLocaleString()}</td>
+              <td>${visit.page_url}</td>
+            `;
+            visitLog.appendChild(row);
+          });
+        });
+    });
+  </script>
+</body>
+</html>

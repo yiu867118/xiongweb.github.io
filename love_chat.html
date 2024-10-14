@@ -263,6 +263,7 @@
         }
 
     </style>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div id="con">
@@ -521,6 +522,36 @@
               vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
           }
       });
+
+
+
+
+
+
+
+                    // Supabase配置
+           
+                    document.addEventListener('DOMContentLoaded', async () => {
+                    const pageUrl = window.location.href;
+                    const username = localStorage.getItem('username') || null;
+
+                    // 记录访问详情
+                    const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+
+                    const { createClient } = window.supabase;
+                    const supabase = createClient(supabaseUrl, supabaseKey);
+
+                    const { data, error } = await supabase
+                        .from('visits')
+                        .insert([{ username, page_url: pageUrl }]);
+
+                    if (error) {
+                        console.error('记录访问详情时出错:', error);
+                    } else {
+                        console.log('访问记录成功:', data);
+                    }
+                    });
 
 
 
