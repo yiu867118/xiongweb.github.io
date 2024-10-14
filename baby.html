@@ -766,50 +766,51 @@
             });
 
 
-             // Supabase配置
-    document.addEventListener('DOMContentLoaded', async () => {
-        const pageUrl = window.location.href;
-        const username = localStorage.getItem('username') || null;
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
 
-        try {
-            // 获取用户IP和地理位置
-            const ipResponse = await fetch('https://api.ipstack.com/check?access_key=de37878ed5c3e2e6f37af43f3766eed2');
-            if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
-            const locationData = await ipResponse.json();
-            const city = locationData.city || '未知城市';
-            const country = locationData.country_name || '未知国家';
-            const region = locationData.region_name || '未知地区';
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
 
-            // 使用服务器时间并转换为北京时间
-            const getServerTime = async () => {
-            const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
-            if (!res.ok) throw new Error('获取服务器时间失败');
-            const timeData = await res.json();
-            return timeData.datetime;
-            };
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
 
-            const beijingTime = await getServerTime();
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
 
-            // 记录访问详情
-            const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
-            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const beijingTime = await getServerTime();
 
-            const { createClient } = window.supabase;
-            const supabase = createClient(supabaseUrl, supabaseKey);
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
 
-            const { data, error } = await supabase
-            .from('visits')
-            .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
 
-            if (error) {
-            console.error('记录访问详情时出错:', error);
-            } else {
-            console.log('访问记录成功:', data);
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
             }
-        } catch (error) {
-            console.error('获取用户位置时出错:', error.message);
-        }
-        });
+            });
 
         </script>
     </div>
