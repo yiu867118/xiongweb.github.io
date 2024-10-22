@@ -284,7 +284,6 @@
       <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
   <div id="con">
     <header>
       <div><h1>熊宝宝</h1></div>
@@ -295,38 +294,33 @@
         <div class="dropdown-content" id="vip-dropdown">
             <p id="vip-message"></p>
         </div>
-    </div>
+      </div>
     </header>
-
     <div class="red-envelope-section">
       <input type="number" id="custom-amount" class="custom-amount-input" placeholder="请输入任意金额">
       <button class="red-envelope-btn" onclick="showPaymentModal()">发红包</button>
     </div>
-
-    <div id="success-message" class="success-message">🎉 红包发送成功！小小熊祝你万事如意，心想事成!</div>
-
+    <div id="success-message" class="success-message">
+      红包发送成功！小小熊祝你万事如意，心想事成!
+    </div>
     <div id="payment-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>扫码发红包</h2>
-        <img id="qr-code" src="baby_pic/money.png" alt="支付宝收款码">
-        <input type="text" id="nickname" placeholder="输入您的名字或昵称">
-        <input type="text" id="alipay" placeholder="输入您的支付宝账号">
-        <button id="confirm-payment" class="confirm-btn">确认发红包</button>
+        <img id="qr-code" alt="支付宝收款码">
+        <button id="confirm-payment" class="confirm-btn">确认已支付</button>
       </div>
     </div>
-    
     <div id="records">
-        <section id="leaderboard" class="leaderboard">
+      <section id="leaderboard" class="leaderboard">
         <h2>红包记录</h2>
         <ul id="ranking-list">
             <li>1. 小君 发了 100 元红包</li>
             <li>2. 小光 发了 100 元红包</li>
         </ul>
-        </section>
+      </section>
     </div>
   </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const paymentModal = document.getElementById('payment-modal');
@@ -334,39 +328,42 @@
       const confirmPaymentBtn = document.getElementById('confirm-payment');
       const successMessage = document.getElementById('success-message');
       const rankingList = document.getElementById('ranking-list');
-      const nicknameInput = document.getElementById('nickname');
-      const alipayInput = document.getElementById('alipay');
       const qrCodeImg = document.getElementById('qr-code');
-      const customAmountInput = document.getElementById('custom-amount');
-
       let leaderboard = [
         { name: '小君', amount: 100 },
         { name: '小光', amount: 100 }
       ];
+      let currentOrderId = null;
 
       closeModal.addEventListener('click', () => {
         paymentModal.style.display = 'none';
       });
 
-      confirmPaymentBtn.addEventListener('click', () => {
-        const nickname = nicknameInput.value || '匿名用户';
-        const alipay = alipayInput.value;
-        const amount = customAmountInput.value;
-
-        if (alipay && amount > 0) {
-          leaderboard.push({ name: nickname, amount: amount });
-
+      confirmPaymentBtn.addEventListener('click', async () => {
+        const nickname = localStorage.getItem('username') || '匿名用户';
+        const paymentSuccess = await checkPaymentSuccess(currentOrderId);
+        if (paymentSuccess) {
+          leaderboard.push({ name: nickname, amount: paymentSuccess.amount });
           updateLeaderboard();
           paymentModal.style.display = 'none';
-          showSuccessMessage();
-          nicknameInput.value = '';
-          alipayInput.value = '';
+          showSuccessMessage(paymentSuccess.amount);
         } else {
-          alert('请输入正确的金额和支付宝账号');
+          alert('支付失败，请重试');
         }
       });
 
-      function showSuccessMessage() {
+      async function checkPaymentSuccess(orderId) {
+        const response = await fetch('http://127.0.0.1:5000/alipay/check-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId })
+        });
+        const result = await response.json();
+        return result.success ? result : false;
+      }
+
+      function showSuccessMessage(amount) {
+        successMessage.textContent = `恭喜您, 成功发了 ${amount} 元红包!`;
         successMessage.style.display = 'block';
         setTimeout(() => {
           successMessage.style.display = 'none';
@@ -383,20 +380,29 @@
         });
       }
 
-      window.showPaymentModal = function() {
-        const amount = customAmountInput.value;
-
-        if (amount && amount > 0) {
-          qrCodeImg.src = 'baby_pic/money.png';
-          qrCodeImg.dataset.amount = amount;
-          paymentModal.style.display = 'flex';
+      window.showPaymentModal = async function() {
+        const amount = document.getElementById('custom-amount').value;
+        const response = await fetch('http://127.0.0.1:5000/alipay/create-payment', {  // 确保端口号和路径正确
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount })
+        });
+        const result = await response.json();
+        if (result.success) {
+            qrCodeImg.src = result.qrCodeUrl;
+            currentOrderId = result.orderId;
+            paymentModal.style.display = 'flex';
         } else {
-          alert('请输入有效的金额');
+            alert('无法生成支付二维码，请稍后再试');
         }
-      }
+    }
+
+
 
       updateLeaderboard();
     });
+
+
 
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -437,52 +443,7 @@
 
 
 
-            //supabase
-            document.addEventListener('DOMContentLoaded', async () => {
-            const pageUrl = window.location.href;
-            const username = localStorage.getItem('username') || null;
-
-            try {
-                // 获取用户IP和地理位置
-                const ipResponse = await fetch('https://ipapi.co/json/');
-                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
-                const locationData = await ipResponse.json();
-                console.log('locationData:', locationData); // 调试信息
-
-                const city = locationData.city || '未知城市';
-                const country = locationData.country_name || '未知国家';
-                const region = locationData.region || '未知地区';
-
-                // 使用服务器时间并转换为北京时间
-                const getServerTime = async () => {
-                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
-                if (!res.ok) throw new Error('获取服务器时间失败');
-                const timeData = await res.json();
-                return timeData.datetime;
-                };
-
-                const beijingTime = await getServerTime();
-
-                // 记录访问详情
-                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
-                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
-                const { createClient } = window.supabase;
-                const supabase = createClient(supabaseUrl, supabaseKey);
-
-                const { data, error } = await supabase
-                .from('visits')
-                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
-
-                if (error) {
-                console.error('记录访问详情时出错:', error);
-                } else {
-                console.log('访问记录成功:', data);
-                }
-            } catch (error) {
-                console.error('获取用户位置时出错:', error.message);
-            }
-            });
-
+         
 
   </script>
 </body>

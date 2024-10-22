@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小光相册</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(baby_pic/x.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        body {
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            background-color: #f0f6fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+    
+
+        header {
+            display: flex;
+            justify-content: center; /* 居中对齐 */
+            padding: 50px 20px;
+            background-color: #3faeef;
+            color: #fff;
+            border-radius: 12px;
+            background-image: url(baby_pic/z.jpg);
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgb(11, 11, 11);
+        }
+
+        .intro {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .year {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .year-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #517344;
+            background-color: #f0f6fc;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 100px);
+        }
+
+        .caption-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .year-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 更小的最小宽度 */
+            gap: 1px;
+            margin-top: 15px;
+        }
+
+
+        .year-images img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            max-height: auto;
+        }
+
+        #one{
+            width: 200px;
+            height: auto;
+        }
+
+        .year-images img:hover {
+            transform: scale(1.05);
+        }
+
+
+         /* 为视频设置固定的宽高比，并确保自适应大小 */
+        video {
+            display: grid;
+            max-width: 500px;
+            height: auto;
+            aspect-ratio: 16 / 9; /* 设置视频的宽高比例 */
+            border-radius: 20px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        video:hover{
+            transform: scale(1.05);
+        }
+
+        
+
+    
+
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .year {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .year-label {
+                margin-bottom: 15px;
+            }
+
+            .content {
+                width: 100%;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(-20px, -8000px) rotate(10deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(20px, -16000px) rotate(-10deg);
+                opacity: 0.2;
+            }
+        }
+
+        .bubble {
+            position: absolute;
+            width: 40px; /* 调整泡泡大小 */
+            height: 40px; /* 调整泡泡大小 */
+            background: linear-gradient(135deg, rgba(208, 247, 186, 0.7), rgba(201, 243, 111, 0.5)); /* 渐变色 */
+            border-radius: 50%; /* 圆形泡泡 */
+            filter: blur(1px); /* 模糊滤镜 */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
+            animation: float 1000s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
+            will-change: transform, opacity; /* 性能优化 */
+        }
+
+        .bubble::before,
+        .bubble::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.4); /* 调整颜色和透明度 */
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .bubble::before {
+            top: -8px;
+            left: -6px;
+        }
+
+        .bubble::after {
+            left: 8px;
+            top: 4px;
+        }
+
+
+        .float {
+            animation: float 10s linear infinite;
+        }
+
+        /* 星光点效果 */
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .star {
+            animation: starTwinkle 1.5s infinite; /* Twinkle animation */
+        }
+
+
+
+        #login {
+            color: #444;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%; /* Ensure it drops below the login element */
+            background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+            min-width: 240px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px 0; /* Added padding to handle hover area */
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content p {
+            padding: 12px 16px;
+            color: #000000;
+            text-shadow: 2px 2px rgb(255, 255, 255);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .dropdown-content a {
+            color: rgb(76, 144, 212);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4fb7e8a3;
+        }
+
+
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="title">小光的相册</div>
+        <div class="dropdown">
+            <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+            <div class="dropdown-content" id="vip-dropdown">
+                <p id="vip-message"></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="timeline">
+        <!-- Year 2020 -->
+        <div class="year">
+            <div class="year-label">在医院</div>
+            <div class="content">
+                <div class="caption-card">手术确认单和宝宝探望证明</div>
+                <div class="year-images">
+                    <img src="baby_pic/1001.jpg" alt="小小熊">
+                    <img src="baby_pic/1002.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">手术前</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1003.mp4" controls alt="手术前">
+                </div>
+
+                <br>
+                <div class="caption-card">小熊熊来啦! 小光爸爸剪脐带</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1006.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">刚出生一天,医院拍的视频</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1011.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">住院  肚子上手臂上插了各种针管... 每天清晨都被针扎醒...</div>
+                <div class="year-images">
+                    <img src="baby_pic/1010.jpg" alt="小小熊">
+                    <img src="baby_pic/1011.jpg" alt="小小熊">
+                    <img src="baby_pic/1008.jpg" alt="小小熊">
+                    <img src="baby_pic/1009.jpg" alt="小小熊">
+                </div>
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">调理院时光</div>
+            <div class="content">
+                <div class="caption-card">第一次帮熊宝宝换臭臭</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1007.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">小光爸爸拍拍</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1010.mp4" controls alt="小小熊">
+                </div>
+                
+                <br>
+                <div class="caption-card">小君第一次抱小熊</div>
+                <div class="year-images">
+                    <img src="baby_pic/1013.jpg" alt="小小熊">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">六个月前</div>
+            <div class="content">
+
+                <div class="caption-card">在吗</div>
+                <div class="year-images">
+                    <img src="baby_pic/1018.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">屁屁是青青的</div>
+                <div class="year-images">
+                    <img src="baby_pic/1020.jpg" alt="小小熊">
+                </div>
+
+
+
+                <br>
+                <div class="caption-card">小光爸爸洗宝宝, 宝宝臭臭汤洗澡</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1022.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">打针去</div>
+                <div class="year-images">
+                    
+                    <video id="myVideo" src="baby_pic/1024.mp4" controls alt="小小熊"></video>
+                    <video id="myVideo" src="baby_pic/1025.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">家门口樱花开了</div>
+                <div class="year-images">
+                    <img src="baby_pic/1031.jpg" alt="小小熊">
+                    <img src="baby_pic/1032.jpg" alt="小小熊">
+                    <img src="baby_pic/1030.jpg" alt="小小熊">
+                    <img src="baby_pic/1034.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">熊爸爸买的熊帽帽和兔兔衣</div>
+                <div class="year-images">
+                    <img src="baby_pic/1036.jpg" alt="小小熊">
+                    <img src="baby_pic/1038.jpg" alt="小小熊">
+                    <img src="baby_pic/1039.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">和熊爸爸一起看动画片</div>
+                <div class="year-images">
+                    <video src="baby_pic/1037.mp4" controls alt="小小熊"></video>
+                </div>
+
+                <br>
+                <div class="caption-card">花样睡姿</div>
+                <div class="year-images">
+                    <img src="baby_pic/1040.jpg" alt="小小熊">
+                    <img src="baby_pic/1041.jpg" alt="小小熊">
+                    <img src="baby_pic/1042.jpg" alt="小小熊">
+                    <img src="baby_pic/1043.jpg" alt="小小熊">
+                </div>
+                
+                <br>
+                <div class="caption-card">公园溜宝宝</div>
+                <div class="year-images">
+                    <img src="baby_pic/1051.jpg" alt="小小熊">
+                    <img src="baby_pic/1052.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">一起跷跷板</div>
+                <div class="year-images">
+                    <img src="baby_pic/1053.jpg" alt="小小熊">
+                    <img src="baby_pic/1054.jpg" alt="小小熊">
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="year">
+            <div class="year-label">一岁前</div>
+            <div class="content">
+                
+                <div class="caption-card">八个月大, 饭桌上最小的宝宝</div>
+                <div class="year-images">
+                    <video id="myVideo" src="baby_pic/1062.mp4" controls alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">第一张证件照, 看起来像个大大宝宝</div>
+                <div class="year-images">
+                    <img src="baby_pic/1060.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">熊家看烟花</div>
+                <div class="year-images">
+                    <img src="baby_pic/1071.jpg" alt="小小熊">
+                    <img src="baby_pic/1072.jpg" alt="小小熊">
+                    <img src="baby_pic/1073.jpg" alt="小小熊">
+                    <img src="baby_pic/1074.jpg" alt="小小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">和小光爸爸一起探望学习的小惨君</div>
+                <div class="year-images">
+                    <img src="baby_pic/1081.jpg" alt="小小熊">
+                </div>
+
+            </div>
+        </div>
+
+      
+
+    </div>
+
+
+    <footer>
+        <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(221, 245, 197, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
+            <p style="font-size: 19px; color: #555; margin: 0; font-family: 'KaiTi', 'Poppins', sans-serif; font-weight: 600;">
+                网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+            </p>
+            <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: 'KaiTi', 'Poppins', sans-serif;">
+                © 2024 熊家 All Rights Reserved.
+            </p>
+        </div>
+    </footer>   
+</div>
+
+<script>
+// 获取所有视频元素
+const videos = document.querySelectorAll('video');
+
+videos.forEach((video) => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const img = document.createElement('img');
+    const playButton = document.createElement('div'); // 播放按钮
+
+    // 设置播放按钮的样式
+    playButton.innerHTML = '▶'; // 简单的播放符号
+    playButton.style.position = 'absolute';
+    playButton.style.top = '50%';
+    playButton.style.left = '15%';
+    playButton.style.transform = 'translate(-50%, -50%)';
+    playButton.style.fontSize = '40px';
+    playButton.style.color = 'white';
+    playButton.style.opacity = '0.8';
+    playButton.style.cursor = 'pointer';
+    playButton.style.zIndex = '10'; // 确保按钮在其他元素之上
+
+    // 视频容器设置成相对定位
+    video.parentElement.style.position = 'relative';
+    video.parentElement.appendChild(playButton); // 插入播放按钮
+    video.parentElement.appendChild(img); // 将生成的img元素插入到每个视频的父容器中
+
+    // 当视频元数据加载完后
+    video.addEventListener('loadedmetadata', () => {
+        // 设置canvas宽高为视频的宽高
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        // 将视频的第一帧捕捉到 canvas 上
+        video.currentTime = 0.2;  // 尝试捕捉非常靠近开头的一帧
+    });
+
+    // 当当前时间更改时绘制帧
+    const onTimeUpdate = () => {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        img.src = canvas.toDataURL(); // 将Canvas转换为图像URL
+        img.style.width = '100%'; // 让生成的图片和视频一样大
+        img.style.borderRadius = '20px'; // 和视频一致的圆角
+        img.style.position = 'relative';
+        img.style.zIndex = '1'; // 保证图片显示在播放按钮之下
+        video.style.display = 'none'; // 隐藏视频
+        video.removeEventListener('timeupdate', onTimeUpdate); // 移除事件监听器
+    };
+
+    // 在视频时间更新时绘制帧
+    video.addEventListener('timeupdate', onTimeUpdate);
+
+    // 当点击图片或播放按钮时，显示并播放视频
+    const playVideo = () => {
+        video.style.display = 'block'; // 显示视频
+        img.style.display = 'none'; // 隐藏图片
+        playButton.style.display = 'none'; // 隐藏播放按钮
+        video.play(); // 播放视频
+    };
+
+    img.addEventListener('click', playVideo);
+    playButton.addEventListener('click', playVideo);
+
+    // 当视频播放结束时，隐藏视频，重新显示图片和播放按钮
+    video.addEventListener('ended', () => {
+        video.style.display = 'none';
+        img.style.display = 'block';
+        playButton.style.display = 'block'; // 重新显示播放按钮
+    });
+});
+
+
+
+
+
+
+
+
+   function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.left = Math.random() * 100 + 'vw';
+        bubble.style.animationDuration = (Math.random() * 50 + 15) + 's'; // Set floating animation duration
+        document.body.appendChild(bubble);
+
+        // Create star
+        const starCount = Math.floor(Math.random() * 3) + 1; // Random number of stars
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.position = 'absolute'; // Absolute position for stars
+            star.style.width = '4px'; // Star width
+            star.style.height = '4px'; // Star height
+            star.style.backgroundColor = 'rgba(247, 209, 56, 0.8)'; // Star color
+            star.style.borderRadius = '50%'; // Make stars circular
+            star.style.left = (Math.random() * 40) - 20 + 'px'; // Random star position within bubble
+            star.style.top = (Math.random() * 40) - 20 + 'px';
+            star.style.opacity = Math.random(); // Random opacity for twinkling effect
+            star.style.zIndex = '1'; // Ensure stars are on top of the bubble
+            bubble.appendChild(star);
+        }
+
+        setTimeout(() => {
+            bubble.remove();
+        }, 8000); // Duration for bubble to exist, matching animation
+    }
+
+
+    
+
+        setInterval(createBubble, 600); // 控制泡泡生成频率
+
+        window.onload = function() {
+            const styleSheet = document.styleSheets[0];
+
+            // 动态插入CSS规则
+            const pageHeight = document.body.scrollHeight; // 获取页面的总高度
+            const animationRule = `
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0);
+                        opacity: 0.8;
+                    }
+                    50% {
+                        transform: translate(-20px, -${pageHeight * 0.3}px) rotate(10deg); /* 50% 页面高度 */
+                        opacity: 0.6;
+                    }
+                    100% {
+                        transform: translate(20px, -${pageHeight}px) rotate(-10deg); /* 100% 页面高度 */
+                        opacity: 0;
+                    }
+                }
+            `;
+
+            styleSheet.insertRule(animationRule, styleSheet.cssRules.length);
+
+            // 将动画应用到浮动元素
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach(bubble => {
+                bubble.style.animation = "float 10s linear infinite";
+            });
+        };
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+          const username = localStorage.getItem('username');
+          const loginElement = document.getElementById('login');
+          const vipDropdown = document.getElementById('vip-dropdown');
+          const vipMessage = document.getElementById('vip-message');
+
+          if (username) {
+              loginElement.textContent = username;
+              loginElement.href = '#';
+              vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+              // Show dropdown on hover
+              loginElement.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              loginElement.addEventListener('mouseleave', function () {
+                  setTimeout(function () {
+                      if (!vipDropdown.matches(':hover')) {
+                          vipDropdown.style.display = 'none';
+                      }
+                  }, 300);
+              });
+
+              vipDropdown.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              vipDropdown.addEventListener('mouseleave', function () {
+                  vipDropdown.style.display = 'none';
+              });
+          } else {
+              vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+          }
+      });
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+</script>
+
+
+</body>
+</html>
