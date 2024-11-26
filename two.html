@@ -146,12 +146,13 @@
           background-color: #4fb7e8a3;
       }
 
-        #navbar {
+      #navbar {
             display: flex;
             justify-content: center;
-            background-color: rgba(239, 228, 252, 0.9);
-            padding: 10px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, rgba(240, 228, 252, 0.9), rgba(218, 186, 245, 0.9));
+            padding: 10px 20px; /* 增加左右内边距 */
+            border-radius: 8px; /* 调整边角圆滑 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加阴影 */
             max-width: 100%;
         }
 
@@ -161,14 +162,37 @@
             font-weight: 600;
             padding: 12px 20px;
             text-decoration: none;
-            transition: background-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* 添加变换过渡 */
             margin: 0 10px;
+            background-color: rgba(236, 188, 245, 0.3);
+            border-radius: 50px;
+            position: relative; /* 添加相对定位以便于创建伪元素 */
+            overflow: hidden; /* 防止内容溢出 */
+        }
+
+        #navbar a::before {
+            content: ""; /* 创建伪元素用于渐变效果 */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(214, 150, 244, 0.5);
+            transition: width 0.4s ease-in-out, left 0.4s ease-in-out; /* 过渡效果 */
+            z-index: 0; /* 确保在背景层 */
+        }
+
+        #navbar a:hover::before {
+            width: 100%; /* 鼠标悬停时展开 */
+            left: 0; /* 使背景完全展开 */
         }
 
         #navbar a:hover {
-            background-color: rgba(225, 205, 252, 0.7);
-            border-radius: 5px;
+            color: #2e2e2e; /* 鼠标悬停时更改字体颜色 */
+            background-color: rgba(214, 150, 244, 0.7); /* 鼠标悬停时更改背景颜色 */
+            transform: scale(1.05); /* 鼠标悬停时放大 */
         }
+
 
         #container {
             display: flex;
