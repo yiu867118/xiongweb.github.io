@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小君熊的个人主页</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                 url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 动态背景渐变 */
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('home_pic/back.jpg') center/cover no-repeat;
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(3px);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #000;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            animation: fadeInSlideDown 1.2s ease;
+        }
+
+        @keyframes fadeInSlideDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #navbar a {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #navbar a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(150, 207, 244, 0.5);
+            z-index: 0;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        #navbar a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        #navbar a:hover {
+            color: rgba(48, 68, 95, 0.719);
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        section {
+            max-width: 80%;
+            width: 90%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        section:nth-child(even) {
+            background: linear-gradient(135deg, #ffffff, #c0d9f560);
+            color: #fff;
+        }
+
+        section:hover {
+            transform: scale(1.01);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            position: relative;
+            color: #000;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: #74ebd5;
+            margin: 10px auto 0;
+        }
+
+
+
+    /* 小君简介模块优化 */
+    #background {
+        max-width: 80%;
+        width: 90%;
+        margin: auto;
+        padding: 50px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(152, 187, 219, 0.95));
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #background:hover {
+        transform: scale(1.01);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    #background h2 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        position: relative;
+        animation: fadeIn 1s ease-out;
+    }
+
+    #background h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #ff6f61;
+        margin: 10px auto 0;
+        border-radius: 2px;
+    }
+
+    #background p {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #444;
+        margin-bottom: 20px;
+        animation: fadeIn 1.2s ease-out;
+        text-align: justify;
+        text-indent: 2em;
+    }
+
+    #background p:last-child {
+        color: #333;
+        font-size: 20px;
+    }
+
+    #background::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 70%);
+        z-index: -1;
+        animation: glowPulse 10s infinite;
+        pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes glowPulse {
+        0%, 100% {
+            transform: scale(1.05) translate(-50%, -50%);
+        }
+        50% {
+            transform: scale(1.1) translate(-50%, -50%);
+        }
+    }
+
+    /* 添加动态微粒效果 */
+    #background::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('https://cdn.pixabay.com/photo/2017/02/22/00/41/particles-2089967_960_720.png') center/cover no-repeat;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+
+
+
+    /* MBTI 区块优化 */
+    #mbti {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background: linear-gradient(135deg, #d2efff, #9fe6fc);
+        color: #333;
+        padding: 50px;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    #mbti h2 {
+        font-size: 22px;
+        text-transform: uppercase;
+        position: relative;
+        margin-bottom: 20px;
+        color: #020202;
+    }
+
+    #mbti h2::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: #ff6f61;
+        margin: 10px auto 0;
+    }
+
+    #mbti .mbti-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 70%;
+        width: 100%;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #mbti .mbti-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    #mbti .mbti-card img {
+        max-width: 400px;
+        height: auto;
+        border-radius: 10%;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(240, 238, 238, 0.1);
+        border: 3px solid #c4c4c4;
+    }
+
+    #mbti .mbti-card h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    #mbti .mbti-card p {
+        font-size: 16px;
+        line-height: 2;
+        color: #666;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    #mbti .cta-button {
+        display: inline-block;
+        padding: 10px 25px;
+        background: #ff6f61;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: background 0.3s ease, transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #mbti .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transition: width 0.4s ease;
+        z-index: 1;
+    }
+
+    #mbti .cta-button:hover::before {
+        width: 100%;
+    }
+
+    #mbti .cta-button:hover {
+        transform: scale(1.01);
+    }
+
+
+    /* Family 模块 */
+#family {
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* 梦幻粉调渐变背景 */
+    color: #fff;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#family::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    z-index: 0;
+    animation: dreamGlow 6s infinite alternate;
+}
+
+@keyframes dreamGlow {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+}
+
+#family h2 {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+#family h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #fff;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.family-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.family-info {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.family-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.family-photos img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    margin: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.family-photos img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Baby 模块 */
+.baby {
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    color: #333;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.baby h2 {
+    font-size: 28px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #444;
+    position: relative;
+    z-index: 2;
+}
+
+.baby h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #74ebd5;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.baby-content {
+    max-width: 800px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+    color: #555;
+}
+
+.baby-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.baby-photos img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.baby-photos img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow Animation */
+@keyframes glowPulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+
+
+        .photos img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #fff;
+        }
+
+        .photos img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #74ebd5;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #ff4500;
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #74ebd5;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: white;
+            border-radius: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <h1>小君熊的个人主页</h1>
+        <br>
+        <br>
+        <nav id="navbar">
+            <a href="#background">简介</a>
+            <a href="#photos">照片墙</a>
+            <a href="#mbti">MBTI</a>
+            <a href="#papers">作品</a>
+            <a href="#family">熊友</a>
+            <a href="#baby">熊宝宝</a>
+            <a href="homepage.html">熊家主页</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="background">
+            <h2>小君简介</h2>
+            <p>我是小君熊，熊家排行第二，但聪明才智熊家第一！别被我软萌可爱的外表骗了，其实我是个隐藏的“大脑袋”——智慧的象征。我兴趣广泛，从研究如何神不知鬼不觉地偷吃蛋糕，到挑战高难度的“上天取炸弹”任务，样样精通，可谓无所不能。生活中的我热爱探索新奇有趣的事物，与小光一起书写了属于我们的独特故事。从懵懂相识到幸福三口之家，我们的每一天都像一部充满冒险与温馨的动画篇章。</p>
+            <p>有爱与笑声的地方，就是生活最精彩的模样。快来和我一起，把生活过成真正的“熊样”吧！</p>
+        </section>
+
+        <section id="photos" class="photos">
+            <h2>小君照片墙</h2>
+            <div>
+                <img src="jun_pic/0001.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0003.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0005.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0006.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0008.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0010.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0011.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0030.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0035.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0037.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0042.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0050.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0056.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0058.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0060.jpg" alt="小君小时候的照片1">
+            </div>
+        </section>
+
+
+
+        <section id="mbti">
+            <h2>MBTI 性格分析</h2>
+            <div class="mbti-card">
+                <img src="jun_pic/MBTI.png" alt="MBTI 图标">
+                <h3>ENTP-A 辩论者</h3>
+                <p>
+                    ENTP-A的人被称为"辩论者"，他们是机智而大胆的，不怕说出不同意现状的观点。他们几乎从不畏惧
+                    表达对于任何事情或任何人的不同意。这种个性类型的人热衷于唇枪舌剑–如果对话转向有争议的领域，
+                    那就更好了。他们是好奇且思维灵活的人，他们无法抵挡智力挑战。他们往往大胆且富有创造力，具有
+                    极高的思维敏捷性，能够解构和重建观念
+                </p>
+                <p>
+                    <strong>外向 (E):</strong> 54%    你可能会通过社交互动获得能量，并倾向于公开表达你的热情和兴奋。<br>
+                    <strong>直觉 (N):</strong> 52%    你可能更倾向于关注可能性和未来的发展，而不是现在的事实和细节。<br>
+                    <strong>思考 (T):</strong> 69%    你在做决定时可能更多地依赖逻辑和客观分析，而不是个人价值观或情感。<br>
+                    <strong>知觉 (P):</strong> 71%    你可能更喜欢灵活和自由的生活方式，而不是有计划和组织的生活。<br>
+                    <strong>坚决型 (A):</strong> 53%  你可能是自信的、平和的、能抵抗压力的。
+                </p>
+                <a href="https://mbti.ycyuans.cn/#/home?source=ycyuans3&bd_vid=8488701860942752778" class="cta-button" target="_blank">进行 MBTI 测试</a>
+            </div>
+        </section>
+
+
+
+        <section id="papers">
+            <h2>小君的作品</h2>
+            <ul>
+                <li><a href="jun_pic/YihuiLu.pdf" target="_blank">《2024.09.30 发表了第一篇期刊论文 第一次在谷歌学术也可以搜到自己名字》</a> <<<<点击查看论文 </li>
+                <br>
+                <li><a href="example.pdf" target="_blank"></a>.....敬请期待更多作品</li>
+            </ul>
+        </section>
+
+        <section id="family">
+            <h2>小君熊和小光</h2>
+            <div class="family-content">
+                <div class="family-info">
+                    <p>
+                       我们两只是最好的小熊朋友, 第一名的小熊朋友
+                    </p>
+                    <p>
+                        
+                    </p>
+                    <a href="love.html" class="cta-button">前往小君和小光的主页</a>
+                </div>
+                <div class="family-photos">
+                    <img src="jun_pic/3000.jpg" alt="小君和小光甜蜜照片">
+                    <img src="jun_pic/3001.jpg" alt="小君和小光温馨瞬间">
+                    <img src="jun_pic/3003.jpg" alt="小君和小光幸福合影">
+                    <img src="jun_pic/3004.jpg" alt="小君和小光浪漫照片">
+                </div>
+            </div>
+        </section>
+        
+        <section id="baby" class="baby">
+            <h2>小熊宝宝的成长记录</h2>
+            <div class="baby-content">
+                <p>
+                    一只可可爱爱的熊熊小宝宝
+                </p>
+                <a href="baby.html" class="cta-button">前往小熊宝宝的主页</a>
+                <div class="baby-photos">
+                    <img src="jun_pic/5001.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5002.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5005.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5010.jpg" alt="小熊宝宝照片">
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>©2024 小君熊个人主页</p>
+        <p>Powered by HTML & CSS</p>
+    </footer>
+
+    <script>
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('Particles.js config loaded');
+        });
+    </script>
+</body>
+</html>

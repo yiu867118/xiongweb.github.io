@@ -506,7 +506,7 @@ section ul li a .placeholder {
 
 /* Family 样式整体优化 */
 #family {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.781), rgba(152, 187, 219, 0.95));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.781), rgba(152, 187, 219, 0.95));
   padding: 60px;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
@@ -522,8 +522,9 @@ section ul li a .placeholder {
 
 .family-content {
   flex: 1 1 1%; /* 最小宽度 40%，可扩展 */
-  text-align: left;
+  text-align: center;
   animation: fadeIn 1.5s ease-in-out;
+  max-width: 300px; /* 限制宽度 */
 }
 
 .family-content p {
@@ -649,21 +650,7 @@ section ul li a .placeholder {
   }
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .family-container {
-    flex-wrap: wrap; /* 窄屏时改为换行 */
-    justify-content: center; /* 居中对齐 */
-  }
 
-  .family-content, .sliders-container {
-    flex: 1 1 100%; /* 占满宽度 */
-  }
-
-  .family-slider {
-    height: 250px; /* 缩小高度以适应屏幕 */
-  }
-}
 
 
 
@@ -688,6 +675,7 @@ section ul li a .placeholder {
   justify-content: space-evenly; /* 左对齐图片 */
   flex-wrap: nowrap; /* 不换行，保持横向排列 */
   gap: 15px; /* 调整间距，使得内容与图片更紧凑 */
+  flex: 1 1 80%; /* 最小宽度 60%，可扩展 */
 }
 
 /* 标题样式 */
@@ -717,6 +705,7 @@ section ul li a .placeholder {
     line-height: 1.6;
     text-align: left; /* 调整为左对齐 */
     color: #444;
+    max-width: 300px; /* 限制宽度 */
     
 }
 
@@ -765,6 +754,122 @@ section ul li a .placeholder {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 10px rgba(116, 235, 213, 0.7);
     border-color: #74ebd5;
 }
+
+
+
+
+
+/* 熊家品牌模块 */
+#brand {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(152, 187, 219, 0.95));
+    padding: 60px 20px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+}
+
+/* Flex 布局容器 */
+.brand-container {
+    display: flex;
+    flex-wrap: nowrap; /* 保持横向排列 */
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px; /* 增加间距 */
+    margin: 0 auto;
+}
+
+/* 文本和按钮 */
+.brand-content {
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+    max-width: 300px; /* 限制宽度 */
+}
+
+.brand-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: #ff6f61;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+    background: #ff4d40;
+    transform: scale(1.08);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 图片展示 */
+.brand-gallery {
+    flex: 2; /* 更宽的图片区域 */
+    display: grid; /* 使用网格布局 */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 响应式网格 */
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 100%; /* 自适应宽度 */
+    max-height: 300px;
+    aspect-ratio: 1; /* 保持正方形 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 15px;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 
 
 
@@ -883,7 +988,7 @@ section ul li a .placeholder {
             <a href="#papers">作品</a>
             <a href="#family">熊两只</a>
             <a href="#baby">熊宝宝</a>
-            <a href="homepage.html">熊家主页</a>
+            <a href="#brand">熊家</a>
         </nav>
     </header>
 
@@ -966,7 +1071,7 @@ section ul li a .placeholder {
               <!-- 文本和按钮 -->
               <div class="family-content">
                 <p>小君和小光是两只好朋友熊熊</p>
-                <a href="baby.html" class="cta-button">前往小君和小光的主页</a>
+                <a href="love.html" class="cta-button">前往小君和小光的主页</a>
               </div>
               <!-- 轮播模块容器 -->
               <div class="sliders-container">
@@ -1023,7 +1128,43 @@ section ul li a .placeholder {
                 </div>
             </div>
         </section>
+         
+        <section id="brand" class="brand">
+            <h2>熊熊一家</h2>
+            <div class="brand-container">
+                <!-- 文本和按钮 -->
+                <div class="brand-content">
+                    <p>我们是小熊熊一家</p>
+                    <a href="homepage.html" class="cta-button">前往熊家主页</a>
+                </div>
+                <!-- 图片展示模块 -->
+                <div class="brand-gallery">
+                    <div class="gallery-item">
+                        <img src="jun_pic/8001.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>熊宝宝</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="jun_pic/8002.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>专注</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="jun_pic/8003.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>睡呼呼</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
+
+
+
+
         
     </main>
 
