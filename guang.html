@@ -164,7 +164,10 @@
             animation: fadeInSlide 4s ease-in-out;
         }
         .card {
-            width: 320px;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            object-fit: cover;
             background-color: white;
             border-radius: 15px;
             overflow: hidden;
@@ -265,6 +268,167 @@
         }
 
 
+
+
+
+/* MBTI 区块优化 */
+/* 为 MBTI 模块添加动画 */
+#mbti {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 5%;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeInSlide 4s ease-in-out; /* 添加动画 */
+    opacity: 0; /* 初始透明度为 0 */
+    transform: translateY(20px); /* 初始位置向下偏移 */
+    animation-fill-mode: forwards; /* 动画完成后保持最终状态 */
+}
+
+/* 单独为 MBTI 模块定义的动画（与 fadeInSlide 类似） */
+@keyframes fadeInSlideMBTI {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#mbti .mbti-card, #mbti .mbti-content {
+    animation: fadeInSlideMBTI 2s ease-in-out; /* 子元素也应用动画 */
+    animation-delay: 0.5s; /* 延迟显示，避免重叠 */
+}
+
+#mbti h2 {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+    width: 100%;
+    text-align: center;
+}
+
+#mbti h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #141414e1, #2221209f);
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
+
+#mbti .mbti-card {
+    flex: 1 1 35%; /* 保证宽度一致 */
+    background: linear-gradient(45deg, #46464636, #000000a8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mbti .mbti-content {
+    flex: 1 1 55%; /* 保证宽度一致 */
+    background: linear-gradient(45deg, #46464636, #000000a8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mbti .mbti-card:hover, #mbti .mbti-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+#mbti .mbti-card img {
+    width: 95%; /* 限制最大宽度 */
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(196, 196, 196, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mbti .mbti-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .mbti-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#mbti .mbti-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #ffffff;
+    text-shadow: 2px 2px 3px rgb(0, 0, 0);
+    margin-bottom: 15px;
+    text-align: justify; /* 更好地排版文字 */
+}
+
+#mbti .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #252525, #393c3f);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+#mbti .cta-button:hover {
+    background: linear-gradient(135deg, #1e1e1f, #1b1d1f);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+#mbti .cta-button:hover::before {
+    width: 100%;
+}
+
+
+
     
     </style>
 </head>
@@ -279,6 +443,7 @@
                     <div>
                         <a href="homepage.html">熊家主页</a>
                         <a href="#about">小光动态</a>
+                        <a href="#mbti">MBTI</a>
                         <!-- <a href="#contact">小光相册(暂未开放)</a> -->
                     </div>
                 </nav>
@@ -325,6 +490,33 @@
                     </div>
                 </div>
             </section>
+
+            <section id="mbti">
+                <div class="background-overlay"></div>
+                <h2>小光的 MBTI</h2>
+                <div class="mbti-card">
+                    <img src="guang_pic/mbti.png" alt="MBTI 图标">
+                </div>a
+            
+                <div class="mbti-content">
+                    <h3>INFJ-T 提倡者</h3>
+                    <p>
+                        也许是因为他们的性格类型很不常见，倡导者往往会有一种与大多数人不同的感觉--无论他们是否意识到。由于他们丰富的内心生活和寻找生活目标的深沉而持久的渴望，他们并不总是与周围的人融为一体。
+                    </p>
+                    <p>
+                        <strong>内向 (I):</strong> 74% 偏好独处和深度思考，与外部世界互动时更关注质量而非数量。<br>
+                        <strong>直觉 (N):</strong> 59% 倾向于关注可能性和未来的发展，而不是现在的事实和细节。<br>
+                        <strong>感受 (F):</strong> 59% 以情感为中心，重视人际关系，善于共情，容易理解他人情绪。<br>
+                        <strong>评判 (J):</strong> 55% 倾向于组织和规划，喜欢明确的方向和稳定的行动框架。<br>
+                        <strong>坚决型 (A):</strong> 56% 情绪敏感，可能在自信和犹疑之间切换，但也能通过自省成长。
+                    </p>
+                    <a href="https://mbti.ycyuans.cn/#/home?source=ycyuans3&bd_vid=8488701860942752778" class="cta-button" target="_blank">进行 MBTI 测试</a>
+                </div>
+            </section>
+            
+            
+            
+
             <!-- 页脚 -->
             <footer>
                 <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(28, 28, 28, 0.187); border-top: 1px solid #ddd; margin-top: 40px;">
