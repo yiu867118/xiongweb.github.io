@@ -349,97 +349,114 @@
 
 
 
-/* === 小小熊简介模块样式 === */
+/* === 左右布局优化 === */
 #background {
-    padding: 50px 20px;
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    margin: 60px auto;
-    flex-direction: column; /* 改为垂直布局 */
-    animation: fadeIn 1.5s ease;
+    padding: 80px 30px;
+    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url(love_pic/n.jpg) center/cover no-repeat;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 30px;
+    animation: fadeIn 1.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#background:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
 #background h2 {
-    font-size: 28px;
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
-    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-/* 图片及按钮容器样式 */
+/* 图片及按钮容器调整 */
 .intro-content {
     display: flex;
+    flex-wrap: nowrap; /* 避免换行 */
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
-    align-items: flex-start; /* 左右对齐调整 */
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .intro-left {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 居中对齐 */
-    gap: 10px; /* 图像和按钮的间距 */
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 150px; /* 限制宽度占比 */
 }
 
 .intro-image {
-    width: 200px;
-    height: auto;
+    width: 200px; /* 减小头像尺寸 */
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .intro-image:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .gallery-button {
-    display: block; /* 转为块级元素，独占一行 */
-    width: auto; /* 按钮宽度根据内容自适应 */
-    text-align: center; /* 文本居中 */
-    margin: 0; /* 去掉默认 margin-top */
-    padding: 10px 20px;
-    background: #0078d7;
-    color: #fff;
-    border-radius: 5px;
+    display: inline-block;
     font-size: 16px;
+    font-weight: 500;
+    padding: 8px 20px;
+    background: linear-gradient(45deg, #0078d7, #005a99);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
     text-decoration: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .gallery-button:hover {
-    background: #005a99;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, #005a99, #003f6e);
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-
-/* 简介文字样式 */
+/* 简介文字区块扩展 */
 .intro-text {
-    flex: 1;
+    flex: 1; /* 自动扩展占据剩余空间 */
     font-size: 20px;
     line-height: 1.8;
-    color: #0c0c0c;
+    color: #222;
     text-align: justify;
-
+    border-left: 4px solid #0078d7;
+    padding-left: 20px;
+    position: relative;
 }
+
+.intro-text:before {
+    content: '“';
+    font-size: 50px;
+    color: #0078d7;
+    position: absolute;
+    top: -20px;
+    left: -40px;
+}
+
+/* .intro-text p:last-child {
+
+} */
 
 /* 动画 */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
 
 
 
@@ -551,7 +568,7 @@
         <h1>熊宝宝的童趣世界</h1>
         <p>一只小熊宝宝的熊熊日常</p>
         <nav id="navbar">
-            <a href="#gallery">小小熊简介</a>
+            <!-- <a href="#gallery">小小熊简介</a> -->
             <!-- <a href="#blog">熊熊趣事</a> -->
             <a href="baby_pic.html">熊宝宝影像集</a>
             <a href="homepage.html">熊家主页</a>
@@ -596,20 +613,25 @@
             <div id="dots" class="carousel-dots"></div>
         </div>
     </section>
-    
-    <section id="background" class="intro-section">
-        <h2>小小熊简介</h2>
+     <br>
+     <br>
+    <section id="background" class="intro-section" aria-labelledby="intro-title">
+        <h2 id="intro-title">小小熊简介</h2>
         <div class="intro-content">
-            <div class="intro-left">
-                <img src="baby_pic/627.jpg" alt="小小熊" class="intro-image">
-                <a class="gallery-button" href="baby_pic.html">点击进入小熊宝宝影像集</a>
-            </div>
-            <div class="intro-text">
+            <figure class="intro-left">
+                <img src="baby_pic/627.jpg" alt="可爱的小小熊" class="intro-image" aria-label="小小熊的照片">
+                <figcaption>
+                    <a class="gallery-button" href="baby_pic.html" aria-label="进入小熊宝宝影像集">点击进入小熊宝宝影像集</a>
+                </figcaption>
+            </figure>
+            <blockquote class="intro-text">
                 <p>我是小小熊，2023年12月诞生于韩国京畿道光明市。那一天，首尔地区迎来了四十多年未见的大雪，整个世界都被洁白的雪花覆盖，而我就在这片银装素裹的世界中，悄悄来到这个美丽的世界。</p>
                 <p>作为熊家最小的一员，我是一只活泼又调皮的小熊，每天都在家里大冒险，探索每个角落，寻找属于我的小惊喜。 每一天，我的世界都是充满了新奇和欢笑的地方。</p>
                 <p>虽然爸爸妈妈常常外出不带我，但我在家里依然乐趣无穷。我知道，虽然我还很小，但我会慢慢长大，变得更加勇敢，去探索更多未知的地方。而现在，我就像一个小小探险家，每天都在家里和外面的世界之间穿梭，带着无限的好奇和快乐，等待着属于我的更多精彩时刻！</p>
-            </div>
+            </blockquote>
         </div>
+    </section>
+    
     </section>
     
     

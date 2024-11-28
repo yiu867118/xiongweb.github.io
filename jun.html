@@ -151,7 +151,7 @@ section {
     width: 90%;
     margin: 0 auto;
     padding: 40px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.781), rgba(152, 187, 219, 0.95));
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
     border-radius: 20px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.5);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -215,7 +215,7 @@ section ul li a {
     display: block;
     padding: 20px;
     border-radius: 15px;
-    background: linear-gradient(135deg, #e0ebfa, #e9f1f8);
+    background: linear-gradient(135deg, #ffffffe0, #ebf0f5);
     text-decoration: none;
     color: #333;
     font-weight: 500;
@@ -226,7 +226,7 @@ section ul li a {
 }
 
 section ul li a:hover {
-    background: linear-gradient(135deg, #b2d2df, #c8dae6);
+    background: linear-gradient(135deg, #ffffff73, #ffffff);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
 }
@@ -293,220 +293,265 @@ section ul li a .placeholder {
 
 
 
-    /* 小君简介模块优化 */
-    #background {
-        max-width: 80%;
-        width: 90%;
-        margin: auto;
-        padding: 50px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(152, 187, 219, 0.95));
-        border-radius: 20px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        position: relative;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+   /* 自我介绍 */
+#background {
+    padding: 60px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    animation: fadeIn 1.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景动态微粒效果 */
+#background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://cdn.pixabay.com/photo/2017/02/22/00/41/particles-2089967_960_720.png') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+    animation: glowPulse 5s infinite;
+}
+
+/* 标题样式 */
+#background h2 {
+    font-size: 24px;
+    color: #333;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 内容容器样式 */
+.intro-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+/* 左侧图像容器 */
+.intro-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.intro-left:hover {
+    transform: translateY(-5px);
+}
+
+/* 图像样式 */
+.intro-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.intro-image:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 文字内容样式 */
+.intro-text {
+    flex: 1;
+    font-size: 22px;
+    line-height: 1.8;
+    color: #0c0c0c;
+    text-align: justify;
+    padding: 10px 20px;
+    border-left: 4px solid rgba(0, 120, 215, 0.8);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-text:hover {
+    background: rgba(196, 228, 243, 0.9);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
-
-    #background:hover {
-        transform: scale(1.01);
-        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+}
 
-    #background h2 {
-        font-size: 22px;
-        color: #333;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        position: relative;
-        animation: fadeIn 1s ease-out;
+@keyframes glowPulse {
+    0%, 100% {
+        transform: scale(1.05);
     }
-
-    #background h2::after {
-        content: '';
-        display: block;
-        width: 80px;
-        height: 4px;
-        background: #ff6f61;
-        margin: 10px auto 0;
-        border-radius: 2px;
+    50% {
+        transform: scale(1.1);
     }
-
-    #background p {
-        font-size: 18px;
-        line-height: 1.8;
-        color: #444;
-        margin-bottom: 20px;
-        animation: fadeIn 1.2s ease-out;
-        text-align: justify;
-        text-indent: 2em;
-    }
-
-    #background p:last-child {
-        color: #333;
-        font-size: 20px;
-    }
-
-    #background::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 120%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 70%);
-        z-index: -1;
-        animation: glowPulse 10s infinite;
-        pointer-events: none;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes glowPulse {
-        0%, 100% {
-            transform: scale(1.05) translate(-50%, -50%);
-        }
-        50% {
-            transform: scale(1.1) translate(-50%, -50%);
-        }
-    }
-
-    /* 添加动态微粒效果 */
-    #background::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('https://cdn.pixabay.com/photo/2017/02/22/00/41/particles-2089967_960_720.png') center/cover no-repeat;
-        opacity: 0.5;
-        z-index: -1;
-    }
+}
 
 
 
 
-    /* MBTI 区块优化 */
-    #mbti {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(152, 187, 219, 0.774));
-        color: #333;
-        padding: 50px;
-        border-radius: 20px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    }
 
-    #mbti h2 {
-        font-size: 22px;
-        text-transform: uppercase;
-        position: relative;
-        margin-bottom: 20px;
-        color: #020202;
-    }
+/* MBTI 区块优化 */
+#mbti {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; /* 保持左右内容对齐高度 */
+    justify-content: space-between; /* 两侧均匀分布 */
+    gap: 40px; /* 加大间距，增加留白感 */
+    padding: 60px 5%;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
 
-    #mbti h2::after {
-        content: '';
-        display: block;
-        width: 60px;
-        height: 4px;
-        background: #ff6f61;
-        margin: 10px auto 0;
-    }
+#mbti h2 {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 30px;
+    color: #1c1c1c;
+    width: 100%;
+    text-align: center;
+}
 
-    #mbti .mbti-card {
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 20px;
-        padding: 30px;
-        max-width: 70%;
-        width: 100%;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
+#mbti h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #ff6f61, #fdbb2d);
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
 
-    #mbti .mbti-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
+#mbti .mbti-card {
+    flex: 1 1 35%; /* 保证宽度一致 */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mbti .mbti-content {
+    flex: 1 1 55%; /* 保证宽度一致 */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-    #mbti .mbti-card img {
-        max-width: 400px;
-        height: auto;
-        border-radius: 10%;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 15px rgba(240, 238, 238, 0.1);
-        border: 3px solid #c4c4c4;
-    }
+#mbti .mbti-card:hover, #mbti .mbti-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
 
-    #mbti .mbti-card h3 {
-        font-size: 18px;
-        color: #333;
-        margin-bottom: 10px;
-    }
+#mbti .mbti-card img {
+    width: 95%; /* 限制最大宽度 */
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(196, 196, 196, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    #mbti .mbti-card p {
-        font-size: 16px;
-        line-height: 2;
-        color: #666;
-        margin-bottom: 20px;
-        text-align: left;
-    }
+#mbti .mbti-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
 
-    #mbti .cta-button {
-        display: inline-block;
-        padding: 10px 25px;
-        background: #61cdff;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 30px;
-        transition: background 0.3s ease, transform 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
+#mbti .mbti-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2a2a2a;
+    margin-bottom: 15px;
+    text-align: left;
+}
 
-    #mbti .cta-button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.3);
-        transition: width 0.4s ease;
-        z-index: 1;
-    }
+#mbti .mbti-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify; /* 更好地排版文字 */
+}
 
-    #mbti .cta-button:hover::before {
-        width: 100%;
-    }
+#mbti .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #61cdff, #3bb2ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
 
-    #mbti .cta-button:hover {
-        transform: scale(1.01);
-    }
+#mbti .cta-button:hover {
+    background: linear-gradient(135deg, #3bb2ff, #61cdff);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+#mbti .cta-button:hover::before {
+    width: 100%;
+}
+
 
 
 /* Family 样式整体优化 */
 #family {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.781), rgba(152, 187, 219, 0.95));
+  background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
   padding: 60px;
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
@@ -658,7 +703,7 @@ section ul li a .placeholder {
 
 /* Baby 模块整体样式 */
 .baby {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.781), rgba(152, 187, 219, 0.95));
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
     color: #333;
     padding: 20px;
     border-radius: 25px;
@@ -761,7 +806,7 @@ section ul li a .placeholder {
 
 /* 熊家品牌模块 */
 #brand {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(152, 187, 219, 0.95));
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
     padding: 60px 20px;
     border-radius: 25px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -993,10 +1038,20 @@ section ul li a .placeholder {
     </header>
 
     <main>
-        <section id="background">
+        <section id="background" class="intro-section">
             <h2>小君简介</h2>
-            <p>我是小君熊，熊家排行第二，但聪明才智熊家第一！别被我软萌可爱的外表骗了，其实我是个隐藏的“大脑袋”——智慧的象征。我兴趣广泛，从研究如何神不知鬼不觉地偷吃蛋糕，到挑战高难度的“上天取炸弹”任务，样样精通，可谓无所不能。</p>
+            <div class="intro-content">
+                <div class="intro-left">
+                    <img src="jun_pic/intro2.jpg" alt="小君" class="intro-image">
+                    <!-- <a class="gallery-button" href="baby_pic.html">点击进入小熊宝宝影像集</a> -->
+                </div>
+                <div class="intro-text">
+                    <p>我是小君熊，熊家排行第二，但聪明才智熊家第一！别被我软萌可爱的外表骗了，其实我是个隐藏的“大脑袋”——智慧的象征。
+                      我兴趣广泛，从研究如何神不知鬼不觉地偷吃蛋糕，到挑战高难度的“上天取炸弹”任务，样样精通，可谓无所不能。</p>
+                </div>
+            </div>
         </section>
+        
 
         <section id="photos" class="photos">
             <h2>小君照片墙</h2>
@@ -1016,21 +1071,25 @@ section ul li a .placeholder {
                 <img src="jun_pic/0056.jpg" alt="小君小时候的照片1">
                 <img src="jun_pic/0058.jpg" alt="小君小时候的照片1">
                 <img src="jun_pic/0060.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0062.jpg" alt="小君小时候的照片1">
             </div>
         </section>
 
 
-
+        <br>
+        <br>
         <section id="mbti">
             <h2>MBTI 性格分析</h2>
             <div class="mbti-card">
                 <img src="jun_pic/MBTI.png" alt="MBTI 图标">
+            </div>
+            <div class="mbti-content">
                 <h3>ENTP-A 辩论者</h3>
                 <p>
                     ENTP-A的人被称为"辩论者"，他们是机智而大胆的，不怕说出不同意现状的观点。他们几乎从不畏惧
                     表达对于任何事情或任何人的不同意。这种个性类型的人热衷于唇枪舌剑–如果对话转向有争议的领域，
                     那就更好了。他们是好奇且思维灵活的人，他们无法抵挡智力挑战。他们往往大胆且富有创造力，具有
-                    极高的思维敏捷性，能够解构和重建观念
+                    极高的思维敏捷性，能够解构和重建观念。
                 </p>
                 <p>
                     <strong>外向 (E):</strong> 54%    你可能会通过社交互动获得能量，并倾向于公开表达你的热情和兴奋。<br>
@@ -1042,6 +1101,7 @@ section ul li a .placeholder {
                 <a href="https://mbti.ycyuans.cn/#/home?source=ycyuans3&bd_vid=8488701860942752778" class="cta-button" target="_blank">进行 MBTI 测试</a>
             </div>
         </section>
+        
 
 
 
