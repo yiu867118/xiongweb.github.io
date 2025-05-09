@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>光的主页 - 精致未来体验</title>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'), 
+                 url('STXINWEI.TTF') format('truetype');
+        }
+        /* 全局样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', 'Montserrat', sans-serif;
+            color: #ffffff;
+            background-color: #212121;
+            background-position: center;
+            background-size: cover;
+            animation: fadeBg 20s ease-in-out infinite;
+            overflow-x: hidden;
+        }
+        #con {
+            position: relative;
+            max-width: 99.8%;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+            padding: 0;
+        }
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(guang_pic/501.jpg);
+            background-size: cover;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        /* 增强背景动态效果 */
+        header {
+            animation: backgroundShift 15s infinite ease-in-out;
+            height: 100vh;
+            width: 100%;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            text-align: center;
+            z-index: 1;
+        }
+        @keyframes backgroundShift {
+            0%, 100% { background-image: url('guang_pic/501.jpg'); }
+            50% { background-image: url('guang_pic/502.jpg'); }
+        }
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* 精致粒子效果 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+        }
+        /* 优化滚动体验 */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* 导航栏 */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            padding: 15px;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            font-size: 20px;
+            margin: 0 20px;
+            padding: 10px;
+            transition: all 0.4s ease;
+        }
+        nav a:hover {
+            color: #f0c14b;
+            text-shadow: 0px 0px 10px rgba(240, 193, 75, 0.6);
+        }
+        /* Header 内容样式 */
+        header h1 {
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.9);
+            animation: fadeInSlide 2s ease-in-out;
+        }
+        header p {
+            font-size: 20px;
+            color: #ddd;
+            margin: 20px auto;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.8);
+            animation: fadeInSlide 3s ease-in-out;
+        }
+        /* 向下滑动按钮动画 */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        header .cta-button {
+            margin-top: 20px;
+            padding: 15px 20px;
+            font-size: 12px;
+            color: #101010;
+            background-color: #ffffff81;
+            border: none;
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            animation: bounce 2s infinite;
+        }
+        header .cta-button:hover {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+            animation: none;
+        }
+        /* 卡片展示 */
+        .cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 80px 20px;
+            animation: fadeInSlide 4s ease-in-out;
+        }
+        .card {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            object-fit: cover;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+            background-color: #101010;
+            color: #ffffff;
+        }
+        .card-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .card-content p {
+            font-size: 18px;
+            color: #bbb;
+        }
+        /* 页脚样式 */
+        footer {
+            background-color: #101010;
+            color: #bbb;
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInSlide 5s ease-in-out;
+        }
+        footer a {
+            color: #bbb;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+        footer a:hover {
+            color: #f0c14b;
+            border-bottom: 2px solid #f0c14b;
+        }
+
+
+
+
+        .dropdown {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 200; /* 确保 z-index 足够高以覆盖其他元素 */
+        }
+
+        #login {
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+            border-left: 1px;
+            border-right: 1px;
+            cursor: pointer;
+            font-size: 18px; /* 增加字体大小，便于视觉优化 */
+            padding: 15px 15px; /* 增加一些内边距，增强可点击区域 */
+            background-color: rgba(255, 255, 255, 0); /* 添加背景色，突出显示 */
+            border-radius: 8px; /* 圆角优化 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #login:hover {
+            background-color: #fcfcfc; /* 悬停时背景色变化 */
+            color: #000; /* 悬停时文字颜色变化 */
+        }
+
+        /* 调整下拉菜单样式 */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: linear-gradient(45deg, #d5ecfb, #a4a4a58a);
+            min-width: 300px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 300;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+
+
+
+/* MBTI 区块优化 */
+/* 为 MBTI 模块添加动画 */
+#mbti {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 60px 5%;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    animation: fadeInSlide 4s ease-in-out; /* 添加动画 */
+    opacity: 0; /* 初始透明度为 0 */
+    transform: translateY(20px); /* 初始位置向下偏移 */
+    animation-fill-mode: forwards; /* 动画完成后保持最终状态 */
+}
+
+/* 单独为 MBTI 模块定义的动画（与 fadeInSlide 类似） */
+@keyframes fadeInSlideMBTI {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#mbti .mbti-card, #mbti .mbti-content {
+    animation: fadeInSlideMBTI 2s ease-in-out; /* 子元素也应用动画 */
+    animation-delay: 0.5s; /* 延迟显示，避免重叠 */
+}
+
+#mbti h2 {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+    width: 100%;
+    text-align: center;
+}
+
+#mbti h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #141414e1, #2221209f);
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
+
+#mbti .mbti-card {
+    flex: 1 1 35%; /* 保证宽度一致 */
+    background: linear-gradient(45deg, #46464636, #000000a8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mbti .mbti-content {
+    flex: 1 1 55%; /* 保证宽度一致 */
+    background: linear-gradient(45deg, #46464636, #000000a8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mbti .mbti-card:hover, #mbti .mbti-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+#mbti .mbti-card img {
+    width: 95%; /* 限制最大宽度 */
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(196, 196, 196, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mbti .mbti-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .mbti-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgb(0, 0, 0);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#mbti .mbti-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #ffffff;
+    text-shadow: 2px 2px 3px rgb(0, 0, 0);
+    margin-bottom: 15px;
+    text-align: justify; /* 更好地排版文字 */
+}
+
+#mbti .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #252525, #393c3f);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+#mbti .cta-button:hover {
+    background: linear-gradient(135deg, #1e1e1f, #1b1d1f);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+#mbti .cta-button:hover::before {
+    width: 100%;
+}
+
+
+
+    
+    </style>
+</head>
+<body>
+    <div id="con">
+        <!-- 粒子效果背景 -->
+        <div id="particles-js"></div>
+        <!-- Hero 区块 -->
+            <header>
+                <!-- 导航栏 -->
+                <nav>
+                    <div>
+                        <a href="homepage.html">熊家主页</a>
+                        <!-- <a href="#about">小光动态</a> -->
+                        <a href="#mbti">MBTI</a>
+                        <!-- <a href="#contact">小光相册(暂未开放)</a> -->
+                    </div>
+                </nav>
+                <div class="dropdown">
+                    <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                    <div class="dropdown-content" id="vip-dropdown">
+                        <p id="vip-message"></p>
+                    </div>
+                </div>
+                <div>
+                    <h1>质疑小光，理解小光，成为小光</h1>
+                    <p>探索光的力量，开启极致体验</p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <button class="cta-button" id="scroll-down">向下滑动以继续</button>
+                </div>
+            </header>
+
+            <!-- 卡片展示 -->
+            <!-- <section class="cards" id="about">
+                <div class="card">
+                    <img src="guang_pic/9001.jpg" alt="活动1">
+                    <div class="card-content">
+                        <h3>思索的小光</h3>
+                        <p>猜猜小光在思索什么呢......</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="guang_pic/9002.jpg" alt="活动2">
+                    <div class="card-content">
+                        <h3>小光新发型</h3>
+                        <p>小光发型之釜山</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="guang_pic/9003.jpg" alt="活动3">
+                    <div class="card-content">
+                        <h3>新钱包</h3>
+                        <p>小光给小君买的新钱包</p>
+                    </div>
+                </div>
+            </section> -->
+
+            <section id="mbti">
+                <div class="background-overlay"></div>
+                <h2>小光的 MBTI</h2>
+                <div class="mbti-card">
+                    <img src="guang_pic/mbti.png" alt="MBTI 图标">
+                </div>a
+            
+                <div class="mbti-content">
+                    <h3>INFJ-T 提倡者</h3>
+                    <p>
+                        也许是因为他们的性格类型很不常见，倡导者往往会有一种与大多数人不同的感觉--无论他们是否意识到。由于他们丰富的内心生活和寻找生活目标的深沉而持久的渴望，他们并不总是与周围的人融为一体。
+                    </p>
+                    <p>
+                        <strong>内向 (I):</strong> 74% 偏好独处和深度思考，与外部世界互动时更关注质量而非数量。<br>
+                        <strong>直觉 (N):</strong> 59% 倾向于关注可能性和未来的发展，而不是现在的事实和细节。<br>
+                        <strong>感受 (F):</strong> 59% 以情感为中心，重视人际关系，善于共情，容易理解他人情绪。<br>
+                        <strong>评判 (J):</strong> 55% 倾向于组织和规划，喜欢明确的方向和稳定的行动框架。<br>
+                        <strong>坚决型 (A):</strong> 56% 情绪敏感，可能在自信和犹疑之间切换，但也能通过自省成长。
+                    </p>
+                    <a href="https://mbti.ycyuans.cn/#/home?source=ycyuans3&bd_vid=8488701860942752778" class="cta-button" target="_blank">进行 MBTI 测试</a>
+                </div>
+            </section>
+            
+            
+            
+
+            <!-- 页脚 -->
+            <footer>
+                <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(28, 28, 28, 0.187); border-top: 1px solid #ddd; margin-top: 40px;">
+                    <p style="font-size: 19px; color: #ffffff; margin: 0;">
+                        网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+                    </p>
+                    <p style="font-size: 14px; color: #ffffff; margin-top: 10px;">
+                        © 2024 熊家 All Rights Reserved.
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <!-- 粒子效果 JS 引用 -->
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script>
+            document.getElementById('scroll-down').addEventListener('click', function() {
+                const targetSection = document.getElementById('about');
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+    
+            particlesJS.load('particles-js', 'particles.json', function() {
+                console.log('particles loaded');
+            });
+    
+            function scrollToSection() {
+                document.querySelector('#about').scrollIntoView({ behavior: 'smooth' });
+            }
+
+
+            // 登录
+            document.addEventListener('DOMContentLoaded', function () {
+                const username = localStorage.getItem('username');
+                const loginElement = document.getElementById('login');
+                const vipDropdown = document.getElementById('vip-dropdown');
+                const vipMessage = document.getElementById('vip-message');
+                
+                if (username) {
+                    loginElement.textContent = username;
+                    loginElement.href = '#';
+                    vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+                } else {
+                    loginElement.textContent = "Login";
+                    loginElement.href = "login.html";  // 设置未登录时的链接
+                    vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+                }
+
+                // 点击登录显示下拉菜单
+                loginElement.addEventListener('click', function (event) {
+                    if (!username) {
+                        // 如果未登录，直接跳转
+                        window.location.href = "login.html";
+                    } else {
+                        event.preventDefault(); // 防止链接跳转
+                        const isDisplayed = vipDropdown.style.display === 'block';
+                        vipDropdown.style.display = isDisplayed ? 'none' : 'block';
+                    }
+                });
+
+                // 点击下拉菜单外部隐藏下拉菜单
+                document.addEventListener('click', function (event) {
+                    if (!loginElement.contains(event.target) && !vipDropdown.contains(event.target)) {
+                        vipDropdown.style.display = 'none';
+                    }
+                });
+            });
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+                const pageUrl = window.location.href;
+                const username = localStorage.getItem('username') || null;
+
+                try {
+                    // 获取用户IP和地理位置
+                    const ipResponse = await fetch('https://ipapi.co/json/');
+                    if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                    const locationData = await ipResponse.json();
+                    console.log('locationData:', locationData); // 调试信息
+
+                    const city = locationData.city || '未知城市';
+                    const country = locationData.country_name || '未知国家';
+                    const region = locationData.region || '未知地区';
+
+                    // 使用服务器时间并转换为北京时间
+                    const getServerTime = async () => {
+                    const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                    if (!res.ok) throw new Error('获取服务器时间失败');
+                    const timeData = await res.json();
+                    return timeData.datetime;
+                    };
+
+                    const beijingTime = await getServerTime();
+
+                    // 记录访问详情
+                    const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                    const { createClient } = window.supabase;
+                    const supabase = createClient(supabaseUrl, supabaseKey);
+
+                    const { data, error } = await supabase
+                    .from('visits')
+                    .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                    if (error) {
+                    console.error('记录访问详情时出错:', error);
+                    } else {
+                    console.log('访问记录成功:', data);
+                    }
+                } catch (error) {
+                    console.error('获取用户位置时出错:', error.message);
+                }
+                });
+
+        </script>
+    </body>
+    </html>
+    

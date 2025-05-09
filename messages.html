@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊留言板</title>
+    <style>
+        font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family:'KaiTi' 'Helvetica Neue', sans-serif;
+            background-color: #eef2f3; /* Slightly lighter background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease-in-out;
+            color: #333;
+        }
+
+        .container {
+            position: relative;
+
+            width: 85%; /* Adjusted for larger screens */
+            max-height: auto;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque */
+            border-radius: 15px; /* Softer edges */
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+            overflow: hidden;
+            padding: 20px; /* More space for content */
+            animation: fadeIn 1s ease-out;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(love_pic/u.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 5px;
+            background-color: #2da75c;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+       .message {
+            background-color: #ffffff8f;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .message:hover {
+            background-color: #ecf9ec;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+       
+        /* Hide reply and view buttons initially */
+        .reply-button,
+        .view-replies-button {
+            display: none;
+            margin-top: 15px;
+        }
+
+        /* Show buttons only on hover */
+        .message:hover .reply-button,
+        .message:hover .view-replies-button {
+            display: inline-block;
+        }
+
+        /* Style for the reply section, hidden by default */
+        .reply-section {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-left: 4px solid #2da75c;
+            border-radius: 10px;
+        }
+
+        .reply-section.visible {
+            display: block;
+        }
+
+        .message small {
+            color: #888;
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+
+        .form-control {
+            width: 60%;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            background-color: #fafafa;
+            transition: border-color 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* More shadow for focus */
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #2da75c;
+            box-shadow: 0 0 15px rgba(45, 167, 92, 0.3);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #52adeace;
+            color: rgba(0, 0, 0, 0.504);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger button shadow */
+        }
+
+        .button:hover {
+            background-color: #195792;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger hover effect */
+        }
+
+        .view-replies-button {
+            position: absolute;
+            top: 10px;
+            right: 140px; /* 调整按钮的位置，增加两个按钮之间的间距 */
+            color: rgba(0, 0, 0, 0.751);
+        }
+
+
+
+        .reply-button {
+            position: absolute;
+            top: 10px;
+            right: 10px; /* 将按钮靠右 */
+            color: rgba(0, 0, 0, 0.751);
+        }
+
+
+        .reply-button:hover {
+            background-color: #0073e6;
+        }
+
+        .reply {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f7f7f7;
+            border-left: 4px solid #2da75c;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .reply:hover {
+            background-color: #eafaea;
+        }
+
+        #loading {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 300px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content p {
+            padding: 12px 16px;
+            color: #2c3e50;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .dropdown-content a {
+            color: #2980b9;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #3498db;
+        }
+
+        /* Animation for fadeIn */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
+        </header>
+
+        <h2>熊熊留言板</h2>
+        <div id="message-list"></div>
+        <div id="loading">加载中...</div>
+        <div id="post-section">
+            <textarea id="message-content" class="form-control" placeholder="写下你的留言..." maxlength="250"></textarea><br>
+            <small>最多250字</small>
+            <label><input type="checkbox" id="anonymous-checkbox"> 匿名留言</label>
+            <button  id="post-button" class="button">发布留言</button>
+        </div>
+    </div>
+    <script>
+        const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+            headers: {
+                apikey: supabaseKey,
+                Authorization: `Bearer ${supabaseKey}`
+            }
+        });
+
+
+            const checkLoginStatus = () => {
+                const username = localStorage.getItem('username');
+                return username ? true : false;
+            }
+
+            const loadMessages = async () => {
+                document.getElementById('loading').style.display = 'block';
+                try {
+                    const { data: messages, error } = await supabase
+                        .from('messages')
+                        .select('*')
+                        .order('created_at', { ascending: false });
+                    document.getElementById('loading').style.display = 'none';
+                    if (error) {
+                        console.error('Error fetching messages:', error.message);
+                        return;
+                    }
+                    if (messages.length === 0) {
+                        document.getElementById('message-list').innerHTML = '<p>暂时没有留言。</p>';
+                        return;
+                    }
+                    const messageList = document.getElementById('message-list');
+                    messageList.innerHTML = '';
+                    messages.forEach(message => {
+                        const messageElement = document.createElement('div');
+                        messageElement.className = 'message';
+                        const time = new Date(message.created_at).toLocaleString();
+                        messageElement.innerHTML = `<strong>${message.is_anonymous ? '匿名用户' : message.username}:</strong> ${message.content} <br><small class="small-text">${time}</small>`;
+
+                        // 添加查看回复按钮
+                        const viewRepliesButton = document.createElement('button');
+                        viewRepliesButton.textContent = '查看/隐藏回复';
+                        viewRepliesButton.className = 'button view-replies-button';
+                        viewRepliesButton.style.display = 'none';
+                        viewRepliesButton.onclick = () => toggleReplies(message.id, replySection);
+                        messageElement.appendChild(viewRepliesButton);
+
+                        // 添加回复按钮
+                        const replyButton = document.createElement('button');
+                        replyButton.textContent = '回复';
+                        replyButton.className = 'button reply-button';
+                        replyButton.style.display = 'none';
+                        replyButton.onclick = () => replyToMessage(message.id);
+                        messageElement.appendChild(replyButton);
+
+                        // 加载回复区域
+                        const replySection = document.createElement('div');
+                        replySection.className = 'reply';
+                        replySection.id = `replies-${message.id}`;
+                        replySection.style.display = 'none';
+                        messageElement.appendChild(replySection);
+
+                        // Hover时显示查看回复和回复按钮
+                        messageElement.addEventListener('mouseover', () => {
+                            viewRepliesButton.style.display = 'block';
+                            replyButton.style.display = 'block';
+                        });
+                        messageElement.addEventListener('mouseout', () => {
+                            viewRepliesButton.style.display = 'none';
+                            replyButton.style.display = 'none';
+                        });
+
+                        messageList.appendChild(messageElement);
+                    });
+                } catch (error) {
+                    console.error('Error loading messages:', error);
+                    document.getElementById('loading').style.display = 'none';
+                }
+            }
+
+            const toggleReplies = async (messageId, replySection) => {
+                if (replySection.style.display === 'block') {
+                    replySection.style.display = 'none';
+                } else {
+                    replySection.style.display = 'block';
+                    const { data: replies, error } = await supabase
+                        .from('replies')
+                        .select('*')            .eq('message_id', messageId)
+                        .order('created_at', { ascending: true });
+                    if (error) {
+                        console.error('Error loading replies:', error.message);
+                        return;
+                    }
+                    replySection.innerHTML = '';
+                    replies.forEach(reply => {
+                        const replyElement = document.createElement('div');
+                        replyElement.className = 'message';
+                        replyElement.style.backgroundColor = '#f9f9f9';
+                        replyElement.style.border = '1px solid #ddd';
+                        replyElement.style.marginTop = '5px';
+                        const time = new Date(reply.created_at).toLocaleString();
+                        replyElement.innerHTML = `<strong>${reply.username}:</strong> ${reply.content} <br><small>${time}</small>`;
+                        replySection.appendChild(replyElement);
+                    });
+                }
+            };
+
+            const postMessage = async () => {
+                const isAnonymous = document.getElementById('anonymous-checkbox').checked;
+                const content = document.getElementById('message-content').value;
+                if (!content.trim()) {
+                    alert("留言内容不能为空！");
+                    return;
+                }
+                let username = '匿名用户';
+                if (!checkLoginStatus()) {
+                    const confirmAnonymous = confirm("你未登录，是否继续以未登录状态发布评论？点击取消则转到登录页面。");
+                    if (!confirmAnonymous) {
+                        window.location.href = 'login_messages.html';
+                        return;
+                    }
+                    if (!isAnonymous) {
+                        username = prompt("请输入您的名字（落款）：");
+                        if (!username) {
+                            alert("请输入有效的名字或选择匿名留言！");
+                            return;
+                        }
+                    }
+                } else {
+                    username = isAnonymous ? '匿名' : localStorage.getItem('username');
+                }
+                const { data, error } = await supabase
+                    .from('messages')
+                    .insert([{ username, content, is_anonymous: isAnonymous }]);
+                if (error) {
+                    alert("发布留言失败，请重试！");
+                    console.error('Error inserting message:', error.message);
+                } else {
+                    document.getElementById('message-content').value = '';
+                    loadMessages();
+                }
+            };
+
+            const replyToMessage = async (messageId) => {
+                let username = '匿名用户';
+                if (!checkLoginStatus()) {
+                    // const confirmAnonymous = confirm("你未登录，是否继续以匿名或落款方式回复？点击取消则转到登录页面。");
+                    // if (!confirmAnonymous) {
+                    //     window.location.href = 'login.html';
+                    //     return;
+                    // }
+                    const isAnonymous = confirm("是否匿名回复？点击取消则以落款方式回复。");
+                    if (!isAnonymous) {
+                        username = prompt("请输入您的名字（落款）：");
+                        if (!username) {
+                            alert("请输入有效的名字或选择匿名回复！");
+                            return;
+                        }
+                    }
+                } else {
+                    username = localStorage.getItem('username');
+                }
+                const replyContent = prompt("请输入您的回复：");
+                if (!replyContent) {
+                    alert("回复内容不能为空！");
+                    return;
+                }
+                const { data, error } = await supabase
+                    .from('replies')
+                    .insert([{ message_id: messageId, username, content: replyContent }]);
+                if (error) {
+                    alert("回复失败，请重试！");
+                    console.error('Error inserting reply:', error.message);
+                } else {
+                    loadMessages();
+                }
+            };
+
+            document.getElementById('post-button').addEventListener('click', postMessage);
+
+            // 实时监听留言和回复的变化
+            supabase
+                .channel('public:messages')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'messages' }, payload => {
+                    console.log('Messages updated!', payload);
+                    loadMessages();
+                })
+                .subscribe();
+
+            supabase
+                .channel('public:replies')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'replies' }, payload => {
+                    console.log('Replies updated!', payload);
+                    loadMessages();
+                })
+                .subscribe();
+
+            loadMessages();
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const username = localStorage.getItem('username');
+            const loginElement = document.getElementById('login');
+            const vipDropdown = document.getElementById('vip-dropdown');
+            const vipMessage = document.getElementById('vip-message');
+
+            if (username) {
+                loginElement.textContent = username;
+                loginElement.href = '#';
+                vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+                // Show dropdown on hover
+                loginElement.addEventListener('mouseover', function () {
+                    vipDropdown.style.display = 'block';
+                });
+
+                loginElement.addEventListener('mouseleave', function () {
+                    setTimeout(function () {
+                        if (!vipDropdown.matches(':hover')) {
+                            vipDropdown.style.display = 'none';
+                        }
+                    }, 300);
+                });
+
+                vipDropdown.addEventListener('mouseover', function () {
+                    vipDropdown.style.display = 'block';
+                });
+
+                vipDropdown.addEventListener('mouseleave', function () {
+                    vipDropdown.style.display = 'none';
+                });
+            } else {
+                vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+            }
+        });
+
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+    </script>
+</body>
+</html>

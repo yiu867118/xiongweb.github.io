@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录 Xiong's Family</title>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'KaiTi', sans-serif;
+            background-color: rgb(234, 253, 241);
+            position: relative;
+        }
+        .container {
+            background: url(home_pic/login.jpg);
+            background-size: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            height: auto;
+            text-align: center;
+            position: absolute;
+            margin-top: 25%;
+            margin-left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .input {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .sub {
+            background-color: #2da75c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .sub:hover {
+            background-color: #85cfa4;
+        }
+        #create-account {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #070707;
+        }
+        p {
+            font-size: 22px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>熊家会员登录</h2>
+        <form id="login-form">
+            <input type="text" class="input" name="identifier" placeholder="用户名或姓名" required><br>
+            <input type="password" class="input" name="password" placeholder="密码" required><br>
+            <button type="submit" class="sub">登录</button>
+        </form>
+        <br>
+        <p id="create-account">没有账号? <a href="login_registration.html">点击创建账号</a>.</p>
+    </div>
+
+    <script>
+
+    // 在用户成功登录后调用
+    function setJustLoggedIn() {
+        localStorage.setItem('justLoggedIn', 'true');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+        headers: {
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`
+        }
+    });
+
+    console.log("Supabase 初始化完成");
+
+    async function loginSuccess(event) {
+        event.preventDefault(); // 阻止默认提交行为
+
+        const identifier = document.querySelector('input[name="identifier"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+
+        try {
+            console.log("登录尝试用户：", identifier);
+
+            // 直接查询所有用户
+            const { data: users, error } = await supabase
+                .from('users')
+                .select('*');
+
+            if (error) {
+                console.error('查询出错:', error);
+                alert('查询出错: ' + error.message);
+                return;
+            }
+
+            console.log('查询到的所有用户:', users);
+
+            const user = users.find(user => user.username === identifier || user.fullname === identifier);
+
+            if (!user) {
+                console.error('登录失败: 用户名或姓名不存在。');
+                alert('登录失败: 用户名或姓名不存在。');
+                return;
+            }
+
+            // 验证密码
+            if (user.password !== password) {
+                console.error('登录失败: 密码错误。');
+                alert('登录失败: 密码错误。');
+                return;
+            }
+
+         // 保存用户名到 localStorage
+            localStorage.setItem('username', user.username);
+            localStorage.setItem('userData', JSON.stringify(user));
+
+            // 设置登录标志
+            localStorage.setItem('isLoggedIn', 'true'); // 标记用户已经登录
+
+            console.log('登录成功:', user);
+            alert('登录成功!');
+
+            
+            // 获取重定向参数并进行重定向
+            const params = new URLSearchParams(window.location.search);
+            const redirectUrl = params.get('redirect') || 'homepage.html';
+            window.location.href = redirectUrl; // 重定向到指定页面
+        } catch (error) {
+            console.error('登录过程中发生错误:', error.message);
+            alert('登录失败: ' + error.message);
+        }
+    }
+
+    const form = document.getElementById('login-form');
+    form.addEventListener('submit', loginSuccess);
+});
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+        
+    </script>
+</body>
+</html>

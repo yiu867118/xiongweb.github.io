@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>熊熊日常记录</title>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 全局样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(love_pic/g.jpg);
+            text-align: center;
+            padding: 15px 0;
+            max-width: 100%;
+            min-height:auto;
+            gap: 20px;
+        }
+
+        #con {
+            position: relative;
+            max-width: 90%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(love_pic/g.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        header {
+            background-color: #f4f0ec;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #login {
+          color: #444;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      .dropdown {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+      }
+
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 100%; /* Ensure it drops below the login element */
+          background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+          min-width: 240px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          z-index: 100;
+          border-radius: 8px;
+          overflow: hidden;
+          padding: 10px 0; /* Added padding to handle hover area */
+      }
+
+      .dropdown:hover .dropdown-content,
+      .dropdown-content:hover {
+          display: block;
+      }
+
+      .dropdown-content p {
+          padding: 12px 16px;
+          color: #000000;
+          text-shadow: 2px 2px rgb(255, 255, 255);
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .dropdown-content a {
+          color: rgb(76, 144, 212);
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          
+          transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #4fb7e8a3;
+      }
+
+
+        h1 {
+            margin: 0;
+            color: #060606;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px #fcfdfd;
+        }
+
+        h1:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
+        }
+
+        /* 图库样式 */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .image-container {
+            position: relative; /* 修正位置问题 */
+            flex-grow: 1;
+            min-width: 200px;
+            max-width: 300px;
+            height: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.2s ease, opacity 0.2s ease; /* 更改动画持续时间 */
+        }
+
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px;
+        }
+
+        /* 图片样式 */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            opacity: 0.3; /* 初始透明度 */
+            transition: opacity 0.2s ease; /* 平滑过渡效果 */
+        }
+
+        .image-container:hover img {
+            opacity: 1; /* 悬停时变为完全不透明 */
+        }
+
+        /* 文字浮层 */
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(254, 253, 253, 0); /* 设置为不透明的黑色背景 */
+            color: rgba(255, 255, 255, 0); 
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 0 15px 15px;
+            opacity: 0; /* 初始状态下不可见 */
+            transition: opacity 0.2s ease; /* 添加平滑过渡效果 */
+        }
+
+        .image-container:hover .overlay {
+            opacity: 1; /* 悬停时显示浮层 */
+        }
+
+
+        .text {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 40px; /* 调整泡泡大小 */
+            height: 40px; /* 调整泡泡大小 */
+            background: linear-gradient(135deg, rgba(19, 150, 244, 0.7), rgba(255, 255, 255, 0.5)); /* 渐变色 */
+            border-radius: 50%; /* 圆形泡泡 */
+            filter: blur(1px); /* 模糊滤镜 */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
+            animation: float 1000s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
+            will-change: transform, opacity; /* 性能优化 */
+        }
+
+        .bubble::before,
+        .bubble::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.4); /* 调整颜色和透明度 */
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .bubble::before {
+            top: -8px;
+            left: -6px;
+        }
+
+        .bubble::after {
+            left: 8px;
+            top: 4px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-20px, -50%) rotate(10deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(20px, -100%) rotate(-10deg);
+                opacity: 0;
+            }
+        }
+
+        .float {
+            animation: float 10s linear infinite;
+        }
+
+        /* 星光点效果 */
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(247, 209, 56, 0.7);
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div id="con">
+        <header>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>熊熊日常记录</h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
+        </header>
+
+        <div class="gallery">
+            <!-- Image 1 -->
+            <div class="image-container">
+                <img src="love_pic/260.jpg" alt="聊天记录1">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <!-- Image 2 -->
+            <div class="image-container">
+                <img src="love_pic/261.jpg" alt="聊天记录2">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class="image-container">
+                <img src="love_pic/262.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/263.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/264.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/265.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/266.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/267.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/268.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/270.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/272.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/273.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/276.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <img src="love_pic/277.jpg" alt="聊天记录3">
+                <div class="overlay">
+                    <div class="text">🐻♥🐻</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
+                <p style="font-size: 19px; color: #555; margin: 0; font-family: 'KaiTi', 'Poppins', sans-serif; font-weight: 600;">
+                    网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+                </p>
+                <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: 'KaiTi', 'Poppins', sans-serif;">
+                    © 2024 熊家 All Rights Reserved.
+                </p>
+            </div>
+        </footer>        
+
+            <!-- 滚动条进度条 -->
+        <div id="scrollProgress">
+            <div id="scrollProgressBar"></div>
+        </div>
+    </div>
+
+    <script>
+        // // 图片点击事件的JavaScript代码
+        // document.querySelectorAll('.image-container').forEach((container) => {
+        //     container.addEventListener('click', () => {
+        //         alert('你点击了情侣聊天记录图片！');
+        //     });
+        // });
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.left = Math.random() * 100 + 'vw';
+            bubble.style.animationDuration = (Math.random() * 20 + 5) + 's'; /* 随机的动画时间 */
+            document.body.appendChild(bubble);
+
+            // 创建星光效果
+            const starCount = Math.floor(Math.random() * 3) + 1; /* 随机数量星光 */
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = (Math.random() * 10 - 5) + 'px'; /* 随机星光位置 */
+                star.style.top = (Math.random() * 10 - 5) + 'px';
+                bubble.appendChild(star);
+            }
+
+            setTimeout(() => {
+                bubble.remove();
+            }, 8000); /* 泡泡存在时间，与动画一致 */
+        }
+
+        setInterval(createBubble, 600); /* 控制泡泡生成频率 */
+
+        window.onload = function() {
+            const floatingElement = document.querySelector('.float');
+            const pageHeight = document.body.scrollHeight; // 获取页面的总高度
+
+            // 动态插入CSS规则
+            const styleSheet = document.styleSheets[0];
+            styleSheet.insertRule(`
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0);
+                        opacity: 0.8;
+                    }
+                    50% {
+                        transform: translate(-20px, -${pageHeight * 0.5}px) rotate(10deg); /* 50% 页面高度 */
+                        opacity: 0.6;
+                    }
+                    100% {
+                        transform: translate(20px, -${pageHeight}px) rotate(-10deg); /* 100% 页面高度 */
+                        opacity: 0;
+                    }
+                }
+            `, styleSheet.cssRules.length);
+
+            // 将动画应用到浮动元素
+            floatingElement.style.animation = "float 10s linear infinite";
+        };
+
+
+        // 更新滚动进度条的 JavaScript
+        window.onscroll = function() {
+            const scrollProgressBar = document.getElementById('scrollProgressBar');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            scrollProgressBar.style.height = scrollPercentage + "%";
+        };
+
+
+
+
+        //login
+
+        document.addEventListener('DOMContentLoaded', function () {
+          const username = localStorage.getItem('username');
+          const loginElement = document.getElementById('login');
+          const vipDropdown = document.getElementById('vip-dropdown');
+          const vipMessage = document.getElementById('vip-message');
+
+          if (username) {
+              loginElement.textContent = username;
+              loginElement.href = '#';
+              vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+              // Show dropdown on hover
+              loginElement.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              loginElement.addEventListener('mouseleave', function () {
+                  setTimeout(function () {
+                      if (!vipDropdown.matches(':hover')) {
+                          vipDropdown.style.display = 'none';
+                      }
+                  }, 300);
+              });
+
+              vipDropdown.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              vipDropdown.addEventListener('mouseleave', function () {
+                  vipDropdown.style.display = 'none';
+              });
+          } else {
+              vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+          }
+      });
+
+
+
+
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+
+
+    </script>
+</body>
+</html>

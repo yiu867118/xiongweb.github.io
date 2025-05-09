@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>熊宝宝收红包</title>
+  <style>
+    @font-face {
+        font-family: 'KaiTi';
+        src: url('STKAITI.TTF') format('truetype'),
+             url('STXINWEI.TTF') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    #con {
+        position: relative;
+        max-width: 90%;
+        margin: 20px auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    #con::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(baby_pic/691.jpg);
+        background-size: cover;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    body {
+        font-family: 'KaiTi', 'Pacifico', 'Dancing Script', cursive, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(baby_pic/z.jpg);
+        text-align: center;
+        padding: 20px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        gap: 20px;
+        min-height: 200px;
+    }
+
+    header img {
+            width: 240px;
+            height: 240px;
+            border-radius: 100%;
+        }
+
+    header img:hover{
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #login {
+        color: #444;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%; /* Ensure it drops below the login element */
+        background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+        min-width: 300px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 10px 0; /* Added padding to handle hover area */
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown-content:hover {
+        display: block;
+    }
+
+    .dropdown-content p {
+        padding: 12px 16px;
+        color: #000000;
+        text-shadow: 2px 2px rgb(255, 255, 255);
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .dropdown-content a {
+        color: rgb(18, 70, 123);
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #4fb7e8a3;
+    }
+
+
+    #qr-code {
+        width: 350px;
+        height: 350px;
+        border-radius: 10px;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: #000000;
+        text-shadow: 3px 3px #ffffff;
+    }
+
+    h1:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
+
+    .red-envelope-section {
+        margin: 30px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .red-envelope-btn,
+    .custom-amount-input {
+        padding: 15px 20px;
+        background-color: #fe8b74;
+        color: #fff;
+        border: none;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin: 10px 0;
+        border-radius: 8px;
+        width: 30%;
+        transition: all 0.3s ease;
+    }
+
+    .custom-amount-input {
+        background-color: #fff;
+        color: #333;
+        border: 2px solid #fe8b74;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .red-envelope-btn:hover {
+        background-color: #e64a19;
+        transform: scale(1.05);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 30px;
+        text-align: center;
+        border-radius: 15px;
+        width: 80%;
+        max-width: 500px;
+        position: relative;
+    }
+
+    .modal-content h2 {
+        margin-bottom: 20px;
+    }
+
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #333;
+    }
+
+    #nickname,
+    #alipay {
+        padding: 12px;
+        font-size: 1em;
+        margin: 10px 0;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .confirm-btn {
+        background-color: #7af8ae;
+        color: white;
+        padding: 15px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 8px;
+        font-size: 1.2em;
+        transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn:hover {
+        background-color: #27ae60;
+    }
+
+    .success-message {
+        display: none;
+        color: #2ecc71;
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+
+    #records {
+        background-color: rgba(243, 255, 216, 0.1);
+        width: 99.5%;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .leaderboard {
+        margin-top: 40px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+    }
+
+    .leaderboard h2 {
+        color: #ff5252;
+        margin-bottom: 20px;
+    }
+
+    .leaderboard ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .leaderboard li {
+        background-color: #fff;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 1.2em;
+        transition: transform 0.3s ease;
+    }
+
+    .leaderboard li:hover {
+        transform: translateY(-5px);
+    }
+  </style>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="con">
+    <header>
+      <div><h1>熊宝宝</h1></div>
+      <div><img src="baby_pic/691.jpg" alt="熊家图标"></div>
+      <div><h1>收红包</h1></div>
+      <div class="dropdown">
+        <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+        <div class="dropdown-content" id="vip-dropdown">
+            <p id="vip-message"></p>
+        </div>
+      </div>
+    </header>
+    <div class="red-envelope-section">
+      <input type="number" id="custom-amount" class="custom-amount-input" placeholder="请输入任意金额">
+      <button class="red-envelope-btn" onclick="showPaymentModal()">发红包</button>
+    </div>
+    <div id="success-message" class="success-message">
+      红包发送成功！小小熊祝你万事如意，心想事成!
+    </div>
+    <div id="payment-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>扫码发红包</h2>
+        <img id="qr-code" alt="支付宝收款码">
+        <button id="confirm-payment" class="confirm-btn">确认已支付</button>
+      </div>
+    </div>
+    <div id="records">
+      <section id="leaderboard" class="leaderboard">
+        <h2>红包记录</h2>
+        <ul id="ranking-list">
+            <li>1. 小君 发了 100 元红包</li>
+            <li>2. 小光 发了 100 元红包</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const paymentModal = document.getElementById('payment-modal');
+      const closeModal = document.querySelector('.close');
+      const confirmPaymentBtn = document.getElementById('confirm-payment');
+      const successMessage = document.getElementById('success-message');
+      const rankingList = document.getElementById('ranking-list');
+      const qrCodeImg = document.getElementById('qr-code');
+      let leaderboard = [
+        { name: '小君', amount: 100 },
+        { name: '小光', amount: 100 }
+      ];
+      let currentOrderId = null;
+
+      closeModal.addEventListener('click', () => {
+        paymentModal.style.display = 'none';
+      });
+
+      confirmPaymentBtn.addEventListener('click', async () => {
+        const nickname = localStorage.getItem('username') || '匿名用户';
+        const paymentSuccess = await checkPaymentSuccess(currentOrderId);
+        if (paymentSuccess) {
+          leaderboard.push({ name: nickname, amount: paymentSuccess.amount });
+          updateLeaderboard();
+          paymentModal.style.display = 'none';
+          showSuccessMessage(paymentSuccess.amount);
+        } else {
+          alert('支付失败，请重试');
+        }
+      });
+
+      async function checkPaymentSuccess(orderId) {
+        const response = await fetch('http://127.0.0.1:5000/alipay/check-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId })
+        });
+        const result = await response.json();
+        return result.success ? result : false;
+      }
+
+      function showSuccessMessage(amount) {
+        successMessage.textContent = `恭喜您, 成功发了 ${amount} 元红包!`;
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+      }
+
+      function updateLeaderboard() {
+        rankingList.innerHTML = '';
+        leaderboard.sort((a, b) => b.amount - a.amount);
+        leaderboard.forEach((entry, index) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${index + 1}. ${entry.name} 发了 ${entry.amount} 元红包`;
+          rankingList.appendChild(listItem);
+        });
+      }
+
+      window.showPaymentModal = async function() {
+        const amount = document.getElementById('custom-amount').value;
+        const response = await fetch('http://127.0.0.1:5000/alipay/create-payment', {  // 确保端口号和路径正确
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount })
+        });
+        const result = await response.json();
+        if (result.success) {
+            qrCodeImg.src = result.qrCodeUrl;
+            currentOrderId = result.orderId;
+            paymentModal.style.display = 'flex';
+        } else {
+            alert('无法生成支付二维码，请稍后再试');
+        }
+    }
+
+
+
+      updateLeaderboard();
+    });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+            const username = localStorage.getItem('username');
+            const loginElement = document.getElementById('login');
+            const vipDropdown = document.getElementById('vip-dropdown');
+            const vipMessage = document.getElementById('vip-message');
+
+            if (username) {
+                loginElement.textContent = username;
+                loginElement.href = '#';
+                vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+                // Show dropdown on hover
+                loginElement.addEventListener('mouseover', function () {
+                    vipDropdown.style.display = 'block';
+                });
+
+                loginElement.addEventListener('mouseleave', function () {
+                    setTimeout(function () {
+                        if (!vipDropdown.matches(':hover')) {
+                            vipDropdown.style.display = 'none';
+                        }
+                    }, 300);
+                });
+
+                vipDropdown.addEventListener('mouseover', function () {
+                    vipDropdown.style.display = 'block';
+                });
+
+                vipDropdown.addEventListener('mouseleave', function () {
+                    vipDropdown.style.display = 'none';
+                });
+            } else {
+                vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+            }
+        });
+
+
+
+         
+
+  </script>
+</body>
+</html>

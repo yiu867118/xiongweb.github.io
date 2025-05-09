@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>两只小熊的照片集</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(love_pic/j.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        body {
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            background-color: #f0f6fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+    
+
+        header {
+            display: flex;
+            justify-content: center; /* 居中对齐 */
+            padding: 50px 20px;
+            background-color: #3faeef;
+            color: #fff;
+            border-radius: 12px;
+            background-image: url(love_pic/g.jpg);
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgb(11, 11, 11);
+        }
+
+        .intro {
+            font-size: 18px;
+            margin-bottom: 0;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .year {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .year-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3faeef;
+            background-color: #f0f6fc;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .content {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(100% - 100px);
+        }
+
+        .caption-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .year-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 更小的最小宽度 */
+            gap: 1px;
+            margin-top: 15px;
+        }
+
+
+        .year-images img {
+            width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            max-height: auto;
+        }
+
+
+
+        #one{
+            width: 300px;
+            height: auto;
+        }
+
+        .year-images img:hover {
+            transform: scale(1.05);
+        }
+
+
+        video {
+            display: grid;
+            max-width: 600px;
+            height: auto;
+            aspect-ratio: 16 / 9; /* 设置视频的宽高比例 */
+            border-radius: 20px; /* 圆角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        }
+        video:hover{
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background-color: #2c97d5;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #007bff;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 20px;
+            }
+
+            .year {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .year-label {
+                margin-bottom: 15px;
+            }
+
+            .content {
+                width: 100%;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(-20px, -8000px) rotate(10deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(20px, -16000px) rotate(-10deg);
+                opacity: 0.2;
+            }
+        }
+
+        .bubble {
+            position: absolute;
+            width: 40px; /* 调整泡泡大小 */
+            height: 40px; /* 调整泡泡大小 */
+            background: linear-gradient(135deg, rgba(19, 150, 244, 0.7), rgba(255, 255, 255, 0.5)); /* 渐变色 */
+            border-radius: 50%; /* 圆形泡泡 */
+            filter: blur(1px); /* 模糊滤镜 */
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); /* 柔和的阴影 */
+            animation: float 1000s infinite ease-in-out; /* 漂浮动画，增加时间，加入缓和效果 */
+            will-change: transform, opacity; /* 性能优化 */
+        }
+
+        .bubble::before,
+        .bubble::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.4); /* 调整颜色和透明度 */
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+
+        .bubble::before {
+            top: -8px;
+            left: -6px;
+        }
+
+        .bubble::after {
+            left: 8px;
+            top: 4px;
+        }
+
+
+        .float {
+            animation: float 10s linear infinite;
+        }
+
+        /* 星光点效果 */
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .star {
+            animation: starTwinkle 1.5s infinite; /* Twinkle animation */
+        }
+
+
+        #login {
+          color: #444;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      .dropdown {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+      }
+
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 100%; /* Ensure it drops below the login element */
+          background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+          min-width: 240px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          z-index: 100;
+          border-radius: 8px;
+          overflow: hidden;
+          padding: 10px 0; /* Added padding to handle hover area */
+      }
+
+      .dropdown:hover .dropdown-content,
+      .dropdown-content:hover {
+          display: block;
+      }
+
+      .dropdown-content p {
+          padding: 12px 16px;
+          color: #000000;
+          text-shadow: 2px 2px rgb(255, 255, 255);
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .dropdown-content a {
+          color: rgb(76, 144, 212);
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          
+          transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #4fb7e8a3;
+      }
+
+    </style>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="title">两只小熊的照片集</div>
+        <div class="dropdown">
+            <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+            <div class="dropdown-content" id="vip-dropdown">
+                <p id="vip-message"></p>
+            </div>
+        </div>
+    </header>
+
+    <div class="timeline">
+        <!-- Year 2020 -->
+        <div class="year">
+            <div class="year-label">2020年</div>
+            <div class="content">
+                <div class="caption-card">第一次一起拍照....</div>
+                <div class="year-images">
+                    <img src="love_pic/2020_03_1.jpg" alt="鲁邦风情街的小熊">
+                    <img src="love_pic/2020_03_3.jpg" alt="鲁邦风情街的小熊">
+                    
+                </div>
+
+                <br>
+                <div class="caption-card">古装</div>
+                <div class="year-images">
+                    <img src="love_pic/2020_10_1.jpg" alt="古装">
+                    <img src="love_pic/2020_10_2.jpg" alt="古装">
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2021 -->
+        <div class="year">
+            <div class="year-label">2021年</div>
+            <div class="content">
+
+                <div class="caption-card">小吃光</div>
+                <div class="year-images">
+                    <video src="love_pic/2021_10_01.mp4" controls alt="两只小熊">
+                </div>
+                <br>
+                <div class="caption-card">一起赏月...</div>
+                <div class="year-images">
+                    <img src="love_pic/2021_09_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2021_09_2.jpg" alt="两只小熊">
+                </div>
+                <br>
+                <div class="caption-card">在釜山</div>
+                <div class="year-images">
+                    <img src="love_pic/2021_12_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2021_12_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2021_12_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2021_12_4.jpg" alt="两只小熊">
+                </div>
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">2022年</div>
+            <div class="content">
+                <div class="caption-card">本科毕业了!</div>
+                <div class="year-images">
+                    <img src="love_pic/2022_08_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_08_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_08_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_08_4.jpg" alt="两只小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">来到首尔的第一次理发</div>
+                <div class="year-images">
+                    <img id="one" src="love_pic/2022_09_1.jpg"  alt="两只小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">在景福宫</div>
+                <div class="year-images">
+                    <img src="love_pic/2022_10_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_10_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_10_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2022_10_4.jpg" alt="两只小熊">
+                </div>
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">2023年</div>
+            <div class="content">
+                <div class="caption-card">在南山塔上，锁上了一把写有我们名字的锁</div>
+                <div class="year-images">
+                    <img src="love_pic/2023_02_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_02_2.jpg" alt="两只小熊">
+                </div>
+                
+                <br>
+                <div class="caption-card">在济州岛</div>
+                <div class="year-images">
+                    <img src="love_pic/2023_07_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_07_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_07_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_07_4.jpg" alt="两只小熊">
+                </div>
+
+                <br>
+                <div class="caption-card">一组婚纱照</div>
+                <div class="year-images">
+                    <img src="love_pic/2023_08_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_6.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_7.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_8.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_9.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_10.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_11.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_12.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_13.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_14.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_17.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_18.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_19.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_20.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_21.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_22.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_25.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_4.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_15.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_16.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_23.jpg" alt="两只小熊">
+                    <img src="love_pic/2023_08_24.jpg" alt="两只小熊">
+                </div>
+            </div>
+        </div>
+
+        <div class="year">
+            <div class="year-label">2024年</div>
+            <div class="content">
+                <div class="caption-card">樱花开了, 带着小熊宝宝在家门口随手拍</div>
+                <div class="year-images">
+                    <img src="love_pic/2024_04_1.jpg" alt="两只小熊">
+                    <img src="love_pic/2024_04_2.jpg" alt="两只小熊">
+                    <img src="love_pic/2024_04_3.jpg" alt="两只小熊">
+                    <img src="love_pic/2024_04_4.jpg" alt="两只小熊">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <footer>
+        <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(197, 221, 245, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
+            <p style="font-size: 19px; color: #555; margin: 0; font-family: 'KaiTi', 'Poppins', sans-serif; font-weight: 600;">
+                网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+            </p>
+            <p style="font-size: 14px; color: #999; margin-top: 10px; font-family: 'KaiTi', 'Poppins', sans-serif;">
+                © 2024 熊家 All Rights Reserved.
+            </p>
+        </div>
+    </footer>   
+</div>
+
+<script>
+   function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        bubble.style.left = Math.random() * 100 + 'vw';
+        bubble.style.animationDuration = (Math.random() * 50 + 15) + 's'; // Set floating animation duration
+        document.body.appendChild(bubble);
+
+        // Create star
+        const starCount = Math.floor(Math.random() * 3) + 1; // Random number of stars
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.position = 'absolute'; // Absolute position for stars
+            star.style.width = '4px'; // Star width
+            star.style.height = '4px'; // Star height
+            star.style.backgroundColor = 'rgba(247, 209, 56, 0.8)'; // Star color
+            star.style.borderRadius = '50%'; // Make stars circular
+            star.style.left = (Math.random() * 40) - 20 + 'px'; // Random star position within bubble
+            star.style.top = (Math.random() * 40) - 20 + 'px';
+            star.style.opacity = Math.random(); // Random opacity for twinkling effect
+            star.style.zIndex = '1'; // Ensure stars are on top of the bubble
+            bubble.appendChild(star);
+        }
+
+        setTimeout(() => {
+            bubble.remove();
+        }, 8000); // Duration for bubble to exist, matching animation
+    }
+
+
+    
+
+        setInterval(createBubble, 600); // 控制泡泡生成频率
+
+        window.onload = function() {
+            const styleSheet = document.styleSheets[0];
+
+            // 动态插入CSS规则
+            const pageHeight = document.body.scrollHeight; // 获取页面的总高度
+            const animationRule = `
+                @keyframes float {
+                    0% {
+                        transform: translate(0, 0);
+                        opacity: 0.8;
+                    }
+                    50% {
+                        transform: translate(-20px, -${pageHeight * 0.3}px) rotate(10deg); /* 50% 页面高度 */
+                        opacity: 0.6;
+                    }
+                    100% {
+                        transform: translate(20px, -${pageHeight}px) rotate(-10deg); /* 100% 页面高度 */
+                        opacity: 0;
+                    }
+                }
+            `;
+
+            styleSheet.insertRule(animationRule, styleSheet.cssRules.length);
+
+            // 将动画应用到浮动元素
+            const bubbles = document.querySelectorAll('.bubble');
+            bubbles.forEach(bubble => {
+                bubble.style.animation = "float 10s linear infinite";
+            });
+        };
+
+        //login
+        document.addEventListener('DOMContentLoaded', function () {
+          const username = localStorage.getItem('username');
+          const loginElement = document.getElementById('login');
+          const vipDropdown = document.getElementById('vip-dropdown');
+          const vipMessage = document.getElementById('vip-message');
+
+          if (username) {
+              loginElement.textContent = username;
+              loginElement.href = '#';
+              vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+              // Show dropdown on hover
+              loginElement.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              loginElement.addEventListener('mouseleave', function () {
+                  setTimeout(function () {
+                      if (!vipDropdown.matches(':hover')) {
+                          vipDropdown.style.display = 'none';
+                      }
+                  }, 300);
+              });
+
+              vipDropdown.addEventListener('mouseover', function () {
+                  vipDropdown.style.display = 'block';
+              });
+
+              vipDropdown.addEventListener('mouseleave', function () {
+                  vipDropdown.style.display = 'none';
+              });
+          } else {
+              vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+          }
+      });
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+
+
+
+</script>
+
+
+</body>
+</html>

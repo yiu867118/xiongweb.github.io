@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>熊家新闻</title>
+        <style>
+            #con {
+                position: relative;
+                max-width: 90%;
+                margin: 10px auto;
+                background-color: rgba(255, 255, 255, 0.6);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                padding: 10px;
+            }
+
+            #con::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url(love_pic/u.jpg);
+                background-size: 100%;
+                opacity: 0.9;
+                z-index: -1;
+            }
+
+            #header{
+                text-align: center;
+            }
+            #h1{
+                text-shadow: 2px 2px 8px aliceblue;
+            }
+            #h1:hover, #img:hover{
+                transform: scale(1.02); 
+                transition: transform 0.3s ease;
+            }
+            h3{
+                font-size: 19px;
+            }
+            p{
+                font-size: 17px;
+            }
+            #img{
+                border-radius: 30px;
+            }
+            #p1, #nav, #section{
+                text-align: left;
+                margin-left: 10%;
+                margin-right: 10%;
+                line-height: 1.8;
+            }
+            p:hover{
+                background-color: rgb(232, 243, 249, 0.6);
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            #mousePicture{
+                position: absolute;
+                z-index: 1000;
+            }
+            @keyframes move{
+                from{transform: translateX(30%);}
+                to{transform: translateX(70%);}
+            }
+            #panda{
+                animation-name: move;
+                animation-duration: 20s;
+                animation-iteration-count: infinite;
+            }
+            #back{
+                background: rgb(208, 239, 250);
+                color: rgb(12, 12, 12);
+                font-size: 18px;
+                font-weight: 600;
+                border: none;
+                padding: 20px 20px;
+                border-radius: 60px;
+                margin-left: 3%;
+                margin-top: 2%;
+            }
+            #back:hover{
+                background: rgb(152, 216, 246);
+            }
+
+            #login {
+                color: #444;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .dropdown {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                right: 0;
+                top: 100%; /* Ensure it drops below the login element */
+                background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+                min-width: 300px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                z-index: 100;
+                border-radius: 8px;
+                overflow: hidden;
+                padding: 10px 0; /* Added padding to handle hover area */
+            }
+
+            .dropdown:hover .dropdown-content,
+            .dropdown-content:hover {
+                display: block;
+            }
+
+            .dropdown-content p {
+                padding: 12px 16px;
+                color: #000000;
+                text-shadow: 2px 2px rgb(255, 255, 255);
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .dropdown-content a {
+                color: rgb(18, 70, 123);
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                
+                transition: background-color 0.3s ease;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #4fb7e8a3;
+            }
+        </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </head>
+    <body>
+        <div id="panda">
+            <img src="home_pic/101.jpg" style="width: 30px; height: 30px;" alt="">
+        </div>
+        <div id="con">
+
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
+            <div>
+                <button id="back" onclick="history.back()">Back</button>
+            </div>
+            <header id="header">
+                <br>
+                <h1 id="h1">两只小熊本科毕业, 准备开启下个副本</h1>
+                <br>
+                <p id="p1"> </p>
+                <br>
+                <figure>
+                    <img id="img" src="home_pic/105.jpg" width="400" height="550">
+                </figure>
+            </header>
+            <br>
+            <br>
+            
+            <!-- <nav id="nav">
+                <h3></h3>
+                <ul>
+                    <li><a href="#life"></a></li>
+                    <li><a href="#character"></a></li>
+                </ul>
+                <br><br>
+            </nav> -->
+            <section id="section">
+                <article id="life">
+                    <h3></h3><br>
+                    <p>
+                        2022年8月17日，两只熊正式本科毕业了。在这一天，他们在学校领到了学位服，并在学校门口的快拍店拍了照片。拍照时，两只熊不禁回忆起在庆南的美好生活：每天放学后去池塘喂鱼，去海边散步。这些美好的时光让他们对即将离开的校园生活感到些许不舍。<br><br>
+
+                        特别是小光，他对教学楼新换的自动马桶感到依依不舍。每次去厕所，热乎乎的马桶座让他感到无比舒适。离开这里后，小光不禁担心自己还能否继续享受这种温暖的体验。
+                        
+                        <br><br></p>
+                </article>
+                <br>
+                <article id="character">
+                    <h3></h3>
+                    <p></p>
+                        <br>
+                </article>
+            </section>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const username = localStorage.getItem('username');
+                const loginElement = document.getElementById('login');
+                const vipDropdown = document.getElementById('vip-dropdown');
+                const vipMessage = document.getElementById('vip-message');
+    
+                if (username) {
+                    loginElement.textContent = username;
+                    loginElement.href = '#';
+                    vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+    
+                    // Show dropdown on hover
+                    loginElement.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+    
+                    loginElement.addEventListener('mouseleave', function () {
+                        setTimeout(function () {
+                            if (!vipDropdown.matches(':hover')) {
+                                vipDropdown.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+    
+                    vipDropdown.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+    
+                    vipDropdown.addEventListener('mouseleave', function () {
+                        vipDropdown.style.display = 'none';
+                    });
+                } else {
+                    vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+                }
+            });
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+            </script>
+    </body>
+</html>

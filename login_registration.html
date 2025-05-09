@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>加入熊家会员</title>
+    <style>
+
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'KaiTi', sans-serif;
+            background-color: #e1ffe1bb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+
+        .container {
+            position: relative;
+            width: 500px;
+            height: auto;
+            padding: 20px;
+            border-radius: 10%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px white;
+        }
+
+        .input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .input:focus {
+            border-color: #2da75c;
+            box-shadow: 0 0 8px rgba(45, 167, 92, 0.2);
+            outline: none;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 24px;
+            color: #34495e;
+            text-shadow: 2px 2px white;
+        }
+
+        .sub {
+            background-color: #2da75c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sub:hover {
+            background-color: #27a05b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .sub:active {
+            background-color: #228e4f;
+            transform: translateY(0);
+        }
+
+        #loading {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-top: 20px;
+        }
+
+        a {
+            font-size: 20px;
+            color: #093018;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 2px 2px white;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('home_pic/login.jpg');
+            background-size: cover;
+            opacity: 1;
+            z-index: -1;
+            border-radius: 40px;
+        }
+
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>加入熊家会员</h2>
+        <form id="register-form">
+            <label for="username">用户名</label>
+            <input type="text" class="input" name="username" id="username" placeholder="请输入用户名" required autocomplete="username"><br><br>
+
+            <label for="fullname">姓名</label>
+            <input type="text" class="input" name="fullname" id="fullname" placeholder="请输入姓名" required autocomplete="name"><br><br>
+
+            <label for="birthdate">生日</label>
+            <input type="date" class="input" name="birthdate" id="birthdate" required autocomplete="bday"><br><br>
+
+            <label for="password">密码</label>
+            <input type="password" class="input" name="password" id="password" placeholder="请输入至少6位密码" required autocomplete="new-password"><br><br>
+
+            <label for="passwordSure">确认密码</label>
+            <input type="password" class="input" name="passwordSure" id="passwordSure" placeholder="再次输入密码" required autocomplete="new-password"><br><br><br>
+
+            <button type="submit" class="sub">加入会员</button>
+        </form>
+        <div id="loading" style="display: none;">加载中...</div>
+        <br>
+        <p id="create-account">已经有熊家会员账号了? <a href="login.html">点击这里转到登陆页面</a>.</p>
+    </div>
+
+
+    <script>
+        // Initialize Supabase client after DOM content is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+            
+            console.log("Supabase 初始化完成");
+
+            // Handle form submission
+            const form = document.getElementById('register-form');
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault(); // 阻止默认提交行为
+
+                const username = document.querySelector('input[name="username"]').value;
+                const fullname = document.querySelector('input[name="fullname"]').value;
+                const birthdate = document.querySelector('input[name="birthdate"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+                const loadingText = document.getElementById('loading');
+                const submitButton = document.querySelector('.sub');
+
+                // 显示加载状态
+                loadingText.style.display = 'block';
+                submitButton.disabled = true;
+
+                try {
+                    // 插入用户到自定义表
+                    const { data, error } = await supabase.from('users').insert([
+                        { username: username, fullname: fullname, birthdate: birthdate, password: password }
+                    ]);
+
+                    if (error) {
+                        console.error('注册失败:', error);
+                        alert('注册失败: ' + error.message);
+                    } else {
+                        console.log('注册成功:', data);
+                        alert('注册成功！请记住你的用户名和密码。');
+                        window.location.href = 'login.html'; // 重定向到登录页面
+                    }
+                } catch (error) {
+                    console.error('发生错误:', error);
+                    alert('发生错误: ' + error.message);
+                } finally {
+                    loadingText.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+            });
+        });
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+    </script>
+</body>
+</html>

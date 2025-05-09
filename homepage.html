@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>小熊一家</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 全屏欢迎页面 */
+        
+        /* 初始样式，定义全屏的欢迎屏幕 */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('two_pic/a.jpg'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            color: white;
+            font-size: 48px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 1s ease, opacity 1s ease; /* 添加平滑动画 */
+        } 
+
+        /* 当欢迎屏幕消失时，它将上移并渐隐 */
+        .welcome-hide {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        #welcome-screen span {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+
+        html {
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', sans-serif;
+        }
+
+        #con {
+            display: none;
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(two_pic/a.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        body {
+            background: #f0f4f8;
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(home_pic/back.jpg);
+            text-align: center;
+            padding: 15px 0;
+            max-width: 100%;
+            gap: 20px;
+            position: relative;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 42px;
+            margin: 0;
+            color: #333;
+            font-weight: 700;
+        }
+
+        h3:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        header img {
+            width: 200px;
+            height: 240px;
+            border-radius: 50%;
+        }
+
+        header img:hover {
+            transform: scale(1.05);
+            opacity: 0.8;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #login {
+            color: #444;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%; /* Ensure it drops below the login element */
+            background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+            min-width: 240px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 10px 0; /* Added padding to handle hover area */
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown-content:hover {
+            display: block;
+        }
+
+        .dropdown-content p {
+            padding: 12px 16px;
+            color: #000000;
+            text-shadow: 2px 2px rgb(255, 255, 255);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .dropdown-content a {
+            color: rgb(76, 144, 212);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #4fb7e8a3;
+        }
+
+
+        #navbar {
+            display: flex;
+            justify-content: center;
+            background: rgba(239, 244, 248, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            gap: 15px;
+            margin-top: 0px;
+        }
+
+        #navbar a {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #navbar a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(150, 207, 244, 0.5);
+            z-index: 0;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+
+
+        #navbar a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        #navbar a:hover {
+            color: rgba(48, 68, 95, 0.719);
+        }
+
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 95%;
+            margin: 20px auto; /* 调整 margin 让它更居中 */
+            gap: 20px; /* 增加左右板块间距 */
+        }
+
+        #news, #related {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #news {
+            background-image: url(home_pic/b.png);
+        }
+
+        #related {
+            background-image: url(home_pic/c.png);
+        }
+
+        h4 {
+            font-size: 24px; /* 改大字体 */
+            margin-bottom: 15px;
+            color: #444;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .news, .re {
+            padding: 10px;
+            margin-bottom: 15px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .news:hover, .re:hover {
+            background-color: rgba(206, 231, 245, 0.7);
+            border-radius: 5px;
+        }
+
+        #picture {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            overflow: hidden;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+
+        #pictures {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: calc(250px * 4);
+        }
+
+        #pictures img {
+            width: 300px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        #pictures img:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 10px;
+        }
+
+        .arrow-small {
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        #prev-re {
+            left: -25px;
+        }
+
+        #next-re {
+            right: -25px;
+        }
+
+        .arrow, .arrow-small {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot.active {
+            background-color: #717171;
+        }
+
+        .pagination-btn {
+            border: none;
+            background-color: #dbf1fd;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #9fcaf9;
+        }
+
+        #page-numbers span {
+            display: inline-block;
+            margin: 0 3px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #page-numbers .active {
+            background-color: #aad2fc;
+            color: white;
+        }
+
+        #page-numbers span:hover {
+            background-color: #8acff9;
+        }
+    </style>  
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <!-- 欢迎屏幕 -->
+    <div id="welcome-screen">
+        <div id="welcome-message"></div>
+        <span>点击任意位置进入熊家主页</span>
+    </div>
+
+
+
+   <!-- 主内容 -->
+    <div id="con">
+        <header>
+            <div><h3>熊熊</h3></div>
+            <div><img src="home_pic/1.jpg" alt="熊家图标"></div>
+            <div><h3>之家</h3></div>
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
+        </header>
+        
+       
+        <div id="navbar">
+            <!-- <a href="love.html">两只小熊</a><br> -->
+            <a href="guang.html">光小熊</a><br>
+            <a href="jun.html">君小熊</a><br>
+            <a href="two.html">合体熊</a><br>
+            <a href="baby.html">小小熊</a><br>
+            <a href="messages.html">留言板</a>
+        </div>
+        <br>
+        <br>
+        
+        
+        <div id="picture">
+            <div id="prev" class="arrow"><</div>
+            <div id="pictures">
+                
+                <!-- <img height="200" width="200" src="home_pic/3.jpg" alt=""> -->
+                <!-- <img height="200" width="200" src="home_pic/4.jpg" alt=""> -->
+                <!-- <img height="200" width="200" src="home_pic/5.jpg" alt=""> -->
+                <!-- <img height="200" width="200" src="home_pic/6.jpg" alt=""> -->
+                <img height="200" width="200" src="home_pic/7.jpg" alt="">
+                <img height="200" width="200" src="home_pic/8.jpg" alt="">
+                <img height="200" width="200" src="home_pic/9.jpg" alt="">
+                <img height="200" width="200" src="home_pic/10.jpg" alt="">
+                <!-- <img height="200" width="200" src="home_pic/11.jpg" alt=""> -->
+                <!-- <img height="200" width="200" src="home_pic/12.jpg" alt=""> -->
+                <img height="200" width="200" src="home_pic/14.jpg" alt="">
+                <img height="200" width="200" src="home_pic/15.jpg" alt="">
+                <img height="200" width="200" src="home_pic/16.jpg" alt="">
+                <img height="200" width="200" src="home_pic/18.jpg" alt="">
+            </div>
+            <div id="next" class="arrow">></div>
+        </div>
+
+        <div id="container">
+            <div id="news">
+                <h4>熊家新闻</h4>
+                <p style="text-align: center;" style="font-size: 20px;">(点击可查看新闻详情)</p>
+                <div id="news-container" style="text-align: left; font-size: 20px; font-weight: 500;">
+                    <!-- 新闻内容 -->
+                </div>
+                <br>
+                <div id="pagination" style="text-align: center; margin-top: 10px;">
+                    <button id="prev-page" class="pagination-btn">上一页</button>
+                    <span id="page-numbers"></span>
+                    <button id="next-page" class="pagination-btn">下一页</button>
+                </div>
+            </div>
+
+            <div id="related">
+                <h4>熊家纪念日</h4>
+                <br>
+                <br>
+                <br>
+                <p style="text-align: center;"> o(*￣▽￣*)o   *^▽^*   ヽ(ﾟ▽ﾟ)ノ</p>
+                <br>
+                <br>
+                <br>
+                <div style="text-align: center; font-size: 22px; font-weight: 500; ">
+                    <div class="re">两只熊♥</div>
+                    <br>
+                    <div class="re">2020.1.26</div>
+                    <br>
+                    <div class="re">距今...天</div>
+                
+                </div>
+                <div class="arrow-small" id="prev-re"><</div>
+                <div class="arrow-small" id="next-re">></div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div id="dots"></div>
+            </div>
+        </div>
+        <br>
+        <footer>
+            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
+                <p style="font-size: 19px; color: #555; margin: 0;">
+                    网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+                </p>
+                <p style="font-size: 14px; color: #999; margin-top: 10px;">
+                    © 2024 熊家 All Rights Reserved.
+                </p>
+            </div>
+        </footer>        
+    </div>
+
+
+        <script>
+        
+
+            // 图片轮播逻辑
+            let pictureIndex = 0;
+            const pictures = document.getElementById('pictures');
+            const pictureChildren = pictures.children;
+            let pictureInterval;
+
+            function slideToIndex(index) {
+                pictureIndex = index;
+                pictures.style.transform = 'translateX(' + (-pictureChildren[0].offsetWidth * pictureIndex) + 'px)';
+            }
+
+            function startPictureAutoSlide() {
+                pictureInterval = setInterval(function () {
+                    pictureIndex = (pictureIndex + 1) % pictureChildren.length;
+                    slideToIndex(pictureIndex);
+                }, 2000);
+            }
+
+            function stopPictureAutoSlide() {
+                clearInterval(pictureInterval);
+            }
+
+            document.getElementById('prev').addEventListener('click', function () {
+                stopPictureAutoSlide();
+                pictureIndex = (pictureIndex - 1 + pictureChildren.length) % pictureChildren.length;
+                slideToIndex(pictureIndex);
+                startPictureAutoSlide();
+            });
+
+            document.getElementById('next').addEventListener('click', function () {
+                stopPictureAutoSlide();
+                pictureIndex = (pictureIndex + 1) % pictureChildren.length;
+                slideToIndex(pictureIndex);
+                startPictureAutoSlide();
+            });
+
+            startPictureAutoSlide();
+
+
+            // 熊家新闻
+            const newsData = [
+                { title: "熊家烟花节", date: "2024.10.05", desc: "首尔烟花节, 熊家看烟花", link: "news7.html" },
+                { title: "啊, 今天小小熊又挨揍了?", date: "2024.8.10", desc: "小小熊今天非常委屈，因为不喝奶被小光爸爸狠狠的揍了。", link: "news1.html" },
+                { title: "小熊家起草熊家法案", date: "", desc: "熊家宣布起草管理法案，规范小熊宝宝的行为。", link: "news2.html" },
+                { title: "熊家迎来新成员“小小熊”", date: "2023.12.30", desc: "2023年12月30日，小小熊出生，小君熊经历手术。", link: "news3.html" },
+                { title: "两只熊的济州岛奇妙之旅", date: "2023.7.10", desc: "近日，两只可爱的熊前往济州岛，享受了一段幸福的旅行。", link: "news4.html" },
+                { title: "两只熊本科毕业啦", date: "2022.8.17", desc: "2022年8月17日, 两只小熊本科毕业, 准备开启下个副本。", link: "news5.html" },
+                { title: "熊熊釜山行", date: "2022.2.27", desc: "陪小君考雅思，两只熊熊釜山行", link: "news6.html" },
+                // 添加更多新闻
+            ];
+
+            const newsPerPage = 2;
+            let currentPage = sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1;
+
+            function renderNews() {
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '';
+
+                const start = (currentPage - 1) * newsPerPage;
+                const end = start + newsPerPage;
+                const newsToShow = newsData.slice(start, end);
+
+                newsToShow.forEach(news => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news';
+                    newsDiv.innerHTML = `
+                        <h5 style="font-size: 22px;"><a href="${news.link}" onclick="saveCurrentPage()">${news.title}</a></h5>
+                        <p>${news.date}</p>
+                        <p>${news.desc}</p>
+                    `;
+                    newsContainer.appendChild(newsDiv);
+                });
+
+                renderPagination();
+            }
+
+            function renderPagination() {
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                const pageNumbers = document.getElementById('page-numbers');
+                pageNumbers.innerHTML = '';
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageSpan = document.createElement('span');
+                    pageSpan.textContent = i;
+                    pageSpan.className = i === currentPage ? 'active' : '';
+                    pageSpan.addEventListener('click', function () {
+                        currentPage = i;
+                        renderNews();
+                    });
+                    pageNumbers.appendChild(pageSpan);
+                }
+
+                document.getElementById('prev-page').disabled = currentPage === 1;
+                document.getElementById('next-page').disabled = currentPage === totalPages;
+            }
+
+            document.getElementById('prev-page').addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderNews();
+                }
+            });
+
+            document.getElementById('next-page').addEventListener('click', function () {
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderNews();
+                }
+            });
+
+            // 保存当前页面的函数
+            function saveCurrentPage() {
+                sessionStorage.setItem('currentPage', currentPage);
+            }
+
+            // 初始渲染新闻
+            renderNews();
+
+
+            // 熊家纪念日
+            const anniversaries = [
+                { date: new Date('2020-01-26'), name: '两只熊♥' },
+                { date: new Date('1998-09-29'), name: '光生日' },
+                { date: new Date('1998-12-13'), name: '君生日' },
+                { date: new Date('2023-08-09'), name: '结婚纪念日' },
+                { date: new Date('2023-12-30'), name: '小小熊生日' }
+            ];
+
+            let reIndex = 0;
+            let reInterval;
+
+            function updateAnniversary(index) {
+                const reElements = document.querySelectorAll('.re');
+                const current = anniversaries[index];
+                const now = new Date();
+                const diff = Math.ceil((now - current.date) / (1000 * 60 * 60 * 24));
+                reElements[0].textContent = current.name;
+                reElements[1].textContent = current.date.toLocaleDateString();
+                reElements[2].textContent = `距今已经${diff}天`;
+                updateDots(index);
+            }
+
+            function updateDots(index) {
+                const dots = document.getElementById('dots');
+                dots.innerHTML = '';
+                anniversaries.forEach((_, i) => {
+                    const dot = document.createElement('span');
+                    dot.className = 'dot' + (i === index ? ' active' : '');
+                    dots.appendChild(dot);
+                });
+            }
+
+            function startAnniversaryAutoSlide() {
+                reInterval = setInterval(function () {
+                    reIndex = (reIndex + 1) % anniversaries.length;
+                    updateAnniversary(reIndex);
+                }, 5000);
+            }
+
+
+            document.getElementById('prev-re').addEventListener('click', function () {
+                reIndex = (reIndex - 1 + anniversaries.length) % anniversaries.length;
+                updateAnniversary(reIndex);
+            });
+
+            document.getElementById('next-re').addEventListener('click', function () {
+                reIndex = (reIndex + 1) % anniversaries.length;
+                updateAnniversary(reIndex);
+            });
+
+            updateAnniversary(reIndex);
+            startAnniversaryAutoSlide();
+
+
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // 显示欢迎页面的逻辑
+                function showWelcomeScreen() {
+                    document.getElementById('welcome-screen').style.display = 'flex';
+                    document.getElementById('con').style.display = 'none';
+
+                    document.getElementById('welcome-screen').addEventListener('click', function () {
+                        document.getElementById('welcome-screen').classList.add('welcome-hide');
+                        setTimeout(function () {
+                            document.getElementById('welcome-screen').style.display = 'none';
+                            document.getElementById('con').style.display = 'block';
+                        }, 1000);
+                    });
+                }
+
+                // 基于访问时间间隔显示欢迎页面
+                const welcomeTimeout = 3 * 60 * 60 * 1000; // 3小时
+                const now = new Date().getTime();
+                const lastVisit = localStorage.getItem('lastVisit');
+                const justLoggedIn = localStorage.getItem('justLoggedIn');
+
+                if (!lastVisit || now - lastVisit > welcomeTimeout) {
+                    showWelcomeScreen();
+                    localStorage.setItem('lastVisit', now);
+                } else if (justLoggedIn) {
+                    showWelcomeScreen(); // 只在刚刚登录时显示欢迎页面
+                    localStorage.removeItem('justLoggedIn'); // 移除标记
+                } else {
+                    document.getElementById('welcome-screen').style.display = 'none';
+                    document.getElementById('con').style.display = 'block';
+                }
+
+                // 用户登录逻辑
+                const username = localStorage.getItem('username');
+                const welcomeMessage = document.getElementById('welcome-message');
+                const loginElement = document.getElementById('login');
+                const vipDropdown = document.getElementById('vip-dropdown');
+                const vipMessage = document.getElementById('vip-message');
+
+                if (username) {
+                    welcomeMessage.innerText = `${username}, 欢迎你来到熊熊之家`;
+                    if (loginElement) {
+                        loginElement.textContent = username;
+                        loginElement.href = '#';
+                        vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+                    }
+
+                    // 悬停时显示下拉菜单
+                    loginElement.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+
+                    // 鼠标离开下拉区域时隐藏下拉菜单
+                    vipDropdown.addEventListener('mouseleave', function () {
+                        vipDropdown.style.display = 'none';
+                    });
+
+                    // 鼠标离开登录元素时隐藏下拉菜单
+                    loginElement.addEventListener('mouseleave', function () {
+                        setTimeout(function () {
+                            if (!vipDropdown.matches(':hover')) {
+                                vipDropdown.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+                } else {
+                    welcomeMessage.innerText = '欢迎来到熊熊之家';
+                    vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+                }
+            });
+
+            // 在用户成功登录后调用
+            function setJustLoggedIn() {
+                localStorage.setItem('justLoggedIn', 'true');
+            }
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+
+
+      
+        </script>
+    </div>
+</body>
+
+</html>

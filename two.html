@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>双熊熊</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #con {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(two_pic/q.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        body {
+            background: #f0f4f8;
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: center; /* 居中对齐 */
+            align-items: center;
+            background-image: url(two_pic/q.jpg);
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            padding: 15px 0;
+            max-width: 100%;
+            gap: 20px; /* 调整标题和图片间距 */
+            min-height: 150px;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 42px; /* 增大字体 */
+            margin: 0;
+            color: #333;
+            font-weight: 700; /* 字体加粗 */
+            text-shadow: 2px 2px #fcfdfd;
+        }
+
+        h3:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
+        }
+
+        h5{
+            font-size: 22px;
+        }
+
+        header img {
+            width: 130px;
+            height: 180px;
+            border-radius: 50%;
+        }
+
+        header img:hover{
+            transform: scale(1.05);
+            opacity: 0.8; /* 透明度 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #login {
+          color: #444;
+          font-weight: 600;
+          text-decoration: none;
+          cursor: pointer;
+      }
+
+      .dropdown {
+          position: absolute;
+          right: 20px;
+          top: 20px;
+      }
+
+      .dropdown-content {
+          display: none;
+          position: absolute;
+          right: 0;
+          top: 100%; /* Ensure it drops below the login element */
+          background-color: linear-gradient(45deg, #d5ecfb, #4fa9d9dd);
+          min-width: 240px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          z-index: 100;
+          border-radius: 8px;
+          overflow: hidden;
+          padding: 10px 0; /* Added padding to handle hover area */
+      }
+
+      .dropdown:hover .dropdown-content,
+      .dropdown-content:hover {
+          display: block;
+      }
+
+      .dropdown-content p {
+          padding: 12px 16px;
+          color: #000000;
+          text-shadow: 2px 2px rgb(255, 255, 255);
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .dropdown-content a {
+          color: rgb(76, 144, 212);
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          
+          transition: background-color 0.3s ease;
+      }
+
+      .dropdown-content a:hover {
+          background-color: #4fb7e8a3;
+      }
+
+      #navbar {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(240, 228, 252, 0.9), rgba(218, 186, 245, 0.9));
+            padding: 10px 20px; /* 增加左右内边距 */
+            border-radius: 8px; /* 调整边角圆滑 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+            max-width: 100%;
+        }
+
+        #navbar a {
+            color: #333;
+            font-size: 26px;
+            font-weight: 600;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* 添加变换过渡 */
+            margin: 0 10px;
+            background-color: rgba(236, 188, 245, 0.3);
+            border-radius: 50px;
+            position: relative; /* 添加相对定位以便于创建伪元素 */
+            overflow: hidden; /* 防止内容溢出 */
+        }
+
+        #navbar a::before {
+            content: ""; /* 创建伪元素用于渐变效果 */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(214, 150, 244, 0.5);
+            transition: width 0.4s ease-in-out, left 0.4s ease-in-out; /* 过渡效果 */
+            z-index: 0; /* 确保在背景层 */
+        }
+
+        #navbar a:hover::before {
+            width: 100%; /* 鼠标悬停时展开 */
+            left: 0; /* 使背景完全展开 */
+        }
+
+        #navbar a:hover {
+            color: #2e2e2e; /* 鼠标悬停时更改字体颜色 */
+            background-color: rgba(214, 150, 244, 0.7); /* 鼠标悬停时更改背景颜色 */
+            transform: scale(1.05); /* 鼠标悬停时放大 */
+        }
+
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 95%;
+            margin: 20px auto; /* 调整 margin 让它更居中 */
+            gap: 20px; /* 增加左右板块间距 */
+        }
+
+        #news, #related {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #news {
+            background-image: url(two_pic/w.jpg);
+        }
+
+        #related {
+            background-image: url(two_pic/w_1.jpg);
+        }
+
+        h4 {
+            font-size: 28px; /* 改大字体 */
+            margin-bottom: 15px;
+            color: #000000;
+            text-align: center;
+            font-weight: 700;
+            text-shadow: 2px 1px #fcfdfd;
+        }
+
+        .news, .re {
+            padding: 10px;
+            margin-bottom: 15px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .news:hover, .re:hover {
+            background-color: rgba(222, 206, 245, 0.7);
+            border-radius: 5px;
+        }
+
+        #related-container, #news-container {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        #related-container p{
+            font-size: 20px;
+        }
+
+
+
+        #picture {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            overflow: hidden;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+
+        #pictures {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: calc(250px * 4);
+        }
+
+        #pictures img {
+            width: 300px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        #pictures img:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 10px;
+        }
+
+        .arrow-small {
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        #prev-re {
+            left: -25px;
+        }
+
+        #next-re {
+            right: -25px;
+        }
+
+        .arrow, .arrow-small {
+            cursor: pointer;
+            user-select: none;
+        }
+
+
+        #news:hover, #related:hover{
+            transform: scale(1.02); 
+            transition: transform 0.3s ease;
+        }
+
+       
+
+        .pagination-btn {
+            border: none;
+            background-color: #efdbfd;
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #d29ff9;
+        }
+
+        #page-numbers span {
+            display: inline-block;
+            margin: 0 3px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #page-numbers .active {
+            background-color: #dbaafc;
+            color: white;
+        }
+
+        #page-numbers span:hover {
+            background-color: #a98af9;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div id="con">
+        <header>
+            <div><h3>合体</h3></div>
+            <!-- <div><img src="two_pic/two.jpg" alt="熊家图标"></div> -->
+            <div><h3>熊熊</h3></div>
+            <div class="dropdown">
+                <a id="login" href="login.html" style="font-size: 20px;">Login</a>
+                <div class="dropdown-content" id="vip-dropdown">
+                    <p id="vip-message"></p>
+                </div>
+            </div>
+        </header>
+        
+        
+        <div id="navbar">
+            <a href="homepage.html">熊家主页</a><br>
+            <a href="jun.html">小君主页</a><br>
+            <a href="baby.html">熊宝宝主页</a><br>
+            
+        </div>
+        <br>
+        <br>
+        
+        
+        <div id="picture">
+            <div id="prev" class="arrow"><</div>
+            <div id="pictures">
+                
+                <img height="200" width="200" src="two_pic/401.jpg" alt="">
+                <img height="200" width="200" src="two_pic/402.jpg" alt="">
+                <img height="200" width="200" src="two_pic/404.jpg" alt="">
+                <img height="200" width="200" src="two_pic/451.jpg" alt="">
+                <img height="200" width="200" src="two_pic/452.jpg" alt="">
+                <img height="200" width="200" src="two_pic/453.jpg" alt="">
+                <img height="200" width="200" src="two_pic/454.jpg" alt="">
+                <img height="200" width="200" src="two_pic/455.jpg" alt="">
+                <img height="200" width="200" src="two_pic/456.jpg" alt="">
+            </div>
+            <div id="next" class="arrow">></div>
+        </div>
+
+        <div id="container">
+            <div id="news">
+                <h4>宝宝历程</h4>
+                <p style="text-align: center;" style="font-size: 20px;"></p>
+                <div id="news-container" style="text-align: left; font-size: 20px; font-weight: 500;">
+                    <!-- 新闻内容 -->
+                </div>
+                <br>
+                <div id="pagination" style="text-align: center; margin-top: 10px;">
+                    <button id="prev-page" class="pagination-btn">上一页</button>
+                    <span id="page-numbers"></span>
+                    <button id="next-page" class="pagination-btn">下一页</button>
+                </div>
+            </div>
+
+            <div id="related">
+                <h4>君君历程</h4>
+                <p style="text-align: center; font-size: 20px;"></p>
+                <div id="related-container" style="text-align: left; font-size: 20px; font-weight: 500;">
+                    <!-- 新闻内容 -->
+                </div>
+                <br>
+                <div id="pagination-related" style="text-align: center; margin-top: 10px;">
+                    <button id="prev-page-related" class="pagination-btn">上一页</button>
+                    <span id="page-numbers-related"></span>
+                    <button id="next-page-related" class="pagination-btn">下一页</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <br>
+        <footer>
+            <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(237, 230, 249, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
+                <p style="font-size: 19px; color: #555; margin: 0;">
+                    网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+                </p>
+                <p style="font-size: 14px; color: #999; margin-top: 10px;">
+                    © 2024 熊家 All Rights Reserved.
+                </p>
+            </div>
+        </footer>        
+    </div>
+
+
+        <script>
+            // 图片轮播逻辑
+            let pictureIndex = 0;
+            const pictures = document.getElementById('pictures');
+            const pictureChildren = pictures.children;
+            let pictureInterval;
+
+            function slideToIndex(index) {
+                pictureIndex = index;
+                pictures.style.transform = 'translateX(' + (-pictureChildren[0].offsetWidth * pictureIndex) + 'px)';
+            }
+
+            function startPictureAutoSlide() {
+                pictureInterval = setInterval(function () {
+                    pictureIndex = (pictureIndex + 1) % pictureChildren.length;
+                    slideToIndex(pictureIndex);
+                }, 2000);
+            }
+
+            function stopPictureAutoSlide() {
+                clearInterval(pictureInterval);
+            }
+
+            document.getElementById('prev').addEventListener('click', function () {
+                stopPictureAutoSlide();
+                pictureIndex = (pictureIndex - 1 + pictureChildren.length) % pictureChildren.length;
+                slideToIndex(pictureIndex);
+                startPictureAutoSlide();
+            });
+
+            document.getElementById('next').addEventListener('click', function () {
+                stopPictureAutoSlide();
+                pictureIndex = (pictureIndex + 1) % pictureChildren.length;
+                slideToIndex(pictureIndex);
+                startPictureAutoSlide();
+            });
+
+            startPictureAutoSlide();
+
+            
+
+            //超声波展示
+            const newsData = [
+                { title: "Week 4", date: "", desc: "第一次见到你 你还是一个小扁蛋", img: "two_pic/451.jpg", link: "news7.html" },
+                { title: "Week 6", date: "", desc: "一个更扁的蛋 有心跳了", img: "two_pic/452.jpg", link: "news7.html" },
+                { title: "Week 8", date: "", desc: "初具人形", img: "two_pic/453.jpg", link: "news7.html" },
+                { title: "Week 12", date: "", desc: "更像小人了", img: "two_pic/454.jpg", link: "news7.html" },
+                { title: "Week 16", date: "", desc: "医生给你拍了屁屁照 得知你是只男宝宝", img: "two_pic/455.jpg", link: "news7.html" },
+                { title: "Week 28", date: "", desc: "你的第一张彩照", img: "two_pic/456.jpg", link: "news7.html" },
+            ];
+
+            const newsPerPage = 1;
+            let currentPage = sessionStorage.getItem('currentPage') ? parseInt(sessionStorage.getItem('currentPage')) : 1;
+
+            function renderNews() {
+                const newsContainer = document.getElementById('news-container');
+                newsContainer.innerHTML = '';
+
+                const start = (currentPage - 1) * newsPerPage;
+                const newsToShow = newsData.slice(start, start + newsPerPage);
+
+                newsToShow.forEach(news => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news';
+                    newsDiv.innerHTML = `
+                        <h5 style="font-size: 26px; text-align:center;">${news.title}</h5>
+                        <h5 style="font-size: 22px; text-align:center;">${news.desc}</h5>
+                        <img src="${news.img}" alt="${news.title}" style="width:90%; height:auto; margin-left:auto; margin-right:auto; display:block;">
+                    `;
+                    newsContainer.appendChild(newsDiv);
+                });
+
+                renderPagination();
+            }
+
+            function renderPagination() {
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                const pageNumbers = document.getElementById('page-numbers');
+                pageNumbers.innerHTML = '';
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageSpan = document.createElement('span');
+                    pageSpan.textContent = i;
+                    pageSpan.className = i === currentPage ? 'active' : '';
+                    pageSpan.addEventListener('click', function () {
+                        currentPage = i;
+                        renderNews();
+                    });
+                    pageNumbers.appendChild(pageSpan);
+                }
+
+                document.getElementById('prev-page').disabled = currentPage === 1;
+                document.getElementById('next-page').disabled = currentPage === totalPages;
+            }
+
+            document.getElementById('prev-page').addEventListener('click', function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderNews();
+                }
+            });
+
+            document.getElementById('next-page').addEventListener('click', function () {
+                const totalPages = Math.ceil(newsData.length / newsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderNews();
+                }
+            });
+
+            function saveCurrentPage() {
+                sessionStorage.setItem('currentPage', currentPage);
+            }
+
+            renderNews();
+
+
+            
+            const relatedContents = [
+                { title: "2023年上学期  期中考试周", text: "傍晚，我和小光看着从医院拿回来的那张扁蛋图像，陷入了沉思——这真的是个人吗？怎么看起来更像个蛋呢？小光总是问我有什么感觉，而我总是回答：“没有。”\n\n" },
+                { title: "2023年上学期  期中-期末", text: "渐渐地，身体开始一天比一天不适，吐，闷，饿。在学校，忙碌于上课和发表。每次英文发表要持续两三个小时，全凭毅力强忍一次次不适。身体越是不舒服，似乎我越是想把事情做得更好。\n\n" },
+                { title: "2023年上学期  学期收获", text: "学期平均绩点:98.3/100, 奖学金:折合约4w人民币"},
+                { title: "2023年暑假", text: "研究助教没有暑假，每天都在做声学分析。小光每天陪着我做。", img: "two_pic/493.jpg" },
+                { title: "", text: "", img: "" },
+                { title: "", text: "", img: "" },
+                { title: "2023年下学期  期中前", text: "不断加重的不适，白天闷、晕、吐、喘不过气, 晚上彻夜难眠。小光开始每天陪我上学放学。\n\n" },
+                { title: "2023年下学期  期中后", text: "超级不适，晚上稍微一动就被撕扯痛得清醒过来，夜夜无眠。在学校, 因着去成均馆大学交换学习了人工智能，没有基础，常常熬夜到清晨。在家里走路都困难的我，到了学校却总是风轻云淡、步态轻盈。\n\n" },
+                { title: "2023年下学期  学期收获", text: "人工智能课:满分，学期平均绩点:98.3/100，奖学金:折合约4w人民币" },
+                { title: "2023年寒假初", text: "结束合体时光",  img: "two_pic/405.jpg" },
+            ];
+
+            let currentPageRelated = 0;
+
+            function displayRelatedContent() {
+                const relatedContainer = document.getElementById("related-container");
+                relatedContainer.innerHTML = "";
+
+                // 显示两个内容
+                for (let i = 0; i < 3; i++) {
+                    const contentIndex = currentPageRelated * 3 + i; // 计算当前显示的内容索引
+                    if (contentIndex < relatedContents.length) {
+                        const content = relatedContents[contentIndex];
+                        const contentDiv = document.createElement("div");
+                        contentDiv.className = "related-content"; // 为每个内容添加类以便样式
+
+                        const title = document.createElement("h5");
+                        title.innerText = content.title;
+                        const text = document.createElement("p");
+                        text.innerText = content.text;
+
+                        contentDiv.appendChild(title);
+                        contentDiv.appendChild(text);
+
+                        if (content.img) {
+                            const img = document.createElement("img");
+                            img.src = content.img;
+                            img.alt = "图片";
+                            img.style.width = "70%";
+                            img.style.height = "auto"
+                            contentDiv.appendChild(img);
+                        }
+
+                        relatedContainer.appendChild(contentDiv);
+                    }
+                }
+
+                updateRelatedPageNumbers();
+            }
+
+            function updateRelatedPageNumbers() {
+                const totalPages = Math.ceil(relatedContents.length / 3); // 计算总页数
+                document.getElementById("page-numbers-related").innerText = `${currentPageRelated + 1} / ${totalPages}`;
+            }
+
+            function prevPageRelated() {
+                if (currentPageRelated > 0) {
+                    currentPageRelated--;
+                    displayRelatedContent();
+                }
+            }
+
+            function nextPageRelated() {
+                const totalPages = Math.ceil(relatedContents.length / 3); // 计算总页数
+                if (currentPageRelated < totalPages - 1) {
+                    currentPageRelated++;
+                    displayRelatedContent();
+                }
+            }
+
+            document.getElementById("prev-page-related").addEventListener("click", prevPageRelated);
+            document.getElementById("next-page-related").addEventListener("click", nextPageRelated);
+
+            displayRelatedContent();
+
+
+
+
+            //login
+            document.addEventListener('DOMContentLoaded', function () {
+                const username = localStorage.getItem('username');
+                const loginElement = document.getElementById('login');
+                const vipDropdown = document.getElementById('vip-dropdown');
+                const vipMessage = document.getElementById('vip-message');
+
+                if (username) {
+                    loginElement.textContent = username;
+                    loginElement.href = '#';
+                    vipMessage.innerHTML = `超厉害的熊熊VIP ${username}, 您好! <a href="login_info.html">查看我的熊熊vip详情</a>`;
+
+                    // Show dropdown on hover
+                    loginElement.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+
+                    loginElement.addEventListener('mouseleave', function () {
+                        setTimeout(function () {
+                            if (!vipDropdown.matches(':hover')) {
+                                vipDropdown.style.display = 'none';
+                            }
+                        }, 300);
+                    });
+
+                    vipDropdown.addEventListener('mouseover', function () {
+                        vipDropdown.style.display = 'block';
+                    });
+
+                    vipDropdown.addEventListener('mouseleave', function () {
+                        vipDropdown.style.display = 'none';
+                    });
+                } else {
+                    vipMessage.innerHTML = `( ＾∀＾）／欢迎＼( ＾∀＾）`;
+                }
+            });
+
+
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+
+
+           
+        </script>
+    </div>
+</body>
+
+</html>

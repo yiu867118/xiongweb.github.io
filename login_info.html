@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+    <style>
+        #con {
+            position: relative;
+            max-width: 80%;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 20px 30px;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #con:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(home_pic/back.jpg);
+            background-size: cover;
+            background-position: center;
+            opacity: 0.85;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8, #dbe2ef);
+            font-family: 'KaiTi', 'Pacifico', 'Dancing Script', 'Brush Script MT', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .info {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .info strong {
+            color: #2c3e50;
+        }
+
+        #logout {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #d5ecfb, #4fa9d9);
+            color: white;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        #logout:hover {
+            background: linear-gradient(45deg, #add9f4, #4f9eee);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        #logout:active {
+            transform: scale(0.98);
+        }
+
+        /* 提高输入框动画的精致感 */
+        .con {
+            transform: translateY(-10px);
+            opacity: 0;
+            animation: fadeInUp 1s forwards ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="con" class="con">
+        <h2>用户信息</h2>
+        <div id="user-info">
+            <!-- 用户信息将在这里显示 -->
+        </div>
+        <button id="logout">退出登录</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const username = localStorage.getItem('username');
+            const userInfoDiv = document.getElementById('user-info');
+
+            if (username) {
+                // 显示用户信息
+                const user = JSON.parse(localStorage.getItem('userData'));
+                userInfoDiv.innerHTML = `
+                    <div class="info"><strong>昵称：</strong> ${user.username}</div>
+                    <div class="info"><strong>姓名：</strong> ${user.fullname}</div>
+                    <div class="info"><strong>生日：</strong> ${user.birthdate}</div>
+                `;
+            } else {
+                // 如果没有用户名，跳转到登录页面
+                // window.location.href = 'login.html';
+            }
+
+            // 退出登录
+            document.getElementById('logout').addEventListener('click', function () {
+                localStorage.removeItem('username');
+                localStorage.removeItem('userData');
+                window.location.href = 'homepage.html';
+            });
+        });
+
+
+            //supabase
+            document.addEventListener('DOMContentLoaded', async () => {
+            const pageUrl = window.location.href;
+            const username = localStorage.getItem('username') || null;
+
+            try {
+                // 获取用户IP和地理位置
+                const ipResponse = await fetch('https://ipapi.co/json/');
+                if (!ipResponse.ok) throw new Error('获取IP地址和位置失败');
+                const locationData = await ipResponse.json();
+                console.log('locationData:', locationData); // 调试信息
+
+                const city = locationData.city || '未知城市';
+                const country = locationData.country_name || '未知国家';
+                const region = locationData.region || '未知地区';
+
+                // 使用服务器时间并转换为北京时间
+                const getServerTime = async () => {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Asia/Shanghai');
+                if (!res.ok) throw new Error('获取服务器时间失败');
+                const timeData = await res.json();
+                return timeData.datetime;
+                };
+
+                const beijingTime = await getServerTime();
+
+                // 记录访问详情
+                const supabaseUrl = 'https://uppjbtoicickglnjorjn.supabase.co';
+                const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwcGpidG9pY2lja2dsbmpvcmpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjg2MzE4MDUsImV4cCI6MjA0NDIwNzgwNX0.TnPWSguzaNfyoR4lYNngiiCAOThjfhf19iOJsW2o__M';
+                const { createClient } = window.supabase;
+                const supabase = createClient(supabaseUrl, supabaseKey);
+
+                const { data, error } = await supabase
+                .from('visits')
+                .insert([{ username, page_url: pageUrl, timestamp: beijingTime, city, country, region }]);
+
+                if (error) {
+                console.error('记录访问详情时出错:', error);
+                } else {
+                console.log('访问记录成功:', data);
+                }
+            } catch (error) {
+                console.error('获取用户位置时出错:', error.message);
+            }
+            });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>小君熊的个人主页</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                 url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #con {
+            position: relative;
+            max-width: 98%;
+            max-height: 98%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(love_pic/g.jpg);
+            background-size: 100%;
+            opacity: 0.9;
+            z-index: -1;
+        }
+
+        /* 动态背景渐变 */
+        body {
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('home_pic/back.jpg') center/cover no-repeat;
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(3px);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #000;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            animation: fadeInSlideDown 1.2s ease;
+        }
+
+        @keyframes fadeInSlideDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #navbar {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #navbar a {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #navbar a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(150, 207, 244, 0.5);
+            z-index: 0;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+
+
+        #navbar a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        #navbar a:hover {
+            color: rgba(48, 68, 95, 0.719);
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+/* Section Styling */
+section {
+    max-width: 80%;
+    width: 90%;
+    margin: 0 auto;
+    padding: 40px;
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: center;
+    overflow: hidden;
+}
+
+section:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+section {
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Title Styling */
+section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+    position: relative;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #74bfeb, #acc5e5);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* List Styling */
+section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+section ul li {
+    margin: 20px 0;
+    font-size: 16px;
+}
+
+section ul li a {
+    display: block;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ffffffe0, #ebf0f5);
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+section ul li a:hover {
+    background: linear-gradient(135deg, #ffffff73, #ffffff);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+/* Interactive Elements */
+section ul li a .date {
+    display: block;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+section ul li a .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+section ul li a .detail {
+    font-size: 16px;
+    color: #555;
+    margin-top: 5px;
+}
+
+section ul li a .link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #1b5d8a;
+    background: rgba(0, 121, 107, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+section ul li a .link:hover {
+    color: #fff;
+    background: #377eb9;
+}
+
+/* Placeholder Style */
+section ul li a .placeholder {
+    color: #888;
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    section {
+        padding: 30px;
+    }
+    section h2 {
+        font-size: 20px;
+    }
+    section ul li a {
+        padding: 15px;
+    }
+    section ul li a .title {
+        font-size: 16px;
+    }
+}
+
+
+
+   /* 自我介绍 */
+#background {
+    padding: 60px 30px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: 80px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    animation: fadeIn 1.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景动态微粒效果 */
+#background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://cdn.pixabay.com/photo/2017/02/22/00/41/particles-2089967_960_720.png') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+    animation: glowPulse 5s infinite;
+}
+
+/* 标题样式 */
+#background h2 {
+    font-size: 24px;
+    color: #333;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.6);
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 内容容器样式 */
+.intro-content {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+/* 左侧图像容器 */
+.intro-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.intro-left:hover {
+    transform: translateY(-5px);
+}
+
+/* 图像样式 */
+.intro-image {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.intro-image:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 文字内容样式 */
+.intro-text {
+    flex: 1;
+    font-size: 22px;
+    line-height: 1.8;
+    color: #0c0c0c;
+    text-align: justify;
+    padding: 10px 20px;
+    border-left: 4px solid rgba(0, 120, 215, 0.8);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-text:hover {
+    background: rgba(196, 228, 243, 0.9);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        transform: scale(1.05);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+
+
+
+
+/* MBTI 区块优化 */
+#mbti {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; /* 保持左右内容对齐高度 */
+    justify-content: space-between; /* 两侧均匀分布 */
+    gap: 40px; /* 加大间距，增加留白感 */
+    padding: 60px 5%;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+#mbti h2 {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    margin-bottom: 30px;
+    color: #1c1c1c;
+    width: 100%;
+    text-align: center;
+}
+
+#mbti h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #ff6f61, #fdbb2d);
+    margin: 15px auto 0;
+    border-radius: 5px;
+}
+
+#mbti .mbti-card {
+    flex: 1 1 35%; /* 保证宽度一致 */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mbti .mbti-content {
+    flex: 1 1 55%; /* 保证宽度一致 */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#mbti .mbti-card:hover, #mbti .mbti-content:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+}
+
+#mbti .mbti-card img {
+    width: 95%; /* 限制最大宽度 */
+    max-width: 500px;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border: 4px solid rgba(196, 196, 196, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mbti .mbti-card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .mbti-content h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2a2a2a;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#mbti .mbti-content p {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify; /* 更好地排版文字 */
+}
+
+#mbti .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #61cdff, #3bb2ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+#mbti .cta-button:hover {
+    background: linear-gradient(135deg, #3bb2ff, #61cdff);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+#mbti .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+#mbti .cta-button:hover::before {
+    width: 100%;
+}
+
+
+
+/* Family 样式整体优化 */
+#family {
+  background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
+  padding: 60px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.family-container {
+  display: flex;
+  align-items: flex-start; /* 顶部对齐 */
+  justify-content: space-evenly; /* 左对齐图片 */
+  flex-wrap: nowrap; /* 不换行，保持横向排列 */
+  gap: 20px; /* 模块间距 */
+}
+
+.family-content {
+  flex: 1 1 1%; /* 最小宽度 40%，可扩展 */
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
+  max-width: 300px; /* 限制宽度 */
+}
+
+.family-content p {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff6f61;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(255, 111, 97, 0.3);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #e05c54;
+  box-shadow: 0 10px 20px rgba(255, 111, 97, 0.5);
+}
+
+#family h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+
+#family h2::after {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 50px;
+  background: #ff6f61;
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+
+.sliders-container {
+  flex: 1 1 60%; /* 最小宽度 60%，可扩展 */
+  display: flex;
+  gap: 15px; /* 轮播之间的间距 */
+}
+
+.family-slider {
+  flex: 1;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.family-slider-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease;
+}
+
+.family-slider-wrapper.effect-fade img.active {
+  opacity: 1;
+}
+
+.family-slider-wrapper.effect-slide {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  animation: slideEffect 10s linear infinite;
+}
+
+.family-slider-wrapper.effect-slide img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.family-slider-wrapper.effect-zoom img {
+  transform: scale(1);
+}
+
+.family-slider-wrapper.effect-zoom img.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* 动画效果 */
+@keyframes slideEffect {
+  0%, 20% {
+    transform: translateX(0);
+  }
+  40%, 60% {
+    transform: translateX(-100%);
+  }
+  80%, 100% {
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+
+
+/* Baby 模块整体样式 */
+.baby {
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
+    color: #333;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+}
+
+/* 容器布局 */
+#baby-container {
+  display: flex;
+  align-items: flex-start; /* 顶部对齐 */
+  justify-content: space-evenly; /* 左对齐图片 */
+  flex-wrap: nowrap; /* 不换行，保持横向排列 */
+  gap: 15px; /* 调整间距，使得内容与图片更紧凑 */
+  flex: 1 1 80%; /* 最小宽度 60%，可扩展 */
+}
+
+/* 标题样式 */
+.baby h2 {
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #3a3a3a;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+.baby h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: linear-gradient(90deg, #74ebd5, #9face6);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* 内容样式 */
+.baby-content {
+    font-size: 18px; /* 适当调整字体大小 */
+    line-height: 1.6;
+    text-align: left; /* 调整为左对齐 */
+    color: #444;
+    max-width: 300px; /* 限制宽度 */
+    
+}
+
+/* 按钮样式 */
+.baby .cta-button {
+    display: inline-block;
+    margin: 15px 0;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(90deg, #74ebd5, #acb6e5);
+    border-radius: 25px;
+    box-shadow: 0 5px 15px rgba(116, 235, 213, 0.4);
+    transition: all 0.4s ease;
+    text-decoration: none;
+}
+
+.baby .cta-button:hover {
+    background: linear-gradient(90deg, #5db4ab, #839abe);
+    box-shadow: 0 10px 20px rgba(116, 235, 213, 0.6);
+    transform: translateY(-3px);
+}
+
+/* 图片区域 */
+.baby-photos {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; /* 左对齐图片 */
+    gap: 20px; /* 缩小图片间距 */
+}
+
+.baby-photos img {
+    width: 140px; /* 调整图片大小 */
+    height: 140px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.baby-photos img:hover {
+    transform: scale(1.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 10px rgba(116, 235, 213, 0.7);
+    border-color: #74ebd5;
+}
+
+
+
+
+
+/* 熊家品牌模块 */
+#brand {
+    background: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7)), url(love_pic/n.jpg) center/cover no-repeat;
+    padding: 60px 20px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin: 40px auto;
+}
+
+/* Flex 布局容器 */
+.brand-container {
+    display: flex;
+    flex-wrap: nowrap; /* 保持横向排列 */
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px; /* 增加间距 */
+    margin: 0 auto;
+}
+
+/* 文本和按钮 */
+.brand-content {
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+    max-width: 300px; /* 限制宽度 */
+}
+
+.brand-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    color: #fff;
+    background: #ff6f61;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+    background: #ff4d40;
+    transform: scale(1.08);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 图片展示 */
+.brand-gallery {
+    flex: 2; /* 更宽的图片区域 */
+    display: grid; /* 使用网格布局 */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 响应式网格 */
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 100%; /* 自适应宽度 */
+    max-height: 300px;
+    aspect-ratio: 1; /* 保持正方形 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 15px;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+        .photos img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #fff;
+        }
+
+        .photos img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #74d3eb, #56c1d4);
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 30px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-45deg);
+    transition: all 0.4s ease;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, #ff9edf, #f74690c2);
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 精致边框效果 */
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cta-button:hover::after {
+    opacity: 1;
+}
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #74c5eb75;
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: white;
+            border-radius: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="con">
+    <div id="particles-js">
+    <header>
+        <h1>小君熊的个人主页</h1>
+        <br>
+        <br>
+        <nav id="navbar">
+            <a href="#background">简介</a>
+            <a href="#photos">照片墙</a>
+            <a href="#mbti">MBTI</a>
+            <a href="#papers">作品</a>
+            <a href="#family">熊两只</a>
+            <a href="#baby">熊宝宝</a>
+            <a href="#brand">熊家</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="background" class="intro-section">
+            <h2>小君简介</h2>
+            <div class="intro-content">
+                <div class="intro-left">
+                    <img src="jun_pic/intro2.jpg" alt="小君" class="intro-image">
+                    <!-- <a class="gallery-button" href="baby_pic.html">点击进入小熊宝宝影像集</a> -->
+                </div>
+                <div class="intro-text">
+                    <p>我是小君熊，熊家排行第二，但聪明才智熊家第一！别被我软萌可爱的外表骗了，其实我是个隐藏的“大脑袋”——智慧的象征。
+                      我兴趣广泛，从研究如何神不知鬼不觉地偷吃蛋糕，到挑战高难度的“上天取炸弹”任务，样样精通，可谓无所不能。</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <section id="photos" class="photos">
+            <h2>小君照片墙</h2>
+            <div>
+                <img src="jun_pic/0001.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0003.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0005.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0006.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0008.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0010.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0011.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0030.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0035.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0037.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0042.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0050.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0056.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0058.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0060.jpg" alt="小君小时候的照片1">
+                <img src="jun_pic/0062.jpg" alt="小君小时候的照片1">
+            </div>
+        </section>
+
+
+        <br>
+        <br>
+        <section id="mbti">
+            <h2>MBTI 性格分析</h2>
+            <div class="mbti-card">
+                <img src="jun_pic/MBTI.png" alt="MBTI 图标">
+            </div>
+            <div class="mbti-content">
+                <h3>ENTP-A 辩论者</h3>
+                <p>
+                    ENTP-A的人被称为"辩论者"，他们是机智而大胆的，不怕说出不同意现状的观点。他们几乎从不畏惧
+                    表达对于任何事情或任何人的不同意。这种个性类型的人热衷于唇枪舌剑–如果对话转向有争议的领域，
+                    那就更好了。他们是好奇且思维灵活的人，他们无法抵挡智力挑战。他们往往大胆且富有创造力，具有
+                    极高的思维敏捷性，能够解构和重建观念。
+                </p>
+                <p>
+                    <strong>外向 (E):</strong> 54%    你可能会通过社交互动获得能量，并倾向于公开表达你的热情和兴奋。<br>
+                    <strong>直觉 (N):</strong> 52%    你可能更倾向于关注可能性和未来的发展，而不是现在的事实和细节。<br>
+                    <strong>思考 (T):</strong> 69%    你在做决定时可能更多地依赖逻辑和客观分析，而不是个人价值观或情感。<br>
+                    <strong>知觉 (P):</strong> 71%    你可能更喜欢灵活和自由的生活方式，而不是有计划和组织的生活。<br>
+                    <strong>坚决型 (A):</strong> 53%  你可能是自信的、平和的、能抵抗压力的。
+                </p>
+                <a href="https://mbti.ycyuans.cn/#/home?source=ycyuans3&bd_vid=8488701860942752778" class="cta-button" target="_blank">进行 MBTI 测试</a>
+            </div>
+        </section>
+        
+
+
+
+        <section id="papers">
+            <h2>小君的作品</h2>
+            <ul>
+                <li>
+                    <a href="jun_pic/YihuiLu.pdf" target="_blank">
+                        <span class="date">2024.09.30</span> 
+                        <span class="title">发表了第一篇期刊论文</span> 
+                        <span class="detail">第一次在谷歌学术也可以搜到自己名字</span>
+                        <span class="link">点击查看论文</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="example.pdf" target="_blank">
+                        <span class="placeholder">敬请期待更多作品...</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        
+
+        <section id="family">
+            <h2>小君和小光</h2>
+            <div class="family-container">
+              <!-- 文本和按钮 -->
+              <div class="family-content">
+                <p>小君和小光是两只好朋友熊熊</p>
+                <a href="love1.html" class="cta-button">前往小君和小光的主页 (应相关隐私条款 该网页不可访问)</a>
+              </div>
+              <!-- 轮播模块容器 -->
+              <div class="sliders-container">
+                <!-- 轮播 1 -->
+                <div class="family-slider">
+                  <div class="family-slider-wrapper effect-slide">
+                    <img src="jun_pic/3000.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3002.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3003.jpg" alt="小熊宝宝照片">
+                  </div>
+                </div>
+                <!-- 轮播 2 -->
+                <div class="family-slider">
+                  <div class="family-slider-wrapper effect-fade">
+                    <img src="jun_pic/3004.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3050.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3051.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3052.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3053.jpg" alt="小熊宝宝照片">
+                  </div>
+                </div>
+                <!-- 轮播 3 -->
+                <div class="family-slider">
+                  <div class="family-slider-wrapper effect-zoom">
+                    <img src="jun_pic/3058.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3059.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3060.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/3061.jpg" alt="小熊宝宝照片">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          
+        
+        
+        
+        
+        
+          <section id="baby" class="baby"> 
+            <h2>小熊熊宝宝</h2>
+            <div id="baby-container">
+                <div class="baby-content">
+                    <p>一只可可爱爱的熊熊小宝宝</p>
+                    <a href="baby.html" class="cta-button">前往小熊宝宝的主页</a>
+                </div>
+                <div class="baby-photos">
+                    <img src="jun_pic/5001.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5002.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5005.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5010.jpg" alt="小熊宝宝照片">
+                    <img src="jun_pic/5012.jpg" alt="小熊宝宝照片">
+                </div>
+            </div>
+        </section>
+         
+        <section id="brand" class="brand">
+            <h2>熊熊一家</h2>
+            <div class="brand-container">
+                <!-- 文本和按钮 -->
+                <div class="brand-content">
+                    <p>我们是小熊熊一家</p>
+                    <a href="homepage.html" class="cta-button">前往熊家主页</a>
+                </div>
+                <!-- 图片展示模块 -->
+                <div class="brand-gallery">
+                    <div class="gallery-item">
+                        <img src="jun_pic/8001.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>熊宝宝</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="jun_pic/8002.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>专注</p>
+                        </div>
+                    </div>
+                    <!-- <div class="gallery-item">
+                        <img src="jun_pic/8003.jpg" alt="熊家照片">
+                        <div class="gallery-overlay">
+                            <p>睡呼呼</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+        
+
+
+
+
+        
+    </main>
+
+    <footer>
+        <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.6); border-top: 1px solid #ddd; margin-top: 40px;">
+            <p style="font-size: 19px; color: #555; margin: 0;">
+                网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+            </p>
+            <p style="font-size: 14px; color: #999; margin-top: 10px;">
+                © 2024 熊家 All Rights Reserved.
+            </p>
+        </div>
+    </footer>  
+    </div>
+    </div>
+    
+    
+    <script>
+// 渐隐效果
+document.querySelectorAll('.family-slider-wrapper.effect-fade').forEach(wrapper => {
+  const images = wrapper.querySelectorAll('img');
+  let currentIndex = 0;
+  setInterval(() => {
+    images.forEach(img => img.classList.remove('active'));
+    currentIndex = (currentIndex + 1) % images.length;
+    images[currentIndex].classList.add('active');
+  }, 4000);
+});
+
+// 放大缩小效果
+document.querySelectorAll('.family-slider-wrapper.effect-zoom').forEach(wrapper => {
+  const images = wrapper.querySelectorAll('img');
+  let currentIndex = 0;
+  setInterval(() => {
+    images.forEach(img => img.classList.remove('active'));
+    currentIndex = (currentIndex + 1) % images.length;
+    images[currentIndex].classList.add('active');
+  }, 4000);
+});
+
+
+
+        particlesJS.load('particles-js', 'particles.json', function() {
+            console.log('Particles.js config loaded');
+        });
+    </script>
+</body>
+</html>

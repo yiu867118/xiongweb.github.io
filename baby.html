@@ -1,0 +1,1321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小小熊</title>
+    <style>
+        @font-face {
+            font-family: 'KaiTi';
+            src: url('STKAITI.TTF') format('truetype'),
+                 url('STXINWEI.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #con {
+            position: relative;
+            max-width: 98%;
+            max-height: 98%;
+            margin: 10px auto;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 10px;
+        }
+
+        #con::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(love_pic/n.jpg);
+            background-size: 100%;
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+
+        /* 全局样式 */
+        /* 动态背景渐变 */
+        body {
+            background: linear-gradient(135deg, #f2fdf7, #a5d6f793);
+
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            font-family: 'KaiTi', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('home_pic/c.png') center/cover no-repeat;
+            opacity: 0.9;
+            z-index: -1;
+            filter: blur(3px);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #000;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            animation: fadeInSlideDown 1.2s ease;
+        }
+
+
+        #navbar {
+            display: flex;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #navbar a {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #navbar a::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 100%;
+            background: rgba(150, 207, 244, 0.5);
+            z-index: 0;
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+
+
+        #navbar a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        #navbar a:hover {
+            color: rgba(48, 68, 95, 0.719);
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.534), rgba(152, 187, 219, 0.95));
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .hero h2 {
+            font-size: 2rem;
+            color: #2a9df4;
+            margin-top: 20px;
+        } */
+
+        main {
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        section h2 {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+            position: relative;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #74bfeb, #acc5e5);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        .family-content {
+            flex: 1 1 1%; /* 最小宽度 40%，可扩展 */
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+            max-width: 300px; /* 限制宽度 */
+        }
+
+        .family-content p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #8dcae9;
+            border-radius: 5px;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(97, 197, 255, 0.3);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #7dd2f3;
+            box-shadow: 0 10px 20px rgba(97, 231, 255, 0.5);
+        }
+/* 整体模块容器样式 */
+.gallery-container {
+    padding: 40px;
+    
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* 标题与按钮样式 */
+.gallery-header {
+    margin-bottom: 20px;
+}
+
+.gallery-title {
+    font-size: 22px;
+    font-family: 'KaiTi', serif;
+    color: #6c4a4a;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+.gallery-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(135deg, #5fc4ff, #7bd4fec9);
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(100, 219, 255, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+}
+
+.gallery-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(100, 193, 255, 0.5);
+}
+
+/* 轮播区域样式 */
+.carousel {
+    position: relative;
+    margin-top: 20px;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-track img {
+    width: 300px;
+    height: auto;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-track img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 导航箭头样式 */
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #444;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.arrow:hover {
+    background-color: rgba(200, 230, 255, 0.9);
+    transform: scale(1.2);
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+/* 圆点导航样式 */
+.carousel-dots {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.carousel-dots .dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(150, 150, 150, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.carousel-dots .dot.active {
+    background: #444;
+    transform: scale(1.2);
+}
+
+
+
+
+
+
+/* === 左右布局优化 === */
+#background {
+    padding: 80px 30px;
+    background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.5)), url(love_pic/n.jpg) center/cover no-repeat;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    animation: fadeIn 1.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#background:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+#background h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 图片及按钮容器调整 */
+.intro-content {
+    display: flex;
+    flex-wrap: nowrap; /* 避免换行 */
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.intro-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 150px; /* 限制宽度占比 */
+}
+
+.intro-image {
+    width: 200px; /* 减小头像尺寸 */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.intro-image:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 20px;
+    background: linear-gradient(45deg, #0078d7, #005a99);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-button:hover {
+    background: linear-gradient(45deg, #005a99, #003f6e);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 简介文字区块扩展 */
+.intro-text {
+    flex: 1; /* 自动扩展占据剩余空间 */
+    font-size: 20px;
+    line-height: 1.8;
+    color: #222;
+    text-align: justify;
+    border-left: 4px solid #0078d7;
+    padding-left: 20px;
+    position: relative;
+}
+
+.intro-text:before {
+    content: '“';
+    font-size: 50px;
+    color: #0078d7;
+    position: absolute;
+    top: -20px;
+    left: -40px;
+}
+
+/* .intro-text p:last-child {
+
+} */
+
+/* 动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+/* === 熊熊趣事模块（Blog）样式 === */
+#blog {
+    padding: 40px 20px;
+    background: #e9f4fdd0;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin: 30px auto;
+    animation: slideIn 1.5s ease;
+}
+
+#blog h2 {
+    font-size: 28px;
+    color: #000000;
+    text-shadow: 1px 2px 8px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.blog-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+}
+
+/* 单个卡片样式 */
+.blog-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-card h3 {
+    font-size: 20px;
+    color: #000000;
+    margin: 15px;
+}
+
+.blog-card p {
+    font-size: 16px;
+    color: #666;
+    padding: 0 15px 15px;
+    line-height: 1.6;
+}
+
+/* 翻页按钮样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    background: #64bdf0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.pagination button:hover {
+    background: #e85757;
+    transform: translateY(-3px);
+}
+
+.pagination button[disabled] {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* 动画 */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* === 宝宝最爱视频模块 - 网格布局样式 === */
+.videos-section {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f0f8ff, #e6f2ff, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    margin: 30px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.videos-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('baby_pic/1093.jpg') center/cover;
+    opacity: 0.04;
+    z-index: 0;
+    filter: blur(10px);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.videos-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0277bd;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.8);
+    margin: 0 0 10px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.videos-section h2::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: linear-gradient(to right, #64b5f6, #1565c0);
+    margin: 12px auto 0;
+    border-radius: 2px;
+}
+
+.section-desc {
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* 视频筛选按钮 */
+.video-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: none;
+    background: #e1f5fe;
+    color: #0277bd;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #0277bd;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 视频网格布局 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.video-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.video-thumbnail {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 宽高比 */
+    cursor: pointer;
+}
+
+.video-thumbnail img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.video-thumbnail:hover img {
+    transform: scale(1.1);
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 119, 189, 0.95);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.video-thumbnail:hover .play-button {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.video-item h3 {
+    font-size: 18px;
+    padding: 15px 15px 5px;
+    margin: 0;
+    color: #333;
+}
+
+.video-tags {
+    padding: 0 15px 15px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.video-tags span {
+    padding: 3px 10px;
+    background: #e3f2fd;
+    color: #0277bd;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+/* 视频模态框 */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 90%;
+    max-width: 900px;
+    margin: 60px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.close-modal:hover {
+    transform: scale(1.2);
+}
+
+.modal-video-container {
+    width: 100%;
+    padding-bottom: 56.25%;
+    position: relative;
+    background: #000;
+}
+
+#modal-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.modal-video-info {
+    padding: 20px;
+}
+
+.modal-video-info h3 {
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    color: #0277bd;
+}
+
+.modal-video-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .videos-section h2 {
+        font-size: 24px;
+    }
+    
+    .section-desc {
+        font-size: 16px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 40px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    
+    .video-item h3 {
+        font-size: 16px;
+        padding: 10px 10px 5px;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .videos-section {
+        padding: 30px 15px;
+    }
+}
+/* 添加到CSS中的漂浮图标样式 */
+.floating-icon {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.2;
+    z-index: 1;
+    animation: float 15s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+        
+    </style>
+</head>
+<body>
+    <div id="con">
+
+    <header>
+        <h1>熊宝宝的童趣世界</h1>
+        <p>一只小熊宝宝的熊熊日常</p>
+        <nav id="navbar">
+            <!-- <a href="#gallery">小小熊简介</a> -->
+            <!-- <a href="#blog">熊熊趣事</a> -->
+            <a href="baby_pic.html">熊宝宝影像集</a>
+            <a href="homepage.html">熊家主页</a>
+        </nav>
+    </header>
+
+    <main>
+    <section id="gallery">
+        <div class="gallery-container">
+            <!-- 标题和按钮部分 -->
+            <!-- 图片轮播区域 -->
+            <div class="carousel">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="pictures">
+                        <img src="baby_pic/601.jpg" alt="熊熊图1">
+                        <!-- <img src="baby_pic/602.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/603.jpg" alt="熊熊图3">
+                        <img src="baby_pic/609.jpg" alt="熊熊图4">
+                        <img src="baby_pic/612.jpg" alt="熊熊图5">
+                        <!-- <img src="baby_pic/613.jpg" alt="熊熊图1"> -->
+                        <img src="baby_pic/615.jpg" alt="熊熊图2">
+                        <img src="baby_pic/617.jpg" alt="熊熊图3">
+                        <img src="baby_pic/619.jpg" alt="熊熊图4">
+                        <img src="baby_pic/620.jpg" alt="熊熊图5">
+                        <img src="baby_pic/621.jpg" alt="熊熊图1">
+                        <img src="baby_pic/625.jpg" alt="熊熊图2">
+                        <img src="baby_pic/628.jpg" alt="熊熊图4">
+                        <img src="baby_pic/629.jpg" alt="熊熊图5">
+                        <img src="baby_pic/630.jpg" alt="熊熊图1">
+                        <!-- <img src="baby_pic/633.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/691.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1100.jpg" alt="熊熊图2">
+                        <!-- <img src="baby_pic/1102.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1104.jpg" alt="熊熊图2"> -->
+                        <!-- <img src="baby_pic/1106.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/1108.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1110.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1112.jpg" alt="熊熊图2">
+                        <!-- <img src="baby_pic/1114.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/1116.jpg" alt="熊熊图2">
+                        <!-- <img src="baby_pic/1118.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/1120.jpg" alt="熊熊图2">
+                        <!-- <img src="baby_pic/1124.jpg" alt="熊熊图2"> -->
+                        <img src="baby_pic/1126.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1128.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1130.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1132.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1134.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1136.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1168.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1174.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1180.jpg" alt="熊熊图2">
+                        <img src="baby_pic/1182.jpg" alt="熊熊图2">
+                        <!-- 更多图片 -->
+                    </div>
+                </div>
+    
+                <!-- 导航箭头 -->
+                <div id="prev" class="arrow">❮</div>
+                <div id="next" class="arrow">❯</div>
+            </div>
+    
+            <!-- 圆点导航 -->
+            <div id="dots" class="carousel-dots"></div>
+        </div>
+    </section>
+     <br>
+     <br>
+    <section id="background" class="intro-section" aria-labelledby="intro-title">
+        <h2 id="intro-title">小小熊简介</h2>
+        <div class="intro-content">
+            <figure class="intro-left">
+                <img src="baby_pic/627.jpg" alt="可爱的小小熊" class="intro-image" aria-label="小小熊的照片">
+                <figcaption>
+                    <a class="gallery-button" href="baby_pic.html" aria-label="进入小熊宝宝影像集">点击进入小熊宝宝影像集</a>
+                </figcaption>
+            </figure>
+            <blockquote class="intro-text">
+                <p>我是小小熊，2023年12月诞生于韩国京畿道光明市。那一天，首尔地区迎来了四十多年未见的大雪，整个世界都被洁白的雪花覆盖，而我就在这片银装素裹的世界中，悄悄来到这个美丽的世界。</p>
+                <p>作为熊家最小的一员，我是一只活泼又调皮的小熊，每天都在家里大冒险，探索每个角落，寻找属于我的小惊喜。 每一天，我的世界都是充满了新奇和欢笑的地方。</p>
+                <p>虽然爸爸妈妈常常外出不带我，但我在家里依然乐趣无穷。我知道，虽然我还很小，但我会慢慢长大，变得更加勇敢，去探索更多未知的地方。而现在，我就像一个小小探险家，每天都在家里和外面的世界之间穿梭，带着无限的好奇和快乐，等待着属于我的更多精彩时刻！</p>
+            </blockquote>
+        </div>
+    </section>
+    
+    </section>
+    
+    
+    
+    <!-- <section id="blog">
+        <h2>熊熊趣事</h2>
+        <div class="blog-section" id="blog-container">
+        
+            <div class="blog-card">
+                <img src="baby_pic/601.jpg" alt="故事1">
+                <h3>熊宝宝出生</h3>
+                <p>这是熊宝宝第一次来到这个世界的故事，温暖而感人。</p>
+            </div>
+            <div class="blog-card">
+                <img src="baby_pic/1093.jpg" alt="故事2">
+                <h3>熊宝宝的朋友</h3>
+                <p>一只新朋友的到来，让熊宝宝的生活更加多姿多彩。</p>
+            </div>
+            <div class="blog-card">
+                <img src="baby_pic/1095.jpg" alt="故事3">
+                <h3>熊宝宝的发现</h3>
+                <p>小熊宝宝意外发现了一个藏在家中的小秘密。</p>
+            </div>
+        </div>
+    
+   
+        <div class="pagination">
+            <button id="prev-page" disabled>上一页</button>
+            <button id="next-page">下一页</button>
+        </div>
+    </section> -->
+    
+<!-- 宝宝最爱视频模块 - 网格布局版 -->
+<section id="baby-videos" class="videos-section">
+    <div class="section-header">
+        <h2>宝宝最爱小视频</h2>
+        <p class="section-desc">收集了熊宝宝最喜欢观看的有趣视频</p>
+    </div>
+    
+    <div class="video-filter">
+        <button class="filter-btn active" data-filter="all">全部</button>
+        <button class="filter-btn" data-filter="korean">韩文版</button>
+        <button class="filter-btn" data-filter="english">英文版</button>
+        <!-- <button class="filter-btn" data-filter="cartoon">动画</button> -->
+    </div>
+    
+    <div class="video-grid">
+        <!-- 视频缩略图 1 -->
+        <div class="video-item" data-category="korean">
+            <div class="video-thumbnail" data-video="http://svz67s74h.hb-bkt.clouddn.com/%EA%B0%80%EC%A1%B1%EA%B3%BC%20%ED%95%A8%EA%BB%98%20%EC%8B%A0%EB%82%98%EB%8A%94%20%EB%8C%84%EC%8A%A4%F0%9F%92%83%20%EB%B2%A0%EB%B2%A0%ED%95%80%EC%86%A1%20%EC%B2%B4%EC%A1%B0%20%EF%BD%9C%20%EA%B7%B8%EB%8C%80%EB%A1%9C%20%EB%A9%88%EC%B6%B0%EB%9D%BC%21%20%EF%BD%9C%20%EC%96%B4%EB%A6%B0%EC%9D%B4%20%EC%9C%A8%EB%8F%99%20%EB%8F%99%EC%9A%94%20%EB%AA%A8%EC%9D%8C%20%EF%BD%9C%20%EB%B2%A0%EB%B2%A0%ED%95%80%20Bebefinn%20-%20%ED%82%A4%EC%A6%88%20%EC%9D%B8%EA%B8%B0%20%EB%8F%99%EC%9A%94%E3%83%BB%EB%8F%99%ED%99%94.mp4">
+                <img src="baby_pic/1178.jpg" alt="Bebefinn 视频">
+                <div class="play-button">▶</div>
+                <div class="video-duration">1h58m</div>
+            </div>
+            <h3>“和家人一起快乐跳舞💃</h3>
+            <div class="video-tags">
+                <span>舞蹈</span>
+                <span>最爱</span>
+            </div>
+        </div>
+        
+        <!-- 视频缩略图 2 -->
+        <div class="video-item" data-category="korean">
+            <div class="video-thumbnail" data-video=http://svz67s74h.hb-bkt.clouddn.com/%5B%EC%B6%94%EC%84%9D%20%ED%8A%B9%EC%A7%91%F0%9F%8C%95%5D%203%EC%8B%9C%EA%B0%84%20%EB%B2%A0%EB%B2%A0%ED%95%80%20BEST%20%EB%8F%99%EC%9A%94%20%EB%AA%B0%EC%95%84%EB%B3%B4%EA%B8%B0%20%EF%BD%9C%20%EA%B0%80%EC%A1%B1%EA%B3%BC%20%ED%95%A8%EA%BB%98%20%EC%A6%90%EA%B1%B0%EC%9A%B4%20%EB%AA%85%EC%A0%88%20%EB%B3%B4%EB%82%B4%EC%84%B8%EC%9A%94%21%20%EF%BD%9C%20%EB%B2%A0%EB%B2%A0%ED%95%80%20Bebefinn%20-%20%ED%82%A4%EC%A6%88%20%EC%9D%B8%EA%B8%B0%20%EB%8F%99%EC%9A%94%E3%83%BB%EB%8F%99%ED%99%94.mp4>
+                <img src="baby_pic/1180.jpg" alt="Bebefinn 视频">
+                <div class="play-button">▶</div>
+                <div class="video-duration">3h17m</div>
+            </div>
+            <h3>3小时小熊最爱合集</h3>
+            <div class="video-tags">
+                <span>歌曲</span>
+            </div>
+        </div>
+        
+        <!-- 视频缩略图 3 -->
+        <div class="video-item" data-category="english">
+            <div class="video-thumbnail" data-video=http://svz67s74h.hb-bkt.clouddn.com/%E2%AD%90%EF%B8%8F%EB%B2%A0%EB%B2%A0%ED%95%80%20%EC%98%81%EC%96%B4%20%EB%8F%99%EC%9A%94%20BEST%2015%EA%B3%A1%E2%AD%90%EF%B8%8F%20Wheels%20on%20the%20Bus%20%2B%20%EC%9D%B8%EA%B8%B0%20%EC%98%81%EC%96%B4%20%EB%8F%99%EC%9A%94%20%EF%BD%9C%20%EC%96%B4%EB%A6%B0%EC%9D%B4%20%EC%98%81%EC%96%B4%20%EB%B0%B0%EC%9A%B0%EA%B8%B0%20%EF%BD%9C%20%EB%B2%A0%EB%B2%A0%ED%95%80%20Bebefinn%20-%20%ED%82%A4%EC%A6%88%20%EC%9D%B8%EA%B8%B0%20%EB%8F%99%EC%9A%94.mp4>
+                <img src="baby_pic/1136.jpg" alt="Bebefinn 视频">
+                <div class="play-button">▶</div>
+                <div class="video-duration">0h48m</div>
+            </div>
+            <h3>Bebefinn人气英文歌合集</h3>
+            <div class="video-tags">
+                <span>歌曲</span>
+            </div>
+        </div>
+        
+        <!-- 视频缩略图 4 -->
+        <div class="video-item" data-category="english">
+            <div class="video-thumbnail" data-video=http://svz67s74h.hb-bkt.clouddn.com/Baby%20Car%20VS%20Bike%E3%85%A3Bebefinn%20Outdoor%20Play%20Songs%20and%20Nursery%20Rhymes.mp4>
+                <img src="baby_pic/1120.jpg" alt="Bebefinn 视频">
+                <div class="play-button">▶</div>
+                <div class="video-duration">0h59m</div>
+            </div>
+            <h3>Baby Car VS BikeㅣBebefinn Outdoor Play Songs and Nursery Rhymes</h3>
+            <div class="video-tags">
+                <span>歌曲</span>
+            </div>
+        </div>
+        
+        <!-- 视频缩略图 5 -->
+        <!-- <div class="video-item" data-category="cartoon">
+            <div class="video-thumbnail" data-video="http://svz67s74h.hb-bkt.clouddn.com/%EA%B0%80%EC%A1%B1%EA%B3%BC%20%ED%95%A8%EA%BB%98%20%EC%8B%A0%EB%82%98%EB%8A%94%20%EB%8C%84%EC%8A%A4%F0%9F%92%83%20%EB%B2%A0%EB%B2%A0%ED%95%80%EC%86%A1%20%EC%B2%B4%EC%A1%B0%20%EF%BD%9C%20%EA%B7%B8%EB%8C%80%EB%A1%9C%20%EB%A9%88%EC%B6%B0%EB%9D%BC%21%20%EF%BD%9C%20%EC%96%B4%EB%A6%B0%EC%9D%B4%20%EC%9C%A8%EB%8F%99%20%EB%8F%99%EC%9A%94%20%EB%AA%A8%EC%9D%8C%20%EF%BD%9C%20%EB%B2%A0%EB%B2%A0%ED%95%80%20Bebefinn%20-%20%ED%82%A4%EC%A6%88%20%EC%9D%B8%EA%B8%B0%20%EB%8F%99%EC%9A%94%E3%83%BB%EB%8F%99%ED%99%94.mp4">
+                <img src="baby_pic/1168.jpg" alt="卡通故事时间">
+                <div class="play-button">▶</div>
+                <div class="video-duration">5:30</div>
+            </div>
+            <h3>卡通故事时间</h3>
+            <div class="video-tags">
+                <span>动画</span>
+                <span>故事</span>
+            </div>
+        </div> -->
+        
+        <!-- 视频缩略图 6 -->
+        <!-- <div class="video-item" data-category="song">
+            <div class="video-thumbnail" data-video="http://svz67s74h.hb-bkt.clouddn.com/%EA%B0%80%EC%A1%B1%EA%B3%BC%20%ED%95%A8%EA%BB%98%20%EC%8B%A0%EB%82%98%EB%8A%94%20%EB%8C%84%EC%8A%A4%F0%9F%92%83%20%EB%B2%A0%EB%B2%A0%ED%95%80%EC%86%A1%20%EC%B2%B4%EC%A1%B0%20%EF%BD%9C%20%EA%B7%B8%EB%8C%80%EB%A1%9C%20%EB%A9%88%EC%B6%B0%EB%9D%BC%21%20%EF%BD%9C%20%EC%96%B4%EB%A6%B0%EC%9D%B4%20%EC%9C%A8%EB%8F%99%20%EB%8F%99%EC%9A%94%20%EB%AA%A8%EC%9D%8C%20%EF%BD%9C%20%EB%B2%A0%EB%B2%A0%ED%95%80%20Bebefinn%20-%20%ED%82%A4%EC%A6%88%20%EC%9D%B8%EA%B8%B0%20%EB%8F%99%EC%9A%94%E3%83%BB%EB%8F%99%ED%99%94.mp4">
+                <img src="baby_pic/1130.jpg" alt="宝宝经典歌谣">
+                <div class="play-button">▶</div>
+                <div class="video-duration">3:10</div>
+            </div>
+            <h3>宝宝经典歌谣</h3>
+            <div class="video-tags">
+                <span>歌曲</span>
+                <span>经典</span>
+            </div>
+        </div>
+    </div> -->
+    
+    <!-- 视频播放模态框 -->
+    <div id="video-modal" class="video-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-video-container">
+                <video id="modal-video" controls>
+                    <source src="" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+            <div class="modal-video-info">
+                <h3 id="modal-video-title"></h3>
+                <p id="modal-video-desc"></p>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    </div>
+</main>
+
+
+
+<footer>
+    <div id="footer-container" style="text-align: center; padding: 20px; background-color: rgba(240, 244, 248, 0.7); border-top: 1px solid #ddd; margin-top: 40px;">
+        <p style="font-size: 19px; color: #555; margin: 0;">
+            网页设计: 小君 &nbsp; | &nbsp; 网页编程: 小君 &nbsp; | &nbsp; 拍摄: 小光, 小君 &nbsp; | &nbsp; 友情参与: 小小熊
+        </p>
+        <p style="font-size: 14px; color: #999; margin-top: 10px;">
+            © 2024 熊家 All Rights Reserved.
+        </p>
+    </div>
+</footer> 
+    </div>
+
+
+    <script>
+        // 视频播放器模块的JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取所有视频缩略图和模态框元素
+    const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+    const videoModal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const closeModal = document.querySelector('.close-modal');
+    const modalTitle = document.getElementById('modal-video-title');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const videoItems = document.querySelectorAll('.video-item');
+    
+    // 点击缩略图打开模态框并播放视频
+    videoThumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            const videoSrc = this.getAttribute('data-video');
+            const videoTitle = this.closest('.video-item').querySelector('h3').textContent;
+            
+            modalVideo.src = videoSrc;
+            modalTitle.textContent = videoTitle;
+            videoModal.style.display = 'block';
+            
+            // 自动播放视频
+            modalVideo.load();
+            modalVideo.play();
+        });
+    });
+    
+    // 关闭模态框
+    closeModal.addEventListener('click', function() {
+        videoModal.style.display = 'none';
+        modalVideo.pause();
+        modalVideo.src = '';
+    });
+    
+    // 点击模态框外部关闭
+    window.addEventListener('click', function(event) {
+        if (event.target === videoModal) {
+            videoModal.style.display = 'none';
+            modalVideo.pause();
+            modalVideo.src = '';
+        }
+    });
+    
+    // 分类筛选逻辑
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // 移除所有按钮的active类
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // 给当前点击的按钮添加active类
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            // 显示或隐藏视频项目
+            videoItems.forEach(item => {
+                if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                    item.style.display = 'block';
+                    // 添加淡入动画
+                    item.style.animation = 'fadeIn 0.5s ease forwards';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // 装饰元素：添加一些漂浮的图标
+    const videosSection = document.querySelector('.videos-section');
+    const icons = ['🧸', '📺', '🎵', '🎬', '🎭'];
+    
+    for (let i = 0; i < 6; i++) {
+        const icon = document.createElement('span');
+        icon.className = 'floating-icon';
+        icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+        icon.style.left = `${Math.random() * 90 + 5}%`;
+        icon.style.top = `${Math.random() * 90 + 5}%`;
+        icon.style.animationDuration = `${Math.random() * 5 + 10}s`;
+        icon.style.animationDelay = `${Math.random() * 5}s`;
+        videosSection.appendChild(icon);
+    }
+});
+        // 图片轮播逻辑
+        let currentIndex = 0;
+            const pictures = document.getElementById('pictures');
+            const pictureCount = pictures.children.length;
+            const dotsContainer = document.getElementById('dots');
+
+            // 初始化点导航
+            for (let i = 0; i < pictureCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => slideToIndex(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            function slideToIndex(index) {
+                currentIndex = index;
+                pictures.style.transform = `translateX(-${300 * currentIndex}px)`;
+                updateDots();
+            }
+
+            function updateDots() {
+                Array.from(dotsContainer.children).forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            // 自动轮播逻辑
+            let interval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % pictureCount;
+                slideToIndex(currentIndex);
+            }, 3000);
+
+            // 控制箭头点击
+            document.getElementById('prev').addEventListener('click', () => {
+                clearInterval(interval);
+                currentIndex = (currentIndex - 1 + pictureCount) % pictureCount;
+                slideToIndex(currentIndex);
+                interval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % pictureCount;
+                    slideToIndex(currentIndex);
+                }, 3000);
+            });
+
+            document.getElementById('next').addEventListener('click', () => {
+                clearInterval(interval);
+                currentIndex = (currentIndex + 1) % pictureCount;
+                slideToIndex(currentIndex);
+                interval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % pictureCount;
+                    slideToIndex(currentIndex);
+                }, 3000);
+            });
+
+
+
+
+// 简单的翻页功能
+const blogContainer = document.getElementById('blog-container');
+const prevPage = document.getElementById('prev-page');
+const nextPage = document.getElementById('next-page');
+let currentPage = 0;
+
+const blogs = [
+    `<div class="blog-card"><img src="baby_pic/601.jpg" alt="故事1"><h3>熊宝宝出生</h3><p>这是熊宝宝第一次来到这个世界的故事，温暖而感人。</p></div>`,
+    `<div class="blog-card"><img src="baby_pic/1093.jpg" alt="故事2"><h3>熊宝宝的朋友</h3><p>一只新朋友的到来，让熊宝宝的生活更加多姿多彩。</p></div>`,
+    `<div class="blog-card"><img src="baby_pic/1095.jpg" alt="故事3"><h3>熊宝宝的发现</h3><p>小熊宝宝意外发现了一个藏在家中的小秘密。</p></div>`,
+    // 更多卡片数据...
+];
+
+function renderPage(page) {
+    blogContainer.innerHTML = blogs.slice(page * 3, (page + 1) * 3).join('');
+    prevPage.disabled = page === 0;
+    nextPage.disabled = (page + 1) * 3 >= blogs.length;
+}
+
+prevPage.addEventListener('click', () => {
+    currentPage--;
+    renderPage(currentPage);
+});
+
+nextPage.addEventListener('click', () => {
+    currentPage++;
+    renderPage(currentPage);
+});
+
+renderPage(currentPage);
+    </script>
+</body>
+</html>
+
